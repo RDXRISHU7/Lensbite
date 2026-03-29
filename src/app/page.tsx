@@ -138,7 +138,7 @@ export default function Home() {
               </div>
               <span className="text-lg font-black tracking-tighter uppercase italic">Lens Bite Secure Platform</span>
            </div>
-           <p className="text-[10px] text-muted-foreground uppercase tracking-[1em] font-black opacity-40">© 2024 LENS BITE. ALL RIGHTS RESERVED.</p>
+           <p className="text-[10px] text-muted-foreground uppercase tracking-[1em] font-black opacity-40">© 2025 LENS BITE • V1.10 DEPLOYED • ALL RIGHTS RESERVED.</p>
         </div>
       </footer>
     </div>
