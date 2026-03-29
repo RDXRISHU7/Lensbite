@@ -66,22 +66,22 @@ export default function Home() {
               </div>
 
               {/* Decorative HUD Element */}
-              <div className="hidden lg:flex relative justify-center items-center h-[600px] animate-reveal [animation-delay:200ms]">
+              <div className="hidden lg:flex relative justify-center items-center h-[600px] animate-reveal">
                 <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full animate-pulse" />
                 <div className="relative z-10 w-[400px] h-[400px] border-[20px] border-primary/10 rounded-[4rem] flex items-center justify-center group overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent group-hover:scale-150 transition-transform duration-1000" />
                   <Dna className="size-32 text-primary animate-pulse" />
                   
                   {/* Rotating Rings */}
-                  <div className="absolute inset-4 border-2 border-dashed border-primary/20 rounded-[3rem] animate-[spin_20s_linear_infinite]" />
-                  <div className="absolute inset-12 border border-primary/10 rounded-[2.5rem] animate-[spin_10s_linear_infinite_reverse]" />
+                  <div className="absolute inset-4 border-2 border-dashed border-primary/20 rounded-[3rem] animate-[spin_20000ms_linear_infinite]" />
+                  <div className="absolute inset-12 border border-primary/10 rounded-[2.5rem] animate-[spin_10000ms_linear_infinite_reverse]" />
                 </div>
                 
                 {/* Floating Badges */}
-                <div className="absolute top-0 right-0 p-8 glass-panel rounded-[2rem] animate-bounce-slow">
+                <div className="absolute top-0 right-0 p-8 glass-panel rounded-[2rem]">
                    <Badge className="bg-primary text-background font-black">ENCRYPTED PROTOCOL</Badge>
                 </div>
-                <div className="absolute bottom-10 left-0 p-6 glass-panel rounded-[2rem] animate-bounce-slow [animation-delay:500ms]">
+                <div className="absolute bottom-10 left-0 p-6 glass-panel rounded-[2rem]">
                    <p className="text-[10px] font-black uppercase opacity-40 mb-1">Response Latency</p>
                    <p className="text-xl font-black">0.22ms</p>
                 </div>
