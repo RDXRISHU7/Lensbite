@@ -62,12 +62,10 @@ export default function ProfilePage() {
   const firestore = useFirestore();
   const { toast } = useToast();
   
-  // On mobile, start with null (menu view). On desktop, start with 'profile'.
   const [activeSection, setActiveSection] = useState<ProfileSection | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
 
-  // Set default section for desktop once mobile status is known
   useEffect(() => {
     if (isMobile === false && activeSection === null) {
       setActiveSection('profile');
@@ -160,116 +158,111 @@ export default function ProfilePage() {
     switch (activeSection) {
       case 'profile':
         return (
-          <div className="space-y-12 md:space-y-16 animate-reveal">
-            <div className="space-y-2 md:space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-black italic tracking-tighter leading-none">Health Profile</h2>
-              <p className="text-muted-foreground text-lg md:text-2xl font-light">Update metrics for accurate safety results.</p>
+          <div className="space-y-6 md:space-y-16 animate-reveal">
+            <div className="space-y-1 md:space-y-4 text-left">
+              <h2 className="text-2xl md:text-6xl font-black italic tracking-tighter leading-none">Health Profile</h2>
+              <p className="text-muted-foreground text-sm md:text-2xl font-light">Update metrics for accurate results.</p>
             </div>
 
             <Tabs defaultValue="biometrics" className="w-full">
-              <TabsList className="grid grid-cols-2 md:grid-cols-4 w-full h-auto p-1.5 md:p-2 glass-panel rounded-2xl md:rounded-3xl mb-8 md:mb-12">
+              <TabsList className="grid grid-cols-2 md:grid-cols-4 w-full h-auto p-1 glass-panel rounded-xl md:rounded-3xl mb-4 md:mb-12">
                 {['biometrics', 'medical', 'diet', 'habits'].map((tab) => (
-                  <TabsTrigger key={tab} value={tab} className="rounded-xl md:rounded-2xl py-3 md:py-6 text-[10px] md:text-xs font-black uppercase tracking-widest data-[state=active]:bg-primary data-[state=active]:text-background transition-all">
+                  <TabsTrigger key={tab} value={tab} className="rounded-lg md:rounded-2xl py-2 md:py-6 text-[8px] md:text-xs font-black uppercase tracking-widest data-[state=active]:bg-primary data-[state=active]:text-background transition-all">
                     {tab === 'biometrics' ? 'Metrics' : tab === 'medical' ? 'Medical' : tab === 'diet' ? 'Allergies' : 'Cooking'}
                   </TabsTrigger>
                 ))}
               </TabsList>
 
-              <TabsContent value="biometrics" className="space-y-8 md:space-y-10 animate-reveal">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                  <div className="p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] glass-panel space-y-4 md:space-y-6 group hover:bg-primary/5 transition-all">
-                    <Label className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Height (cm)</Label>
-                    <Input type="number" placeholder="180" className="h-16 md:h-24 text-4xl md:text-6xl font-black rounded-xl md:rounded-2xl bg-background border-none ring-4 ring-primary/5 focus-visible:ring-primary p-4 md:p-8 transition-all" value={formData.height} onChange={(e) => setFormData(p => ({ ...p, height: e.target.value }))} />
+              <TabsContent value="biometrics" className="space-y-4 md:space-y-10 animate-reveal">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-8">
+                  <div className="p-4 md:p-10 rounded-xl md:rounded-[2.5rem] glass-panel space-y-2 md:space-y-6">
+                    <Label className="text-[7px] md:text-[10px] font-black uppercase tracking-[0.2em] opacity-40">Height (cm)</Label>
+                    <Input type="number" placeholder="180" className="h-12 md:h-24 text-2xl md:text-6xl font-black rounded-lg md:rounded-2xl bg-background border-none ring-2 md:ring-4 ring-primary/5 focus-visible:ring-primary p-2 md:p-8" value={formData.height} onChange={(e) => setFormData(p => ({ ...p, height: e.target.value }))} />
                   </div>
-                  <div className="p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] glass-panel space-y-4 md:space-y-6 group hover:bg-primary/5 transition-all">
-                    <Label className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Weight (kg)</Label>
-                    <Input type="number" placeholder="75" className="h-16 md:h-24 text-4xl md:text-6xl font-black rounded-xl md:rounded-2xl bg-background border-none ring-4 ring-primary/5 focus-visible:ring-primary p-4 md:p-8 transition-all" value={formData.weight} onChange={(e) => setFormData(p => ({ ...p, weight: e.target.value }))} />
+                  <div className="p-4 md:p-10 rounded-xl md:rounded-[2.5rem] glass-panel space-y-2 md:space-y-6">
+                    <Label className="text-[7px] md:text-[10px] font-black uppercase tracking-[0.2em] opacity-40">Weight (kg)</Label>
+                    <Input type="number" placeholder="75" className="h-12 md:h-24 text-2xl md:text-6xl font-black rounded-lg md:rounded-2xl bg-background border-none ring-2 md:ring-4 ring-primary/5 focus-visible:ring-primary p-2 md:p-8" value={formData.weight} onChange={(e) => setFormData(p => ({ ...p, weight: e.target.value }))} />
                   </div>
                 </div>
                 {bmi && (
-                  <div className="p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] bg-primary text-background flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 shadow-2xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:rotate-12 transition-transform duration-[5000ms]">
-                      <Activity className="size-[200px] md:size-[300px]" />
+                  <div className="p-4 md:p-16 rounded-xl md:rounded-[3rem] bg-primary text-background flex flex-col md:flex-row items-center justify-between gap-2 md:gap-12 shadow-2xl relative overflow-hidden group">
+                    <div className="relative z-10 space-y-0.5 md:space-y-2 text-center md:text-left">
+                      <p className="text-[7px] md:text-[10px] font-black uppercase tracking-[0.3em] opacity-60">Body Mass Index</p>
+                      <h3 className="text-4xl md:text-[10rem] font-black tracking-tighter leading-none italic">{bmi}</h3>
                     </div>
-                    <div className="relative z-10 space-y-1 md:space-y-2 text-center lg:text-left">
-                      <p className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.5em] opacity-60">Calculated Body Mass Index</p>
-                      <h3 className="text-6xl md:text-[10rem] font-black tracking-tighter leading-none italic">{bmi}</h3>
-                    </div>
-                    <div className="text-center lg:text-right relative z-10 max-w-xs md:max-w-sm space-y-2 md:space-y-4">
-                      <p className="text-2xl md:text-4xl font-black italic tracking-tighter leading-none">
-                        {parseFloat(bmi) < 18.5 ? 'Underweight' : parseFloat(bmi) < 25 ? 'Healthy Weight' : 'Overweight'}
+                    <div className="text-center md:text-right relative z-10 max-w-xs space-y-1">
+                      <p className="text-xl md:text-4xl font-black italic tracking-tighter leading-none">
+                        {parseFloat(bmi) < 18.5 ? 'Underweight' : parseFloat(bmi) < 25 ? 'Healthy' : 'Overweight'}
                       </p>
-                      <p className="text-background/70 text-sm md:text-lg font-bold leading-tight">Optimizing risks for your body architecture.</p>
                     </div>
                   </div>
                 )}
               </TabsContent>
 
-              <TabsContent value="medical" className="space-y-8 md:space-y-12 animate-reveal">
-                <div className="p-6 md:p-12 rounded-2xl md:rounded-[2.5rem] glass-panel space-y-8 md:space-y-10">
-                  <div className="space-y-6 md:space-y-8">
-                    <h3 className="text-2xl md:text-3xl font-black italic">Medical Conditions</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              <TabsContent value="medical" className="space-y-4 md:space-y-12 animate-reveal">
+                <div className="p-4 md:p-12 rounded-xl md:rounded-[2.5rem] glass-panel space-y-4 md:space-y-10">
+                  <div className="space-y-3 md:space-y-8">
+                    <h3 className="text-lg md:text-3xl font-black italic">Conditions</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-2 gap-2 md:gap-4">
                       {CONDITION_OPTIONS.map(condition => (
                         <div 
                           key={condition} 
                           onClick={() => toggleArrayItem('diseases', condition)} 
                           className={cn(
-                            "flex items-center space-x-4 md:space-x-6 p-6 md:p-8 rounded-xl md:rounded-2xl border-2 transition-all cursor-pointer group min-h-[80px] md:min-h-[100px]",
+                            "flex items-center space-x-2 md:space-x-6 p-3 md:p-8 rounded-lg md:rounded-2xl border-2 transition-all cursor-pointer min-h-[50px] md:min-h-[100px]",
                             formData.diseases.includes(condition) 
                               ? 'bg-primary border-primary text-background' 
-                              : 'bg-background border-primary/10 hover:border-primary/40'
+                              : 'bg-background border-primary/10'
                           )}
                         >
-                          <Checkbox checked={formData.diseases.includes(condition)} className={cn("size-5 md:size-6 rounded-md", formData.diseases.includes(condition) ? "bg-background text-primary" : "border-primary/20")} />
-                          <span className="text-lg md:text-xl font-black italic">{condition}</span>
+                          <Checkbox checked={formData.diseases.includes(condition)} className={cn("size-3 md:size-6", formData.diseases.includes(condition) ? "bg-background text-primary" : "border-primary/20")} />
+                          <span className="text-xs md:text-xl font-black italic">{condition}</span>
                         </div>
                       ))}
                     </div>
                   </div>
-                  <Separator className="bg-white/5" />
-                  <div className="space-y-3 md:space-y-4">
-                    <Label className="text-lg md:text-xl font-black italic">Current Medications</Label>
-                    <Textarea placeholder="List meds to identify safety triggers..." className="min-h-[150px] md:min-h-[250px] text-lg md:text-2xl font-light rounded-xl md:rounded-2xl bg-background border-2 border-primary/10 p-6 md:p-10 focus:ring-primary" value={formData.medicines} onChange={(e) => setFormData(p => ({ ...p, medicines: e.target.value }))} />
+                  <div className="space-y-2">
+                    <Label className="text-sm md:text-xl font-black italic">Medications</Label>
+                    <Textarea placeholder="List meds..." className="min-h-[100px] md:min-h-[250px] text-sm md:text-2xl rounded-lg md:rounded-2xl" value={formData.medicines} onChange={(e) => setFormData(p => ({ ...p, medicines: e.target.value }))} />
                   </div>
                 </div>
               </TabsContent>
 
-              <TabsContent value="diet" className="space-y-8 md:space-y-12 animate-reveal">
-                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+              <TabsContent value="diet" className="space-y-4 md:space-y-12 animate-reveal">
+                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                     {ALLERGY_OPTIONS.map(allergy => (
                         <div 
                           key={allergy} 
                           onClick={() => toggleArrayItem('allergies', allergy)} 
                           className={cn(
-                            "flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] border-2 transition-all text-center cursor-pointer min-h-[140px] md:min-h-[200px] justify-center items-center",
+                            "flex flex-col gap-2 p-3 md:p-10 rounded-xl md:rounded-[2.5rem] border-2 transition-all text-center cursor-pointer min-h-[80px] md:min-h-[200px] justify-center items-center",
                             formData.allergies.includes(allergy) 
-                              ? 'bg-accent border-accent text-background scale-[1.02]' 
-                              : 'bg-secondary/10 border-white/5 hover:border-accent/40'
+                              ? 'bg-accent border-accent text-background' 
+                              : 'bg-secondary/10 border-white/5'
                           )}
                         >
-                            <Checkbox checked={formData.allergies.includes(allergy)} className="size-5 md:size-6 rounded-md" />
-                            <span className="text-lg md:text-2xl font-black italic uppercase tracking-tighter leading-tight">{allergy}</span>
+                            <Checkbox checked={formData.allergies.includes(allergy)} className="size-3 md:size-6" />
+                            <span className="text-xs md:text-2xl font-black italic uppercase tracking-tighter">{allergy}</span>
                         </div>
                     ))}
                 </div>
               </TabsContent>
 
-              <TabsContent value="habits" className="space-y-8 md:space-y-12 animate-reveal">
-                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+              <TabsContent value="habits" className="space-y-4 md:space-y-12 animate-reveal">
+                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
                     {HABIT_OPTIONS.map(option => (
                         <div 
                           key={option} 
                           onClick={() => toggleArrayItem('cookingPractices', option)} 
                           className={cn(
-                            "flex flex-col gap-4 md:gap-8 p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] border-2 transition-all cursor-pointer min-h-[160px] md:min-h-[220px] justify-center items-center",
+                            "flex flex-col gap-2 p-3 md:p-10 rounded-xl md:rounded-[2.5rem] border-2 transition-all cursor-pointer min-h-[100px] md:min-h-[220px] justify-center items-center",
                             formData.cookingPractices.includes(option) 
-                              ? 'bg-primary text-background scale-[1.02]' 
-                              : 'bg-background border-white/5 hover:border-primary/40'
+                              ? 'bg-primary text-background' 
+                              : 'bg-background border-white/5'
                           )}
                         >
-                            <Checkbox checked={formData.cookingPractices.includes(option)} className="size-6 md:size-8 rounded-lg" />
-                            <span className="text-xl md:text-3xl font-black italic text-center">{option}</span>
+                            <Checkbox checked={formData.cookingPractices.includes(option)} className="size-4 md:size-8" />
+                            <span className="text-xs md:text-3xl font-black italic">{option}</span>
                         </div>
                     ))}
                 </div>
@@ -279,27 +272,27 @@ export default function ProfilePage() {
         );
       case 'notifications':
         return (
-          <div className="space-y-12 md:space-y-16 animate-reveal">
-            <div className="space-y-2 md:space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-black italic tracking-tighter leading-none">Risk Alerts</h2>
-              <p className="text-muted-foreground text-lg md:text-2xl font-light">Custom alert system for harmful ingredients.</p>
+          <div className="space-y-6 md:space-y-16 animate-reveal">
+            <div className="space-y-1 md:space-y-4 text-left">
+              <h2 className="text-2xl md:text-6xl font-black italic tracking-tighter leading-none">Risk Alerts</h2>
+              <p className="text-muted-foreground text-sm md:text-2xl font-light">Custom alert system.</p>
             </div>
-            <div className="grid gap-4 md:gap-6">
+            <div className="grid gap-2 md:gap-6">
               {[
-                { title: 'Direct Alerts', desc: 'Instant hazard notifications.', icon: <Database className="size-5 md:size-6 text-primary" />, enabled: true },
-                { title: 'Monthly Summary', desc: 'Food scanning trend reports.', icon: <Activity className="size-5 md:size-6 text-primary" />, enabled: true },
+                { title: 'Direct Alerts', desc: 'Instant notifications.', icon: <Database className="size-4 md:size-6 text-primary" />, enabled: true },
+                { title: 'Monthly Summary', desc: 'Scanning trend reports.', icon: <Activity className="size-4 md:size-6 text-primary" />, enabled: true },
               ].map((item, i) => (
-                <div key={i} className="p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] glass-panel flex items-center justify-between gap-6 md:gap-8 group hover:bg-white/5 transition-all">
-                  <div className="flex items-center gap-4 md:gap-8">
-                    <div className="size-12 md:size-16 rounded-xl md:rounded-2xl bg-background flex items-center justify-center border border-white/5">
+                <div key={i} className="p-4 md:p-10 rounded-xl md:rounded-[2.5rem] glass-panel flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 md:gap-8">
+                    <div className="size-10 md:size-16 rounded-lg md:rounded-2xl bg-background flex items-center justify-center border border-white/5">
                       {item.icon}
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-lg md:text-2xl font-black italic leading-tight">{item.title}</h3>
-                      <p className="text-muted-foreground text-sm md:text-md font-medium">{item.desc}</p>
+                    <div>
+                      <h3 className="text-sm md:text-2xl font-black italic leading-tight">{item.title}</h3>
+                      <p className="text-muted-foreground text-[10px] md:text-md font-medium">{item.desc}</p>
                     </div>
                   </div>
-                  <Switch className="scale-110 md:scale-150" defaultChecked={item.enabled} />
+                  <Switch className="scale-90 md:scale-150" defaultChecked={item.enabled} />
                 </div>
               ))}
             </div>
@@ -307,67 +300,59 @@ export default function ProfilePage() {
         );
       case 'security':
         return (
-          <div className="space-y-12 md:space-y-16 animate-reveal">
-            <div className="space-y-2 md:space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-black italic tracking-tighter leading-none">Privacy Center</h2>
-              <p className="text-muted-foreground text-lg md:text-2xl font-light">Your data is yours. Secure your vault.</p>
+          <div className="space-y-6 md:space-y-16 animate-reveal">
+            <div className="space-y-1 md:space-y-4 text-left">
+              <h2 className="text-2xl md:text-6xl font-black italic tracking-tighter leading-none">Privacy</h2>
+              <p className="text-muted-foreground text-sm md:text-2xl font-light">Secure your data vault.</p>
             </div>
-            <div className="p-10 md:p-16 rounded-[2.5rem] glass-panel border-primary/20 space-y-8">
-               <Fingerprint className="size-16 text-primary animate-pulse" />
-               <h3 className="text-2xl md:text-3xl font-black italic">Encryption Status: Active</h3>
-               <p className="text-muted-foreground text-lg font-medium">All health data is encrypted using military-grade AES-256 standards before leaving your browser.</p>
-               <Button variant="outline" className="h-14 px-8 rounded-xl font-black italic">Rotate Security Keys</Button>
+            <div className="p-6 md:p-16 rounded-xl md:rounded-[2.5rem] glass-panel border-primary/20 space-y-4 md:space-y-8">
+               <Fingerprint className="size-10 md:size-16 text-primary" />
+               <h3 className="text-lg md:text-3xl font-black italic">Encryption Active</h3>
+               <p className="text-muted-foreground text-xs md:text-lg font-medium">All health data is encrypted using AES-256 standards.</p>
+               <Button variant="outline" className="h-10 md:h-14 px-4 md:px-8 rounded-lg font-black italic text-xs">Rotate Keys</Button>
             </div>
           </div>
         );
       default:
-        return (
-          <div className="flex items-center justify-center h-[400px] text-muted-foreground italic font-black text-2xl opacity-20">
-            Select a section to view settings
-          </div>
-        );
+        return null;
     }
   };
 
-  // MOBILE VIEW: Menu List or Detail View
   if (isMobile && activeSection === null) {
     return (
-      <div className="w-full px-4 py-8 space-y-12 animate-reveal pb-32">
-        <div className="flex flex-col items-center gap-6 text-center">
-            <div className="relative group">
-                <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-[2.5rem] animate-pulse" />
-                <Avatar className="h-24 w-24 rounded-[2.5rem] border-4 border-primary/20 shadow-2xl relative z-10">
-                    <AvatarImage src={user.photoURL ?? ''} className="object-cover" />
-                    <AvatarFallback className="bg-secondary text-primary text-3xl font-black italic">
-                        {user.email?.charAt(0) || <User />}
-                    </AvatarFallback>
-                </Avatar>
-            </div>
-            <div className="space-y-2">
-                <h1 className="text-4xl font-black italic tracking-tighter leading-none text-glow">
+      <div className="w-full px-4 py-4 space-y-8 animate-reveal pb-32">
+        <div className="flex flex-col items-center gap-4 text-center">
+            <Avatar className="h-20 w-20 rounded-2xl border-4 border-primary/20">
+                <AvatarImage src={user.photoURL ?? ''} className="object-cover" />
+                <AvatarFallback className="bg-secondary text-primary text-2xl font-black italic">
+                    {user.email?.charAt(0) || <User />}
+                </AvatarFallback>
+            </Avatar>
+            <div className="space-y-1">
+                <h1 className="text-3xl font-black italic tracking-tighter leading-none">
                     {user.isAnonymous ? 'Guest User' : (user.displayName || 'My Profile')}
                 </h1>
-                <Badge className="bg-primary/10 text-primary border-primary/20 px-3 py-1 text-[10px] font-black uppercase tracking-widest">System Active</Badge>
+                <Badge className="bg-primary/10 text-primary border-primary/20 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest">Active</Badge>
             </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-2">
             {sections.map((item) => (
                 <button 
                   key={item.id}
                   onClick={() => setActiveSection(item.id as ProfileSection)}
-                  className="w-full text-left p-6 glass-panel rounded-[2rem] border-white/5 flex items-center justify-between group active:scale-[0.98] transition-all"
+                  className="w-full text-left p-4 glass-panel rounded-2xl border-white/5 flex items-center justify-between group"
                 >
-                    <div className="flex items-center gap-5">
-                        <div className="size-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors">
+                    <div className="flex items-center gap-4">
+                        <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                             {item.icon}
                         </div>
                         <div>
-                            <h3 className="text-lg font-black italic leading-none">{item.label}</h3>
-                            <p className="text-xs text-muted-foreground font-medium mt-1">{item.desc}</p>
+                            <h3 className="text-sm font-black italic leading-none">{item.label}</h3>
+                            <p className="text-[10px] text-muted-foreground font-medium mt-0.5">{item.desc}</p>
                         </div>
                     </div>
-                    <ChevronRight className="size-5 text-muted-foreground opacity-30" />
+                    <ChevronRight className="size-4 text-muted-foreground opacity-30" />
                 </button>
             ))}
         </div>
@@ -375,30 +360,28 @@ export default function ProfilePage() {
     );
   }
 
-  // MOBILE DETAIL VIEW: Show specific section content
   if (isMobile && activeSection !== null) {
     return (
-      <div className="w-full px-4 py-8 space-y-8 animate-reveal pb-48">
+      <div className="w-full px-4 py-4 space-y-6 animate-reveal pb-48">
           <Button 
             variant="ghost" 
             onClick={() => setActiveSection(null)}
-            className="h-12 px-0 text-primary font-black italic uppercase tracking-widest flex items-center gap-2 hover:bg-transparent"
+            className="h-8 px-0 text-primary font-black italic uppercase tracking-[0.2em] text-[10px] flex items-center gap-1"
           >
-            <ArrowLeft size={18} />
-            Back to Profile
+            <ArrowLeft size={14} />
+            BACK
           </Button>
 
           {renderSectionContent()}
 
-          {/* Sync Bar - Mobile Optimized */}
-          <div className="fixed bottom-32 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl px-4 animate-reveal">
-              <div className="glass-panel p-3 rounded-[2rem] border-primary/30 shadow-2xl flex items-center justify-between gap-4">
+          <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[110] w-full max-w-xl px-4">
+              <div className="glass-panel p-2 rounded-2xl border-primary/30 shadow-2xl">
                   <Button 
                       onClick={handleSave} 
                       disabled={isSaving} 
-                      className="w-full h-16 rounded-2xl bg-primary text-background text-lg font-black italic hover:scale-[1.02] active:scale-[0.98] transition-all group"
+                      className="w-full h-12 rounded-xl bg-primary text-background text-sm font-black italic transition-all group"
                   >
-                      {isSaving ? <Loader2 className="animate-spin mr-3 size-6" /> : <Sparkles className="mr-3 size-6" />}
+                      {isSaving ? <Loader2 className="animate-spin mr-2 size-4" /> : <Sparkles className="mr-2 size-4" />}
                       {isSaving ? 'Syncing...' : 'Save Changes'}
                   </Button>
               </div>
@@ -407,11 +390,8 @@ export default function ProfilePage() {
     );
   }
 
-  // DESKTOP VIEW: Sidebar + Content
   return (
     <div className="w-full max-w-7xl px-4 py-12 pb-64 space-y-20 animate-reveal">
-        
-        {/* Profile Header */}
         <div className="flex flex-col md:flex-row gap-12 items-end justify-between relative text-left">
             <div className="flex flex-row items-center gap-10">
                 <div className="relative group">
@@ -446,7 +426,6 @@ export default function ProfilePage() {
         <Separator className="bg-white/5" />
 
         <div className="grid grid-cols-[300px_1fr] gap-20">
-            {/* Nav Sidebar */}
             <aside className="space-y-12">
                 <div className="p-4 glass-panel rounded-[2.5rem] space-y-2">
                     {sections.map((item) => (
@@ -476,18 +455,16 @@ export default function ProfilePage() {
                             <ShieldCheck size={24} />
                         </div>
                         <h4 className="text-xl font-black italic">Your Privacy</h4>
-                        <p className="text-muted-foreground text-sm font-medium leading-relaxed">Your data is stored locally and securely. We never share your health details with anyone.</p>
+                        <p className="text-muted-foreground text-sm font-medium leading-relaxed">Your data is stored locally and securely.</p>
                     </div>
                 </div>
             </aside>
 
-            {/* Main Content Area */}
             <main className="min-h-[800px]">
                 {renderSectionContent()}
             </main>
         </div>
 
-        {/* Sync Bar - Desktop */}
         <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl px-4 animate-reveal">
             <div className="glass-panel p-4 rounded-[2.5rem] border-primary/30 shadow-2xl flex items-center justify-between gap-6">
                 <div className="flex-1 px-4">
