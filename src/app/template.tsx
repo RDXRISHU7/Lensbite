@@ -17,9 +17,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <div key={pathname} className="relative min-h-screen">
-      {/* Sick Global Scan Wipe Overlay */}
+      {/* Sick Global Scan Wipe Overlay - Re-triggers on every navigation */}
       <div className="fixed inset-0 pointer-events-none z-[200] overflow-hidden">
-        <div className="w-full h-1/2 bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-scan-wipe" />
+        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-scan-wipe" />
+        <div className="absolute inset-0 bg-primary/5 opacity-0 animate-pulse-fast pointer-events-none" />
       </div>
 
       <div
