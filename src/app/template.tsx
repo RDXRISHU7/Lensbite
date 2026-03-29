@@ -12,10 +12,16 @@ export default function Template({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
+  // We use the pathname as a key to force re-render and re-trigger animations on every route change
   if (!mounted) return <div className="opacity-0">{children}</div>;
 
   return (
     <div key={pathname} className="relative min-h-screen">
+      {/* Sick Global Scan Wipe Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-[200] overflow-hidden">
+        <div className="w-full h-1/2 bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-scan-wipe" />
+      </div>
+
       <div
         className={cn(
           "animate-reveal"
