@@ -1,0 +1,22 @@
+# Next.js
+.next/
+out/
+build/
+
+# Production
+node_modules/
+.env*.local
+
+# Large files
+*.zip
+*.tar.gz
+*.7z
+project.zip
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
