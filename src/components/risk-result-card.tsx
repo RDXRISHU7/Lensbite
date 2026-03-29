@@ -114,7 +114,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
             <div className="space-y-4">
                 <div className="flex items-center gap-6">
                     <div className={cn(
-                        "size-16 rounded-[1.25rem] flex items-center justify-center text-white shadow-2xl transition-all duration-700ms",
+                        "size-16 rounded-[1.25rem] flex items-center justify-center text-white shadow-2xl transition-all duration-[700ms]",
                         isSafe ? "bg-primary" : "bg-destructive animate-pulse"
                     )}>
                         {isSafe ? <ShieldCheck size={32} /> : <Biohazard size={32} />}
@@ -193,7 +193,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                             <Progress 
                                 value={animatedPercentages[n.name] || 0} 
                                 className="h-2.5 bg-secondary/30 rounded-full overflow-hidden" 
-                                indicatorClassName={cn("transition-all duration-1000ms ease-out", getNutrientColor(n.name, n.percentage))}
+                                indicatorClassName={cn("transition-all duration-[1000ms] ease-out", getNutrientColor(n.name, n.percentage))}
                             />
                         </div>
                     ))}
@@ -202,15 +202,15 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
 
             {/* Dietary Flags */}
             <div className="grid grid-cols-3 gap-4">
-                <div className={cn("p-8 rounded-[2rem] glass-panel border-2 flex flex-col items-center gap-4 transition-all duration-500ms", dietaryFlags.isVegan ? "border-green-500/20 bg-green-500/5 text-green-500" : "opacity-20 border-white/5")}>
+                <div className={cn("p-8 rounded-[2rem] glass-panel border-2 flex flex-col items-center gap-4 transition-all duration-[500ms]", dietaryFlags.isVegan ? "border-green-500/20 bg-green-500/5 text-green-500" : "opacity-20 border-white/5")}>
                     <Leaf size={24} />
                     <span className="text-[10px] font-black uppercase tracking-[0.2em]">Vegan Protocol</span>
                 </div>
-                <div className={cn("p-8 rounded-[2rem] glass-panel border-2 flex flex-col items-center gap-4 transition-all duration-500ms", dietaryFlags.isVegetarian ? "border-primary/20 bg-primary/5 text-primary" : "opacity-20 border-white/5")}>
+                <div className={cn("p-8 rounded-[2rem] glass-panel border-2 flex flex-col items-center gap-4 transition-all duration-[500ms]", dietaryFlags.isVegetarian ? "border-primary/20 bg-primary/5 text-primary" : "opacity-20 border-white/5")}>
                     <Zap size={24} />
                     <span className="text-[10px] font-black uppercase tracking-[0.2em]">Vegetarian Protocol</span>
                 </div>
-                <div className={cn("p-8 rounded-[2rem] glass-panel border-2 flex flex-col items-center gap-4 transition-all duration-500ms", dietaryFlags.palmOilFree ? "border-accent/20 bg-accent/5 text-accent" : "opacity-20 border-white/5")}>
+                <div className={cn("p-8 rounded-[2rem] glass-panel border-2 flex flex-col items-center gap-4 transition-all duration-[500ms]", dietaryFlags.palmOilFree ? "border-accent/20 bg-accent/5 text-accent" : "opacity-20 border-white/5")}>
                     <DropletOff size={24} />
                     <span className="text-[10px] font-black uppercase tracking-[0.2em]">Palm-Free</span>
                 </div>
@@ -249,7 +249,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                         isSaved ? "bg-green-500 text-white" : "bg-primary text-background hover:scale-[1.02] active:scale-[0.98]"
                     )}
                 >
-                    <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-700ms" />
+                    <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-[700ms]" />
                     {isSaving ? <Fingerprint className="mr-4 size-10 animate-pulse" /> : isSaved ? <CheckCircle className="mr-4 size-10" /> : <DatabaseBackup className="mr-4 size-10" />}
                     {isSaving ? "Syncing..." : isSaved ? "Analysis Secured" : "Secure to Health History"}
                 </Button>

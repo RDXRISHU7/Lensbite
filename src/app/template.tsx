@@ -38,7 +38,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
       <div
         className={cn(
-          "transition-all duration-700 ease-out",
+          "transition-all duration-[700ms] ease-out",
           isTransitioning 
             ? "translate-x-[-2vw] opacity-0 blur-xl scale-105" 
             : "translate-x-0 opacity-100 blur-0 scale-100"
