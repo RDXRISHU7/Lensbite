@@ -12,68 +12,66 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <div className="flex flex-col min-h-screen md:min-h-auto md:h-auto max-md:h-screen max-md:overflow-hidden">
+    <div className="flex flex-col h-screen overflow-hidden md:h-auto md:overflow-visible bg-background">
       <Header />
       
-      <main className="flex-1 overflow-y-auto md:overflow-visible">
-        {/* Hero Section / Mobile Home Dashboard */}
-        <section className="relative min-h-[90vh] md:min-h-[90vh] max-md:h-full flex items-center justify-center px-4 pt-10 md:pt-20 overflow-hidden">
+      <main className="flex-1 flex flex-col">
+        {/* Mobile App Dashboard / Desktop Hero */}
+        <section className="flex-1 flex items-center justify-center px-4 relative overflow-hidden">
           <div className="container relative z-10 max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-              <div className="space-y-8 md:space-y-12 animate-reveal">
-                <div className="space-y-4 md:space-y-6">
-                  <Badge variant="outline" className="text-primary border-primary/20 px-4 md:px-6 py-1 md:py-2 uppercase tracking-[0.4em] text-[8px] md:text-[10px] font-black bg-primary/5 rounded-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+              <div className="space-y-6 md:space-y-12 animate-reveal">
+                <div className="space-y-3 md:space-y-6">
+                  <Badge variant="outline" className="text-primary border-primary/20 px-3 md:px-6 py-1 md:py-2 uppercase tracking-[0.4em] text-[8px] md:text-[10px] font-black bg-primary/5 rounded-full">
                     Lens Bite Network • Live Intelligence
                   </Badge>
-                  <h1 className="text-5xl md:text-9xl font-black tracking-tighter leading-[0.9] italic text-glow">
+                  <h1 className="text-4xl md:text-9xl font-black tracking-tighter leading-[0.9] italic text-glow">
                     Food Safety <br />
                     <span className="text-primary">Redefined</span>.
                   </h1>
-                  <p className="max-w-xl text-lg md:text-xl text-muted-foreground font-medium leading-relaxed">
+                  <p className="max-w-xl text-md md:text-xl text-muted-foreground font-medium leading-relaxed">
                     Instantly cross-reference ingredients against your <span className="text-foreground">Health Architecture</span>.
                   </p>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-6">
                   <Link href={user ? "/scanner/barcode" : "/login"} className="w-full sm:w-auto">
-                    <Button size="lg" className="w-full h-16 md:h-20 px-8 md:px-12 rounded-[1.5rem] md:rounded-[2rem] text-lg md:text-xl font-black bg-primary text-background hover:scale-105 active:scale-95 transition-all shadow-xl">
-                      <ScanBarcode className="mr-3 md:mr-4 size-6 md:size-8" />
+                    <Button size="lg" className="w-full h-14 md:h-20 px-6 md:px-12 rounded-2xl md:rounded-[2rem] text-md md:text-xl font-black bg-primary text-background hover:scale-105 active:scale-95 transition-all shadow-xl">
+                      <ScanBarcode className="mr-2 md:mr-4 size-5 md:size-8" />
                       Start Scan
                     </Button>
                   </Link>
                   <Link href={user ? "/profile" : "/login"} className="w-full sm:w-auto">
-                    <Button variant="outline" size="lg" className="w-full h-16 md:h-20 px-8 md:px-12 rounded-[1.5rem] md:rounded-[2rem] text-lg md:text-xl font-black border-white/10 glass-panel hover:bg-white/5 transition-all">
+                    <Button variant="outline" size="lg" className="w-full h-14 md:h-20 px-6 md:px-12 rounded-2xl md:rounded-[2rem] text-md md:text-xl font-black border-white/10 glass-panel hover:bg-white/5 transition-all">
                       Health Vault
                     </Button>
                   </Link>
                 </div>
 
-                {/* Mobile Stats - Condensed */}
-                <div className="flex items-center gap-6 md:gap-10 pt-8 md:pt-12 border-t border-white/5">
+                {/* Mobile Stats - Condensed to fit on one screen */}
+                <div className="flex items-center gap-4 md:gap-10 pt-6 md:pt-12 border-t border-white/5">
                     {[
-                      { label: "Scans", value: "24k+", icon: <Cpu className="size-4 text-primary" /> },
-                      { label: "Sync", value: "Live", icon: <Zap className="size-4 text-accent" /> },
-                      { label: "Status", value: "OK", icon: <ShieldCheck className="size-4 text-primary" /> },
+                      { label: "Scans", value: "24k+", icon: <Cpu className="size-3 md:size-4 text-primary" /> },
+                      { label: "Sync", value: "Live", icon: <Zap className="size-3 md:size-4 text-accent" /> },
+                      { label: "Status", value: "OK", icon: <ShieldCheck className="size-3 md:size-4 text-primary" /> },
                     ].map((stat) => (
-                      <div key={stat.label} className="space-y-1">
+                      <div key={stat.label} className="space-y-0.5">
                         <div className="flex items-center gap-1">
                           {stat.icon}
-                          <p className="text-[8px] uppercase tracking-[0.2em] text-muted-foreground font-black">{stat.label}</p>
+                          <p className="text-[7px] md:text-[8px] uppercase tracking-[0.2em] text-muted-foreground font-black">{stat.label}</p>
                         </div>
-                        <p className="text-lg md:text-2xl font-black tracking-tight">{stat.value}</p>
+                        <p className="text-md md:text-2xl font-black tracking-tight">{stat.value}</p>
                       </div>
                     ))}
                 </div>
               </div>
 
-              {/* Decorative HUD Element - Hidden on very small screens if needed, or scaled */}
+              {/* Decorative HUD Element - Hidden on Mobile to save space */}
               <div className="hidden lg:flex relative justify-center items-center h-[600px] animate-reveal">
                 <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full animate-pulse" />
                 <div className="relative z-10 w-[400px] h-[400px] border-[20px] border-primary/10 rounded-[4rem] flex items-center justify-center group overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent group-hover:scale-150 transition-transform duration-1000" />
                   <Dna className="size-32 text-primary animate-pulse" />
-                  
-                  {/* Rotating Rings */}
                   <div className="absolute inset-4 border-2 border-dashed border-primary/20 rounded-[3rem] animate-[spin_20000ms_linear_infinite]" />
                   <div className="absolute inset-12 border border-primary/10 rounded-[2.5rem] animate-[spin_10000ms_linear_infinite_reverse]" />
                 </div>
@@ -82,7 +80,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features - Scrolling only on Desktop */}
+        {/* Features Section - Only visible on Laptop/Scrolling view */}
         <section className="hidden md:block py-40 border-y border-white/5 bg-card/10 relative overflow-hidden">
           <div className="container px-4 mx-auto max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
