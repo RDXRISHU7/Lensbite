@@ -4,6 +4,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
 import { useEffect, useRef } from 'react';
+import { MobileNav } from '@/components/mobile-nav';
 
 export default function RootLayout({
   children,
@@ -37,10 +38,11 @@ export default function RootLayout({
         <title>Lens Bite | Personalized Food Safety & AI Analysis</title>
         <meta name="description" content="Understand your food ingredients deeply with AI-powered analysis tailored to your personal health needs." />
       </head>
-      <body ref={containerRef} className="font-sans antialiased selection:bg-primary/30 selection:text-foreground">
+      <body ref={containerRef} className="font-sans antialiased selection:bg-primary/30 selection:text-foreground pb-32 md:pb-0">
         <div className="scanline pointer-events-none" />
         <FirebaseClientProvider>
           {children}
+          <MobileNav />
         </FirebaseClientProvider>
         <Toaster />
       </body>
