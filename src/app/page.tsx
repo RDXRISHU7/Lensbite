@@ -52,7 +52,7 @@ export default function Home() {
                     {[
                       { label: "Safety Scans", value: "24,801", icon: <Cpu className="size-4 text-primary" /> },
                       { label: "Analysis Sync", value: "Real-time", icon: <Zap className="size-4 text-accent" /> },
-                      { label: "Data Integrity", value: "Verified", icon: <ShieldCheck className="size-4 text-primary" /> },
+                      { label: "System Status", value: "Operational", icon: <ShieldCheck className="size-4 text-primary" /> },
                     ].map((stat) => (
                       <div key={stat.label} className="space-y-2">
                         <div className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function Home() {
               </div>
               <span className="text-lg font-black tracking-tighter uppercase italic">Lens Bite Secure Platform</span>
            </div>
-           <p className="text-[10px] text-muted-foreground uppercase tracking-[1em] font-black opacity-40">© 2025 LENS BITE • V1.10 DEPLOYED • ALL RIGHTS RESERVED.</p>
+           <p className="text-[10px] text-muted-foreground uppercase tracking-[1em] font-black opacity-40">© 2025 LENS BITE • V1.10 DEPLOYED • SYSTEM STATUS: OPERATIONAL</p>
         </div>
       </footer>
     </div>

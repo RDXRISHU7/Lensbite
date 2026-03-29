@@ -15,7 +15,7 @@ export function Logo(props: React.HTMLAttributes<HTMLDivElement>) {
           <span className="text-2xl font-black tracking-tighter text-foreground leading-none italic uppercase group-hover:text-primary transition-colors">
             Lens Bite
           </span>
-          <span className="text-[7px] font-black bg-primary/20 text-primary px-1 rounded-sm tracking-widest leading-none py-0.5">LIVE</span>
+          <span className="text-[7px] font-black bg-primary/20 text-primary px-1 rounded-sm tracking-widest leading-none py-0.5 animate-pulse">LIVE</span>
         </div>
         <span className="text-[8px] font-black tracking-[0.4em] uppercase opacity-40 leading-none mt-1">
           Smart Food Analysis
