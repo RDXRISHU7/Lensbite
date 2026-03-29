@@ -16,10 +16,13 @@ import {
   } from "@/components/ui/accordion"
 import type { FormState as BarcodeFormState } from '@/app/scanner/barcode/action';
 import type { FormState as FoodFormState } from '@/app/scanner/food/action';
-import { CircleAlert, ShieldCheck, Lightbulb, Leaf, DropletOff, Biohazard, HeartPulse, Fingerprint, DatabaseBackup, TriangleAlert, Zap } from 'lucide-react';
+import { CircleAlert, ShieldCheck, Lightbulb, Leaf, DropletOff, Biohazard, HeartPulse, Fingerprint, DatabaseBackup, TriangleAlert, Zap, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
+import { useUser, useFirestore, addDocumentNonBlocking } from '@/firebase';
+import { collection, serverTimestamp } from 'firebase/firestore';
+import { useToast } from '@/hooks/use-toast';
 
 type RiskResultCardProps = {
     state: FoodFormState | BarcodeFormState;
@@ -42,6 +45,11 @@ const getNutrientTextClass = (name: string, percentage: number) => {
 
 export function RiskResultCard({ state }: RiskResultCardProps) {
     const [animatedPercentages, setAnimatedPercentages] = useState<Record<string, number>>({});
+    const [isSaving, setIsSaving] = useState(false);
+    const [isSaved, setIsSaved] = useState(false);
+    const { user } = useUser();
+    const firestore = useFirestore();
+    const { toast } = useToast();
 
     useEffect(() => {
         if (state.type === 'success' && state.analysis) {
@@ -72,6 +80,32 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
         dietaryFlags,
         detectedAllergens 
     } = analysis;
+
+    const handleSaveToHistory = () => {
+        if (!user || !firestore) return;
+        setIsSaving(true);
+
+        const scansRef = collection(firestore, 'users', user.uid, 'scans');
+        addDocumentNonBlocking(scansRef, {
+            productName,
+            ingredients,
+            riskScore,
+            isSafe,
+            summary,
+            novaScore,
+            nutriScore,
+            timestamp: serverTimestamp(),
+        });
+
+        setTimeout(() => {
+            setIsSaving(false);
+            setIsSaved(true);
+            toast({
+                title: "Scan Secured",
+                description: "This analysis has been added to your Health History.",
+            });
+        }, 1000);
+    };
 
     return (
         <div className="w-full space-y-8 animate-reveal">
@@ -204,33 +238,20 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                 )}
             </div>
 
-            {/* Ingredients Found */}
-            <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="ingredients" className="border-none">
-                    <AccordionTrigger className="h-20 px-10 rounded-[2.5rem] glass-panel border-white/5 hover:bg-white/5 hover:no-underline transition-all">
-                        <div className="flex items-center gap-4">
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Full Ingredient Disclosure</span>
-                            <Badge className="bg-primary/20 text-primary border-none rounded-full px-3">{ingredients?.length}</Badge>
-                        </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pt-10 px-6">
-                        <div className="flex flex-wrap gap-3">
-                            {ingredients?.map((i) => (
-                                <Badge key={i} variant="secondary" className="bg-secondary/20 text-foreground border-white/5 rounded-xl px-5 py-2 text-xs font-black uppercase tracking-tight">
-                                    {i}
-                                </Badge>
-                            ))}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
-            </Accordion>
-
             {/* Persistence Actions */}
             <div className="pt-10 pb-40">
-                <Button size="xl" className="w-full h-32 rounded-[3rem] bg-primary text-background text-3xl font-black italic uppercase tracking-tighter hover:scale-[1.02] active:scale-[0.98] transition-all shadow-3xl group relative overflow-hidden">
+                <Button 
+                    size="xl" 
+                    onClick={handleSaveToHistory}
+                    disabled={isSaving || isSaved}
+                    className={cn(
+                        "w-full h-32 rounded-[3rem] text-3xl font-black italic uppercase tracking-tighter transition-all shadow-3xl group relative overflow-hidden",
+                        isSaved ? "bg-green-500 text-white" : "bg-primary text-background hover:scale-[1.02] active:scale-[0.98]"
+                    )}
+                >
                     <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
-                    <DatabaseBackup className="mr-4 size-10" />
-                    Secure to Health History
+                    {isSaving ? <Fingerprint className="mr-4 size-10 animate-pulse" /> : isSaved ? <CheckCircle className="mr-4 size-10" /> : <DatabaseBackup className="mr-4 size-10" />}
+                    {isSaving ? "Syncing..." : isSaved ? "Analysis Secured" : "Secure to Health History"}
                 </Button>
             </div>
         </div>

@@ -1,4 +1,3 @@
-
 {
   "entities": {
     "UserProfile": {
@@ -17,14 +16,31 @@
           "format": "email"
         },
         "healthReport": {
-            "type": "string",
-            "description": "A structured JSON string containing allergens, medical history, body metrics (height, weight, BMI), medicines, and cooking practices."
+          "type": "string",
+          "description": "A structured JSON string containing allergens, medical history, body metrics, and cooking practices."
         }
       },
       "required": [
         "id",
         "email"
       ]
+    },
+    "SafetyScan": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SafetyScan",
+      "type": "object",
+      "description": "Represents a saved food safety analysis record.",
+      "properties": {
+        "productName": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "riskScore": { "type": "number" },
+        "isSafe": { "type": "boolean" },
+        "summary": { "type": "string" },
+        "novaScore": { "type": "number" },
+        "nutriScore": { "type": "string" },
+        "ingredients": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["productName", "timestamp", "riskScore", "isSafe"]
     }
   },
   "auth": {
@@ -39,19 +55,19 @@
         "path": "/users/{userId}",
         "definition": {
           "entityName": "UserProfile",
-          "schema": {
-            "$ref": "#/backend/entities/UserProfile"
-          },
-          "description": "Stores detailed user profile information including comprehensive health metrics.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "The unique identifier of the user."
-            }
-          ]
+          "schema": { "$ref": "#/backend/entities/UserProfile" },
+          "description": "Stores detailed user profile information."
+        }
+      },
+      {
+        "path": "/users/{userId}/scans/{scanId}",
+        "definition": {
+          "entityName": "SafetyScan",
+          "schema": { "$ref": "#/backend/entities/SafetyScan" },
+          "description": "Stores individual food safety scan history for the user."
         }
       }
     ],
-    "reasoning": "A unified UserProfile document stores the rich health data required for personalized AI analysis, following the requested IA diagram."
+    "reasoning": "Sub-collections for scans allow for efficient querying of history without bloating the main profile document."
   }
 }

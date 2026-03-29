@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useUser, useAuth } from '@/firebase';
 import { signOut } from 'firebase/auth';
-import { User, LogOut, LogIn, Database, Fingerprint } from 'lucide-react';
+import { User, LogOut, LogIn, Database, Fingerprint, History } from 'lucide-react';
 import { Skeleton } from './ui/skeleton';
 
 export function UserNav() {
@@ -57,13 +57,15 @@ export function UserNav() {
                 <Link href="/profile">
                     <DropdownMenuItem className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer focus:bg-primary focus:text-background transition-colors">
                         <Database className="mr-3 h-4 w-4" />
-                        <span>My Health Profile</span>
+                        <span>Health Profile</span>
                     </DropdownMenuItem>
                 </Link>
-                <DropdownMenuItem className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer focus:bg-primary focus:text-background transition-colors">
-                    <Fingerprint className="mr-3 h-4 w-4" />
-                    <span>Security Settings</span>
-                </DropdownMenuItem>
+                <Link href="/history">
+                    <DropdownMenuItem className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer focus:bg-primary focus:text-background transition-colors">
+                        <History className="mr-3 h-4 w-4" />
+                        <span>Safety History</span>
+                    </DropdownMenuItem>
+                </Link>
           </DropdownMenuGroup>
           <DropdownMenuSeparator className="bg-white/5" />
           <DropdownMenuItem onClick={handleLogout} className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer text-destructive focus:bg-destructive focus:text-white transition-colors">
