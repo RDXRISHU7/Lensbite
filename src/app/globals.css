@@ -50,27 +50,45 @@
     @apply bg-card/60 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
   .animate-reveal {
-    animation: reveal 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: reveal 1000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-reveal-slow {
+    animation: reveal 1400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-float {
+    animation: float 6000ms ease-in-out infinite;
   }
   @keyframes reveal {
-    from { opacity: 0; transform: translateY(20px) scale(0.98); filter: blur(10px); }
-    to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    from { 
+      opacity: 0; 
+      transform: translateY(30px) scale(0.95); 
+      filter: blur(15px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0) scale(1); 
+      filter: blur(0); 
+    }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
   .hover-lift {
-    @apply transition-all duration-500 hover:-translate-y-1 hover:shadow-primary/20 hover:shadow-2xl;
+    @apply transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-primary/20 hover:shadow-2xl;
   }
   .text-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    text-shadow: 0 0 30px hsl(var(--primary) / 0.5);
   }
   .scanline {
     width: 100%;
     height: 100px;
     z-index: 50;
-    background: linear-gradient(0deg, rgba(0, 230, 118, 0) 0%, rgba(0, 230, 118, 0.05) 50%, rgba(0, 230, 118, 0) 100%);
-    opacity: 0.1;
+    background: linear-gradient(0deg, rgba(0, 230, 118, 0) 0%, rgba(0, 230, 118, 0.08) 50%, rgba(0, 230, 118, 0) 100%);
+    opacity: 0.15;
     position: absolute;
     bottom: 100%;
-    animation: scanline 6000ms linear infinite;
+    animation: scanline 8000ms linear infinite;
   }
   @keyframes scanline {
     0% { bottom: 100%; }

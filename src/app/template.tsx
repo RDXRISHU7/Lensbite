@@ -15,11 +15,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
   if (!mounted) return <div className="opacity-0">{children}</div>;
 
   return (
-    <div className="relative min-h-screen">
+    <div key={pathname} className="relative min-h-screen">
       <div
         className={cn(
-          "transition-opacity duration-300 ease-out",
-          "opacity-100"
+          "animate-reveal"
         )}
       >
         {children}

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ScanBarcode, ShieldCheck, Activity, ChefHat, Sparkles, Zap, ArrowRight, Dna, Cpu } from 'lucide-react';
+import { ScanBarcode, ShieldCheck, Activity, ChefHat, ArrowRight, Dna, Cpu, Zap } from 'lucide-react';
 import { useUser } from '@/firebase';
 import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
@@ -20,8 +20,8 @@ export default function Home() {
         <section className="flex-1 flex items-center justify-center px-4 relative overflow-hidden">
           <div className="container relative z-10 max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
-              <div className="space-y-6 md:space-y-12 animate-reveal">
-                <div className="space-y-3 md:space-y-6">
+              <div className="space-y-6 md:space-y-12">
+                <div className="space-y-3 md:space-y-6 animate-reveal">
                   <Badge variant="outline" className="text-primary border-primary/20 px-3 md:px-6 py-1 md:py-2 uppercase tracking-[0.4em] text-[8px] md:text-[10px] font-black bg-primary/5 rounded-full">
                     Lens Bite Network • Live Intelligence
                   </Badge>
@@ -34,7 +34,7 @@ export default function Home() {
                   </p>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-6">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-6 animate-reveal [animation-delay:200ms]">
                   <Link href={user ? "/scanner/barcode" : "/login"} className="w-full sm:w-auto">
                     <Button size="lg" className="w-full h-14 md:h-20 px-6 md:px-12 rounded-2xl md:rounded-[2rem] text-md md:text-xl font-black bg-primary text-background hover:scale-105 active:scale-95 transition-all shadow-xl">
                       <ScanBarcode className="mr-2 md:mr-4 size-5 md:size-8" />
@@ -48,8 +48,8 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Mobile Stats - Condensed to fit on one screen */}
-                <div className="flex items-center gap-4 md:gap-10 pt-6 md:pt-12 border-t border-white/5">
+                {/* Mobile Stats - Condensed */}
+                <div className="flex items-center gap-4 md:gap-10 pt-6 md:pt-12 border-t border-white/5 animate-reveal [animation-delay:400ms]">
                     {[
                       { label: "Scans", value: "24k+", icon: <Cpu className="size-3 md:size-4 text-primary" /> },
                       { label: "Sync", value: "Live", icon: <Zap className="size-3 md:size-4 text-accent" /> },
@@ -66,10 +66,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Decorative HUD Element - Hidden on Mobile to save space */}
-              <div className="hidden lg:flex relative justify-center items-center h-[600px] animate-reveal">
+              {/* Decorative HUD Element */}
+              <div className="hidden lg:flex relative justify-center items-center h-[600px] animate-reveal [animation-delay:600ms]">
                 <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full animate-pulse" />
-                <div className="relative z-10 w-[400px] h-[400px] border-[20px] border-primary/10 rounded-[4rem] flex items-center justify-center group overflow-hidden">
+                <div className="relative z-10 w-[400px] h-[400px] border-[20px] border-primary/10 rounded-[4rem] flex items-center justify-center group overflow-hidden animate-float">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent group-hover:scale-150 transition-transform duration-1000" />
                   <Dna className="size-32 text-primary animate-pulse" />
                   <div className="absolute inset-4 border-2 border-dashed border-primary/20 rounded-[3rem] animate-[spin_20000ms_linear_infinite]" />
@@ -80,7 +80,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section - Only visible on Laptop/Scrolling view */}
+        {/* Features Section - Laptop Only */}
         <section className="hidden md:block py-40 border-y border-white/5 bg-card/10 relative overflow-hidden">
           <div className="container px-4 mx-auto max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -101,7 +101,7 @@ export default function Home() {
                   desc: "Instantly detect thousands of additives and potential carcinogens." 
                 }
               ].map((feature, i) => (
-                <div key={i} className="group p-12 rounded-[3rem] glass-panel hover-lift space-y-8 relative overflow-hidden">
+                <div key={i} className="group p-12 rounded-[3rem] glass-panel hover-lift space-y-8 relative overflow-hidden animate-reveal" style={{ animationDelay: `${(i+1)*200}ms` }}>
                   <div className="size-16 rounded-[1.5rem] bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-500">
                     {feature.icon}
                   </div>
