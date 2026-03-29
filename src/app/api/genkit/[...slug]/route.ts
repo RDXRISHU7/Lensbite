@@ -2,6 +2,9 @@ import { ai } from '@/ai/genkit';
 
 /**
  * Genkit 1.x Next.js API route integration.
- * The nextHandler method is part of the Genkit instance in version 1.x.
+ * We use the nextHandler() method from the Genkit instance.
  */
-export const { GET, POST } = ai.nextHandler();
+const handler = ai.nextHandler();
+
+export const GET = handler.GET;
+export const POST = handler.POST;
