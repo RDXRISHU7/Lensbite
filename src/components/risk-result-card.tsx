@@ -241,7 +241,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
             {/* Persistence Actions */}
             <div className="pt-10 pb-40">
                 <Button 
-                    size="xl" 
+                    size="icon" 
                     onClick={handleSaveToHistory}
                     disabled={isSaving || isSaved}
                     className={cn(
