@@ -50,7 +50,7 @@
     @apply bg-card/60 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
   .animate-reveal {
-    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: reveal 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   @keyframes reveal {
     from { opacity: 0; transform: translateY(20px) scale(0.98); filter: blur(10px); }
@@ -70,7 +70,7 @@
     opacity: 0.1;
     position: absolute;
     bottom: 100%;
-    animation: scanline 6s linear infinite;
+    animation: scanline 6000ms linear infinite;
   }
   @keyframes scanline {
     0% { bottom: 100%; }

@@ -31,14 +31,14 @@ export default function Template({ children }: { children: React.ReactNode }) {
       {/* Cinematic Slide Overlay */}
       <div 
         className={cn(
-          "fixed inset-0 z-[100] bg-primary pointer-events-none transition-transform duration-[600ms] ease-[cubic-bezier(0.85,0,0.15,1)]",
+          "fixed inset-0 z-[100] bg-primary pointer-events-none transition-transform duration-[600ms] ease-in-out",
           isTransitioning ? "translate-x-0" : "translate-x-full"
         )}
       />
 
       <div
         className={cn(
-          "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "transition-all duration-700 ease-out",
           isTransitioning 
             ? "translate-x-[-2vw] opacity-0 blur-xl scale-105" 
             : "translate-x-0 opacity-100 blur-0 scale-100"
