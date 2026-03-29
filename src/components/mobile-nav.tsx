@@ -17,7 +17,7 @@ export function MobileNav() {
 
   return (
     <nav className="md:hidden fixed bottom-6 inset-x-4 z-[100]">
-      <div className="glass-panel h-20 rounded-[2rem] flex items-center justify-around px-2 border-primary/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <div className="glass-panel h-20 rounded-[2.5rem] flex items-center justify-around px-2 border-primary/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;

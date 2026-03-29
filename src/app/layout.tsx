@@ -36,13 +36,16 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <title>Lens Bite | Personalized Food Safety & AI Analysis</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <meta name="description" content="Understand your food ingredients deeply with AI-powered analysis tailored to your personal health needs." />
       </head>
-      <body ref={containerRef} className="font-sans antialiased selection:bg-primary/30 selection:text-foreground pb-32 md:pb-0">
+      <body ref={containerRef} className="font-sans antialiased selection:bg-primary/30 selection:text-foreground md:pb-0 touch-none md:touch-auto">
         <div className="scanline pointer-events-none" />
         <FirebaseClientProvider>
-          {children}
-          <MobileNav />
+          <div className="flex flex-col min-h-screen overflow-hidden md:overflow-visible">
+            {children}
+            <MobileNav />
+          </div>
         </FirebaseClientProvider>
         <Toaster />
       </body>
