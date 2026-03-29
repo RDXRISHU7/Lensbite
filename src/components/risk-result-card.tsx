@@ -163,7 +163,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                 </div>
             )}
 
-            {/* Nutritional Breakdown */}
+            {/* Nutritional Architecture */}
             <Card className="rounded-[3rem] bg-card/40 backdrop-blur-md border-white/5 shadow-2xl overflow-hidden">
                 <CardHeader className="p-10 pb-4">
                     <CardTitle className="text-xs font-black uppercase tracking-[0.4em] opacity-40">Nutritional Architecture</CardTitle>
@@ -218,7 +218,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
 
             {/* Analysis Summary */}
             <div className="p-12 rounded-[3rem] glass-panel space-y-8 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-[8000ms] pointer-events-none">
+                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-700 pointer-events-none">
                     <Fingerprint size={160} />
                 </div>
                 <div className="flex items-center gap-5 relative z-10">
