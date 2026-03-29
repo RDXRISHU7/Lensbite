@@ -117,7 +117,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                         "size-12 md:size-16 rounded-xl md:rounded-[1.25rem] flex items-center justify-center text-white shadow-2xl transition-all duration-700",
                         isSafe ? "bg-primary" : "bg-destructive animate-pulse"
                     )}>
-                        {isSafe ? <ShieldCheck size={24} md:size={32} /> : <Biohazard size={24} md:size={32} />}
+                        {isSafe ? <ShieldCheck className="size-6 md:size-8" /> : <Biohazard className="size-6 md:size-8" />}
                     </div>
                     <div className="flex-1 text-left">
                         <h2 className="text-2xl md:text-5xl font-black font-headline tracking-tighter leading-none italic uppercase">{productName}</h2>
@@ -154,7 +154,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
             {detectedAllergens.length > 0 && (
                 <div className="p-6 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-destructive text-white shadow-3xl flex items-center gap-4 md:gap-6 animate-pulse">
                     <div className="size-10 md:size-14 rounded-xl md:rounded-2xl bg-white/20 flex items-center justify-center border border-white/10 shrink-0">
-                        <CircleAlert size={20} md:size={28} />
+                        <CircleAlert className="size-5 md:size-7" />
                     </div>
                     <div className="text-left">
                         <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest opacity-60">Health Warning</p>
@@ -186,7 +186,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                                         {n.percentage}%
                                     </span>
                                     {n.percentage > 100 && (
-                                        <TriangleAlert size={14} md:size={16} className="text-destructive animate-bounce" />
+                                        <TriangleAlert className="size-3.5 md:size-4 text-destructive animate-bounce" />
                                     )}
                                 </div>
                             </div>
@@ -203,15 +203,15 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
             {/* Dietary Flags */}
             <div className="grid grid-cols-3 gap-3">
                 <div className={cn("p-4 md:p-8 rounded-xl md:rounded-[2rem] glass-panel border flex flex-col items-center gap-2 md:gap-4 transition-all duration-500", dietaryFlags.isVegan ? "border-green-500/20 bg-green-500/5 text-green-500" : "opacity-20 border-white/5")}>
-                    <Leaf size={18} md:size={24} />
+                    <Leaf className="size-[18px] md:size-6" />
                     <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-center">Vegan</span>
                 </div>
                 <div className={cn("p-4 md:p-8 rounded-xl md:rounded-[2rem] glass-panel border flex flex-col items-center gap-2 md:gap-4 transition-all duration-500", dietaryFlags.isVegetarian ? "border-primary/20 bg-primary/5 text-primary" : "opacity-20 border-white/5")}>
-                    <Zap size={18} md:size={24} />
+                    <Zap className="size-[18px] md:size-6" />
                     <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-center">Veg</span>
                 </div>
                 <div className={cn("p-4 md:p-8 rounded-xl md:rounded-[2rem] glass-panel border flex flex-col items-center gap-2 md:gap-4 transition-all duration-500", dietaryFlags.palmOilFree ? "border-accent/20 bg-accent/5 text-accent" : "opacity-20 border-white/5")}>
-                    <DropletOff size={18} md:size={24} />
+                    <DropletOff className="size-[18px] md:size-6" />
                     <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-center">Palm-Free</span>
                 </div>
             </div>
@@ -219,11 +219,11 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
             {/* Analysis Summary */}
             <div className="p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] glass-panel space-y-6 md:space-y-8 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-700 pointer-events-none">
-                    <Fingerprint size={120} md:size={160} />
+                    <Fingerprint className="size-[120px] md:size-[160px]" />
                 </div>
                 <div className="flex items-center gap-3 md:gap-5 relative z-10">
                     <div className="size-10 md:size-12 rounded-xl md:rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
-                        <HeartPulse size={20} md:size={24} />
+                        <HeartPulse className="size-5 md:size-6" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-black font-headline tracking-tighter leading-none italic uppercase">Safety Status</h3>
                 </div>
@@ -231,7 +231,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
                 {tip && (
                     <div className="pt-6 md:pt-8 flex items-start gap-3 md:gap-5 border-t border-white/5 relative z-10">
                         <div className="size-8 md:size-10 rounded-lg md:rounded-xl bg-primary flex items-center justify-center shrink-0">
-                           <Lightbulb size={16} md:size={20} className="text-background" />
+                           <Lightbulb className="size-4 md:size-5 text-background" />
                         </div>
                         <p className="text-sm md:text-md font-bold text-primary italic leading-tight">{tip}</p>
                     </div>

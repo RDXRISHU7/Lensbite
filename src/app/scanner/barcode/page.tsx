@@ -179,7 +179,7 @@ export default function BarcodeScannerPage() {
                     {/* HUD Overlays */}
                     <div className="absolute inset-0 pointer-events-none">
                         <div className="absolute top-8 left-8 flex items-center gap-3 text-white/50">
-                            <Zap size={16} className="animate-pulse" />
+                            <Zap className="size-4 md:size-6 animate-pulse" />
                             <span className="text-[10px] font-black uppercase tracking-[0.4em]">Lens Active</span>
                         </div>
                         
@@ -233,7 +233,7 @@ export default function BarcodeScannerPage() {
              <div className="w-full max-w-2xl mx-auto space-y-6 md:space-y-8 animate-reveal px-4">
                 <div className="p-10 md:p-16 rounded-[2.5rem] md:rounded-[4rem] bg-destructive/5 border-2 md:border-4 border-destructive/20 text-center space-y-6 md:space-y-8">
                     <div className="size-16 md:size-24 rounded-2xl md:rounded-3xl bg-destructive text-white flex items-center justify-center mx-auto shadow-2xl">
-                        <CircleAlert size={32} md:size={48} />
+                        <CircleAlert className="size-8 md:size-12" />
                     </div>
                     <div className="space-y-2 md:space-y-4">
                         <h2 className="text-3xl md:text-4xl font-black font-headline tracking-tighter italic">Analysis Failed</h2>
