@@ -31,7 +31,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       {/* Cinematic Slide Overlay */}
       <div 
         className={cn(
-          "fixed inset-0 z-[100] bg-primary pointer-events-none transition-transform duration-600 ease-[cubic-bezier(0.85,0,0.15,1)]",
+          "fixed inset-0 z-[100] bg-primary pointer-events-none transition-transform duration-[600ms] ease-[cubic-bezier(0.85,0,0.15,1)]",
           isTransitioning ? "translate-x-0" : "translate-x-full"
         )}
       />

@@ -218,7 +218,7 @@ export function RiskResultCard({ state }: RiskResultCardProps) {
 
             {/* Analysis Summary */}
             <div className="p-12 rounded-[3rem] glass-panel space-y-8 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-[8s] pointer-events-none">
+                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-[8000ms] pointer-events-none">
                     <Fingerprint size={160} />
                 </div>
                 <div className="flex items-center gap-5 relative z-10">

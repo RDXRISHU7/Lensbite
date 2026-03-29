@@ -1,4 +1,4 @@
-import {nextHandler} from '@genkit-ai/next';
+import { ai } from '@/ai/genkit';
 
-export const GET = nextHandler();
-export const POST = nextHandler();
+// Correct Genkit 1.x pattern for Next.js API route integration
+export const { GET, POST } = ai.nextHandler();

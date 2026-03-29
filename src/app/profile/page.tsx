@@ -250,7 +250,7 @@ export default function ProfilePage() {
                                 </div>
                                 {bmi && (
                                     <div className="p-16 rounded-[3rem] bg-primary text-background flex flex-col lg:flex-row items-center justify-between gap-12 shadow-2xl relative overflow-hidden group">
-                                        <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:rotate-12 transition-transform duration-[5s]">
+                                        <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:rotate-12 transition-transform duration-[5000ms]">
                                             <Activity size={300} />
                                         </div>
                                         <div className="relative z-10 space-y-2">
