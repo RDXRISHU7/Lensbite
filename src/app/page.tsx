@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div className="fixed inset-0 bg-black" />
+    <div className="min-h-screen bg-black" />
   );
 }
