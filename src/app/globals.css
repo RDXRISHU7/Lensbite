@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 222 47% 4%;
+    --background: 222 47% 2%;
     --foreground: 0 0% 100%;
-    --card: 222 47% 6%;
+    --card: 170 100% 5%;
     --card-foreground: 0 0% 100%;
-    --popover: 222 47% 4%;
+    --popover: 222 47% 2%;
     --popover-foreground: 0 0% 100%;
-    --primary: 210 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 32% 17%;
+    --primary: 151 100% 45%;
+    --primary-foreground: 222 47% 2%;
+    --secondary: 170 100% 15%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 142 70% 45%;
-    --accent-foreground: 0 0% 100%;
+    --muted: 170 100% 10%;
+    --muted-foreground: 170 20% 60%;
+    --accent: 24 100% 63%;
+    --accent-foreground: 222 47% 2%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 224 76% 48%;
-    --radius: 1rem;
+    --border: 170 100% 15%;
+    --input: 170 100% 15%;
+    --ring: 151 100% 45%;
+    --radius: 1.5rem;
   }
 }
 
@@ -33,7 +33,7 @@
     font-style: normal !important;
   }
   body {
-    @apply bg-background text-foreground overflow-hidden antialiased;
+    @apply bg-background text-foreground overflow-hidden antialiased font-sans;
     perspective: 2000px;
   }
 }
@@ -43,12 +43,16 @@
   transform-style: preserve-3d;
 }
 
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
 .glass-panel {
-  @apply bg-white/[0.03] backdrop-blur-3xl border border-white/10 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.5)];
+  @apply bg-white/[0.02] backdrop-blur-3xl border border-white/5 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.8)];
 }
 
 @keyframes iris-shutter {
-  0% { transform: scale(1.1); filter: blur(10px); opacity: 0; }
+  0% { transform: scale(1.1); filter: blur(20px); opacity: 0; }
   100% { transform: scale(1); filter: blur(0); opacity: 1; }
 }
 
@@ -62,24 +66,24 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.2; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
 .animate-iris {
   animation: iris-shutter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-3d {
-  animation: float-3d 6s ease-in-out infinite;
+  animation: float-3d 8s ease-in-out infinite;
 }
 
-.shutter-wipe {
-  position: fixed;
-  inset: 0;
-  background: black;
-  z-index: 999;
-  pointer-events: none;
-  transform: translateY(100%);
+.animate-core {
+  animation: core-rotate 120s linear infinite;
 }
 
-.shutter-active .shutter-wipe {
-  transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
-  transform: translateY(0);
+.animate-pulse-ring {
+  animation: pulse-ring 4s ease-in-out infinite;
 }
