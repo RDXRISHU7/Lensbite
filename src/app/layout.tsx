@@ -4,8 +4,8 @@ import { MobileNav } from '@/components/mobile-nav';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata = {
-  title: 'Lens Bite | Safety Command Center',
-  description: 'Pro-grade food safety intelligence with 3D HUD technology.',
+  title: 'Lens Bite | Command Center',
+  description: 'Clinical grade food safety intelligence platform.',
 };
 
 export default function RootLayout({
@@ -17,8 +17,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="bg-background m-0 p-0 overflow-hidden font-sans antialiased">
         <FirebaseClientProvider>
-          <div className="relative min-h-dvh overflow-hidden preserve-3d">
-            <div className="scanline" />
+          <div className="relative min-h-dvh overflow-hidden perspective-3d">
             {children}
             <MobileNav />
             <Toaster />

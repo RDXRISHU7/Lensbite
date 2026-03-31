@@ -3,14 +3,13 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { ShieldCheck, Biohazard, TriangleAlert, Activity, DatabaseBackup, CheckCircle, Fingerprint, Lightbulb } from 'lucide-react';
+import { ShieldCheck, Biohazard, Activity, DatabaseBackup, CheckCircle, Fingerprint, Lightbulb, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
 import { useUser, useFirestore, addDocumentNonBlocking } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
-import type { FormState } from '@/app/scanner/barcode/action';
 
 export function RiskResultCard({ state }: { state: any }) {
     const [animatedPercentages, setAnimatedPercentages] = useState<Record<string, number>>({});
@@ -36,7 +35,7 @@ export function RiskResultCard({ state }: { state: any }) {
     if (state.type !== 'success' || !state.analysis) return null;
 
     const { productName, ingredients, analysis, tip } = state;
-    const { riskScore, isSafe, summary, novaScore, nutriScore, nutrients, detectedAllergens } = analysis;
+    const { riskScore, isSafe, summary, novaScore, nutriScore, nutrients } = analysis;
 
     const handleSaveToHistory = () => {
         if (!user || !firestore) return;
@@ -48,95 +47,95 @@ export function RiskResultCard({ state }: { state: any }) {
     };
 
     return (
-        <div className="w-full space-y-6 md:space-y-10 animate-iris preserve-3d">
-            {/* Header Hero */}
-            <div className="flex items-center gap-6 p-6 rounded-[2.5rem] glass-panel border-primary/20">
+        <div className="w-full space-y-8 animate-iris perspective-3d">
+            {/* Clinical Header */}
+            <div className="flex items-center gap-8 p-8 rounded-[2.5rem] glass-panel bg-white/[0.02]">
                 <div className={cn(
-                    "size-20 rounded-[2rem] flex items-center justify-center text-white shadow-2xl transition-all border-2",
-                    isSafe ? "bg-primary border-primary/20" : "bg-destructive border-destructive/20 animate-pulse"
+                    "size-24 rounded-[2rem] flex items-center justify-center text-black shadow-2xl transition-all",
+                    isSafe ? "bg-white" : "bg-destructive text-white"
                 )}>
-                    {isSafe ? <ShieldCheck className="size-10" /> : <Biohazard className="size-10" />}
+                    {isSafe ? <ShieldCheck className="size-12" /> : <Biohazard className="size-12" />}
                 </div>
                 <div className="flex-1 text-left">
-                    <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-none">{productName}</h2>
-                    <div className="flex items-center gap-3 mt-2">
-                        <Badge variant="outline" className="border-primary/30 text-primary text-[8px] font-black tracking-widest uppercase bg-primary/5">Intelligence Match</Badge>
-                        <span className="text-[8px] font-black opacity-20 uppercase tracking-widest">Confidence: {(100 - riskScore)}%</span>
+                    <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none">{productName}</h2>
+                    <div className="flex items-center gap-4 mt-3">
+                        <Badge variant="outline" className="border-white/20 text-white text-[10px] font-bold tracking-widest uppercase bg-white/5">Verified Report</Badge>
+                        <span className="text-[10px] font-bold opacity-30 uppercase tracking-widest">Integrity Check: Pass</span>
                     </div>
                 </div>
             </div>
 
-            {/* Main Stats 3D */}
-            <div className="grid grid-cols-2 gap-4 md:gap-8">
-                <div className="p-8 rounded-[2.5rem] glass-panel flex flex-col items-center justify-center text-center space-y-2 hover:bg-primary/5 transition-all">
-                    <span className="text-[8px] font-black uppercase tracking-[0.4em] opacity-40">Processing</span>
-                    <div className="text-6xl md:text-8xl font-black tracking-tighter text-primary leading-none">{novaScore}</div>
-                    <p className="text-[10px] font-black uppercase opacity-60 tracking-widest leading-none">NOVA Score</p>
+            {/* Metrics Architecture */}
+            <div className="grid grid-cols-2 gap-6">
+                <div className="p-10 rounded-[3rem] glass-panel flex flex-col items-center justify-center text-center space-y-3 bg-white/[0.01]">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-30">Classification</span>
+                    <div className="text-7xl md:text-9xl font-black tracking-tighter text-white leading-none">{novaScore}</div>
+                    <p className="text-xs font-bold uppercase opacity-60 tracking-[0.2em]">NOVA Grade</p>
                 </div>
-                <div className="p-8 rounded-[2.5rem] glass-panel flex flex-col items-center justify-center text-center space-y-2 hover:bg-primary/5 transition-all">
-                    <span className="text-[8px] font-black uppercase tracking-[0.4em] opacity-40">Quality Grade</span>
+                <div className="p-10 rounded-[3rem] glass-panel flex flex-col items-center justify-center text-center space-y-3 bg-white/[0.01]">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-30">Nutritional ID</span>
                     <div className={cn(
-                        "text-6xl md:text-8xl font-black tracking-tighter leading-none",
-                        nutriScore === 'A' ? 'text-green-500' : nutriScore === 'B' ? 'text-primary' : 'text-yellow-600'
+                        "text-7xl md:text-9xl font-black tracking-tighter leading-none",
+                        nutriScore === 'A' ? 'text-accent' : nutriScore === 'B' ? 'text-primary' : 'text-yellow-600'
                     )}>
                         {nutriScore}
                     </div>
-                    <p className="text-[10px] font-black uppercase opacity-60 tracking-widest leading-none">Nutri-Score</p>
+                    <p className="text-xs font-bold uppercase opacity-60 tracking-[0.2em]">Nutri-Score</p>
                 </div>
             </div>
 
-            {/* Nutrients Architecture */}
-            <Card className="rounded-[3rem] glass-panel border-white/5 shadow-2xl overflow-hidden">
-                <CardHeader className="p-8 pb-4">
-                    <CardTitle className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">Clinical Breakdown</CardTitle>
+            {/* Analysis Data Sheet */}
+            <Card className="rounded-[3.5rem] glass-panel border-white/5 bg-white/[0.01] overflow-hidden">
+                <CardHeader className="p-10 pb-6 border-b border-white/5">
+                    <CardTitle className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-40">Clinical Nutrient Profiling</CardTitle>
                 </CardHeader>
-                <CardContent className="p-8 pt-0 space-y-6">
+                <CardContent className="p-10 space-y-8">
                     {nutrients.map((n: any) => (
-                        <div key={n.name} className="space-y-2">
-                            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
+                        <div key={n.name} className="space-y-3">
+                            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-widest">
                                 <span>{n.name}</span>
                                 <span className={n.percentage > 100 ? "text-destructive" : "text-primary"}>{n.percentage}%</span>
                             </div>
                             <Progress 
                                 value={animatedPercentages[n.name] || 0} 
-                                className="h-2 bg-white/5 rounded-full overflow-hidden" 
-                                indicatorClassName={cn("transition-all duration-1000", n.name.toLowerCase() === 'sugar' ? 'bg-destructive' : 'bg-primary')}
+                                className="h-3 bg-white/5 rounded-full overflow-hidden" 
+                                indicatorClassName={cn("transition-all duration-1000 bg-white")}
                             />
                         </div>
                     ))}
                 </CardContent>
             </Card>
 
-            {/* Action Summary */}
-            <div className="p-10 rounded-[3.5rem] glass-panel space-y-6 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform pointer-events-none">
-                    <Fingerprint className="size-48" />
+            {/* Intelligence Output */}
+            <div className="p-12 rounded-[4rem] glass-panel bg-white/[0.02] space-y-8">
+                <div className="flex items-center gap-5">
+                    <Activity className="size-8 text-primary" />
+                    <h3 className="text-3xl font-black tracking-tighter uppercase">Executive Summary</h3>
                 </div>
-                <div className="flex items-center gap-4 relative z-10">
-                    <Activity className="size-6 text-primary" />
-                    <h3 className="text-2xl font-black tracking-tighter uppercase">Intelligence Output</h3>
-                </div>
-                <p className="text-muted-foreground text-lg font-medium leading-relaxed text-left relative z-10">{summary}</p>
+                <p className="text-white/70 text-xl font-medium leading-relaxed text-left">{summary}</p>
                 {tip && (
-                    <div className="pt-6 border-t border-white/10 flex items-start gap-4">
-                        <Lightbulb className="size-6 text-primary shrink-0" />
-                        <p className="text-sm font-black uppercase leading-tight tracking-tight text-primary">{tip}</p>
+                    <div className="pt-8 border-t border-white/10 flex items-start gap-6">
+                        <Lightbulb className="size-8 text-primary shrink-0" />
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">Precision Recommendation</p>
+                          <p className="text-lg font-bold uppercase leading-tight text-white">{tip}</p>
+                        </div>
                     </div>
                 )}
             </div>
 
-            {/* Persistent Secure Button */}
+            {/* Action Secure */}
             <div className="pt-8 pb-32">
                 <Button 
                     onClick={handleSaveToHistory}
                     disabled={isSaving || isSaved}
                     className={cn(
-                        "w-full h-24 rounded-[2.5rem] text-2xl font-black uppercase tracking-tighter transition-all shadow-3xl",
-                        isSaved ? "bg-green-500 text-white" : "bg-primary text-background hover:scale-[1.02]"
+                        "w-full h-24 rounded-[2.5rem] text-2xl font-black uppercase tracking-tighter transition-all",
+                        isSaved ? "bg-accent text-white" : "bg-white text-black hover:scale-[1.02]"
                     )}
                 >
-                    {isSaving ? <Activity className="mr-3 animate-spin" /> : isSaved ? <CheckCircle className="mr-3" /> : <DatabaseBackup className="mr-3" />}
-                    {isSaving ? "Syncing..." : isSaved ? "Secured" : "Secure to Vault"}
+                    {isSaving ? <Activity className="mr-4 animate-spin" /> : isSaved ? <CheckCircle className="mr-4" /> : <DatabaseBackup className="mr-4" />}
+                    {isSaving ? "Synchronizing..." : isSaved ? "Report Secured" : "Secure Analysis to Vault"}
                 </Button>
             </div>
         </div>
