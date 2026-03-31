@@ -1,88 +1,72 @@
 'use client';
 
-import Link from 'next/link';
+import { useUser, useAuth } from '@/firebase';
+import { signOut } from 'firebase/auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useUser, useAuth } from '@/firebase';
-import { signOut } from 'firebase/auth';
-import { User, LogOut, LogIn, Database, Fingerprint, History } from 'lucide-react';
-import { Skeleton } from './ui/skeleton';
+import { User, LogOut, Settings, Database, History } from 'lucide-react';
+import Link from 'next/link';
 
 export function UserNav() {
   const { user, isUserLoading } = useUser();
   const auth = useAuth();
 
-  const handleLogout = async () => {
-    await signOut(auth);
-  };
-
-  if (isUserLoading) {
-    return <Skeleton className="h-10 w-10 rounded-full" />;
-  }
-
-  if (user) {
-    const fallback = user.email ? user.email.charAt(0).toUpperCase() : <User size={20} />;
+  if (isUserLoading || !user) {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-12 w-12 rounded-[0.75rem] hover:scale-110 transition-transform duration-500 border border-primary/20 bg-primary/5">
-            <Avatar className="h-10 w-10 rounded-[0.5rem]">
-              <AvatarImage src={user.photoURL ?? ''} alt={user.email ?? ''} />
-              <AvatarFallback className="bg-primary text-background font-black italic">{fallback}</AvatarFallback>
-            </Avatar>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-72 rounded-[1.5rem] p-3 glass-panel shadow-2xl" align="end" forceMount>
-          <DropdownMenuLabel className="font-normal p-4">
-            <div className="flex flex-col space-y-1">
-              <p className="text-xl font-black italic tracking-tighter leading-none">
-                {user.isAnonymous ? 'Guest User' : user.email}
-              </p>
-               <p className="text-[10px] uppercase tracking-[0.3em] font-black opacity-40 mt-1">
-                {user.isAnonymous ? "Guest Session" : "Authenticated"}
-              </p>
-            </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-white/5" />
-          <DropdownMenuGroup className="p-1">
-                <Link href="/profile">
-                    <DropdownMenuItem className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer focus:bg-primary focus:text-background transition-colors">
-                        <Database className="mr-3 h-4 w-4" />
-                        <span>Health Profile</span>
-                    </DropdownMenuItem>
-                </Link>
-                <Link href="/history">
-                    <DropdownMenuItem className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer focus:bg-primary focus:text-background transition-colors">
-                        <History className="mr-3 h-4 w-4" />
-                        <span>Safety History</span>
-                    </DropdownMenuItem>
-                </Link>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator className="bg-white/5" />
-          <DropdownMenuItem onClick={handleLogout} className="rounded-xl h-12 px-4 text-md font-black italic cursor-pointer text-destructive focus:bg-destructive focus:text-white transition-colors">
-            <LogOut className="mr-3 h-4 w-4" />
-            <span>Sign Out</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Link href="/login">
+        <Button variant="outline" className="h-10 px-6 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] border-primary/20 text-primary hover:bg-primary/10">
+          Link Session
+        </Button>
+      </Link>
     );
   }
 
   return (
-    <Link href="/login">
-      <Button className="h-12 px-8 rounded-full text-md font-black italic uppercase tracking-widest bg-primary text-background hover:scale-105 transition-all shadow-[0_10px_30px_rgba(0,230,118,0.2)]">
-        <LogIn className="mr-2 h-5 w-5" />
-        Get Started
-      </Button>
-    </Link>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="relative h-10 w-10 rounded-xl bg-white/5 border border-white/10">
+          <Avatar className="h-8 w-8 rounded-lg">
+            <AvatarImage src={user.photoURL ?? ''} />
+            <AvatarFallback className="bg-primary text-background font-black uppercase">
+              {user.email?.charAt(0) || <User />}
+            </AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56 glass-panel rounded-2xl border-white/20 p-2" align="end" forceMount>
+        <DropdownMenuLabel className="font-normal p-4">
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-black uppercase truncate">{user.email}</p>
+            <p className="text-[8px] font-black opacity-40 uppercase tracking-[0.3em]">Verified Access</p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator className="bg-white/10" />
+        <Link href="/profile">
+          <DropdownMenuItem className="rounded-lg h-10 px-3 text-xs font-black uppercase cursor-pointer focus:bg-primary focus:text-background">
+            <Database className="mr-3 h-4 w-4" />
+            Profile
+          </DropdownMenuItem>
+        </Link>
+        <Link href="/history">
+          <DropdownMenuItem className="rounded-lg h-10 px-3 text-xs font-black uppercase cursor-pointer focus:bg-primary focus:text-background">
+            <History className="mr-3 h-4 w-4" />
+            Vault
+          </DropdownMenuItem>
+        </Link>
+        <DropdownMenuSeparator className="bg-white/10" />
+        <DropdownMenuItem onClick={() => signOut(auth)} className="rounded-lg h-10 px-3 text-xs font-black uppercase cursor-pointer text-destructive focus:bg-destructive focus:text-white">
+          <LogOut className="mr-3 h-4 w-4" />
+          End Session
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

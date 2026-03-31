@@ -1,3 +1,9 @@
+'use client';
+
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <div className="animate-iris w-full h-full min-h-dvh">
+      {children}
+    </div>
+  );
 }
