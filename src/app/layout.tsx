@@ -3,7 +3,6 @@
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
-import { useEffect, useRef } from 'react';
 import { MobileNav } from '@/components/mobile-nav';
 
 export default function RootLayout({
@@ -11,23 +10,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const containerRef = useRef<HTMLBodyElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      containerRef.current.style.setProperty('--mouse-x', `${x}%`);
-      containerRef.current.style.setProperty('--mouse-y', `${y}%`);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -35,14 +19,13 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-        <title>Lens Bite | Personalized Food Safety & AI Analysis</title>
+        <title>Lens Bite | Intelligent Food Analysis</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-        <meta name="description" content="Understand your food ingredients deeply with AI-powered analysis tailored to your personal health needs." />
       </head>
-      <body ref={containerRef} className="font-sans antialiased selection:bg-primary/30 selection:text-foreground md:pb-0 touch-none md:touch-auto">
+      <body className="font-sans antialiased text-foreground bg-background">
         <div className="scanline pointer-events-none" />
         <FirebaseClientProvider>
-          <div className="flex flex-col min-h-screen overflow-hidden md:overflow-visible">
+          <div className="flex flex-col min-h-screen relative">
             {children}
             <MobileNav />
           </div>
