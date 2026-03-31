@@ -4,29 +4,6 @@
 
 @layer base {
   :root {
-    --background: 220 33% 98%;
-    --foreground: 224 71% 4%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 142 71% 45%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
-    --radius: 1.5rem;
-  }
-
-  .dark {
     --background: 224 71% 4%;
     --foreground: 210 40% 98%;
     --card: 224 71% 6%;
@@ -34,36 +11,48 @@
     --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
     --primary: 217 91% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
     --accent: 142 71% 45%;
     --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --ring: 217 91% 60%;
+    --radius: 1rem;
   }
 }
 
 @layer base {
   * {
     @apply border-border selection:bg-primary/20;
+    font-style: normal !important;
   }
   body {
-    @apply bg-[#05070a] text-foreground antialiased font-sans overflow-x-hidden;
+    @apply bg-[#05070a] text-foreground antialiased font-sans overflow-hidden;
     background-image: 
       radial-gradient(at 0% 0%, hsla(217, 91%, 60%, 0.15) 0, transparent 50%),
       radial-gradient(at 100% 100%, hsla(142, 71%, 45%, 0.1) 0, transparent 50%);
+    perspective: 1000px;
   }
 }
 
 @layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl;
+    @apply bg-white/5 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)];
+    transform: translateZ(20px);
   }
   
   .animate-reveal {
@@ -77,28 +66,28 @@
   @keyframes reveal {
     from { 
       opacity: 0; 
-      transform: translateY(20px) scale(0.98);
-      filter: blur(10px);
+      transform: translateZ(-100px) translateY(20px);
+      filter: blur(20px);
     }
     to { 
       opacity: 1; 
-      transform: translateY(0) scale(1);
+      transform: translateZ(0) translateY(0);
       filter: blur(0);
     }
   }
 
   @keyframes shutter {
-    0% { transform: translateX(-100%); opacity: 0; }
-    30% { opacity: 0.5; }
-    100% { transform: translateX(100%); opacity: 0; }
+    0% { transform: scaleX(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scaleX(1.5); opacity: 0; }
   }
 
   .text-glow {
-    text-shadow: 0 0 30px hsla(var(--primary), 0.4);
+    text-shadow: 0 0 30px hsla(var(--primary), 0.6);
   }
 
   .hud-ring {
-    @apply relative flex items-center justify-center rounded-full border border-primary/20;
+    @apply relative flex items-center justify-center rounded-full border border-primary/20 preserve-3d;
   }
 
   .scanline {
@@ -110,7 +99,7 @@
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(0, 230, 118, 0.03) 50%,
+      rgba(0, 230, 118, 0.05) 50%,
       transparent 100%
     );
     background-size: 100% 4px;
@@ -122,5 +111,14 @@
   @keyframes scanMove {
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100%); }
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-20px) rotateX(5deg); }
   }
 }

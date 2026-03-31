@@ -33,56 +33,59 @@ export default function HistoryPage() {
     if (isUserLoading || isLoading) {
         return (
             <div className="flex flex-col justify-center items-center h-screen gap-8">
-                <Loader2 className="animate-spin text-primary size-16 md:size-20 opacity-20" />
-                <p className="text-sm md:text-xl font-black tracking-widest uppercase opacity-40 italic">Retrieving Vault Data...</p>
+                <Loader2 className="animate-spin text-primary size-20 opacity-20" />
+                <p className="text-sm font-black tracking-[0.5em] uppercase opacity-40">Syncing Vault...</p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-background flex flex-col">
+        <div className="min-h-screen bg-background flex flex-col perspective-1000">
             <Header />
-            <main className="flex-1 container max-w-5xl mx-auto px-4 py-8 md:py-12 space-y-8 md:space-y-12 animate-reveal pb-32 md:pb-12">
-                <div className="space-y-2 md:space-y-4">
-                    <Badge variant="outline" className="text-primary border-primary/20 px-3 md:px-4 py-1 uppercase tracking-widest text-[8px] md:text-[10px] font-black">Secure History Vault</Badge>
-                    <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter">Scan <span className="text-primary">History</span></h1>
-                    <p className="text-muted-foreground text-sm md:text-xl font-light">Your nutritional safety timeline.</p>
+            <main className="flex-1 container max-w-5xl mx-auto px-4 py-12 space-y-12 animate-reveal pb-32 md:pb-12 preserve-3d">
+                <div className="space-y-4">
+                    <Badge variant="outline" className="text-primary border-primary/20 px-4 py-1.5 uppercase tracking-[0.4em] text-[10px] font-black">Secure History Vault</Badge>
+                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">Scan <span className="text-primary">History</span></h1>
+                    <p className="text-muted-foreground text-sm md:text-xl font-medium uppercase tracking-[0.2em] opacity-40">Your clinical safety timeline.</p>
                 </div>
 
                 {scans?.length === 0 ? (
-                    <div className="p-10 md:p-20 border-2 md:border-4 border-dashed border-white/5 rounded-[2rem] md:rounded-[3rem] text-center space-y-6 md:space-y-8">
-                        <History className="size-12 md:size-20 text-muted-foreground/20 mx-auto" />
-                        <p className="text-lg md:text-2xl font-black italic opacity-20">No saved scans found.</p>
+                    <div className="p-20 border-4 border-dashed border-white/5 rounded-[3rem] text-center space-y-10 glass-panel">
+                        <History className="size-20 text-muted-foreground/20 mx-auto" />
+                        <p className="text-2xl font-black opacity-20 uppercase tracking-widest">No vault entries found.</p>
                         <Link href="/scanner/barcode">
-                            <Button size="lg" className="h-14 md:h-16 px-8 md:px-10 rounded-xl md:rounded-2xl bg-primary text-background font-black italic">Start Your First Scan</Button>
+                            <Button size="lg" className="h-20 px-12 rounded-2xl bg-primary text-background font-black uppercase tracking-widest">Initial Scan</Button>
                         </Link>
                     </div>
                 ) : (
-                    <div className="grid gap-4 md:gap-6">
+                    <div className="grid gap-6">
                         {scans?.map((scan) => (
-                            <Card key={scan.id} className="rounded-2xl md:rounded-[2.5rem] glass-panel border-white/5 overflow-hidden group hover:border-primary/20 transition-all duration-500">
-                                <CardContent className="p-4 md:p-8 flex items-center gap-4 md:gap-8">
+                            <Card key={scan.id} className="rounded-[2.5rem] glass-panel border-white/5 overflow-hidden group hover:border-primary/40 transition-all duration-500 preserve-3d hover:-translate-y-2">
+                                <CardContent className="p-6 md:p-10 flex items-center gap-6 md:gap-10">
                                     <div className={cn(
-                                        "size-12 md:size-20 rounded-xl md:rounded-2xl flex items-center justify-center shrink-0 shadow-2xl",
-                                        scan.isSafe ? "bg-primary/10 text-primary" : "bg-destructive/10 text-destructive"
+                                        "size-16 md:size-24 rounded-2xl flex items-center justify-center shrink-0 shadow-2xl",
+                                        scan.isSafe ? "bg-primary/10 text-primary border border-primary/20" : "bg-destructive/10 text-destructive border border-destructive/20"
                                     )}>
-                                        {scan.isSafe ? <ShieldCheck className="size-6 md:size-10" /> : <Biohazard className="size-6 md:size-10" />}
+                                        {scan.isSafe ? <ShieldCheck className="size-8 md:size-12" /> : <Biohazard className="size-8 md:size-12" />}
                                     </div>
-                                    <div className="flex-1 min-w-0 space-y-1">
-                                        <div className="flex flex-wrap items-center gap-2">
-                                            <h3 className="text-lg md:text-3xl font-black italic tracking-tighter truncate leading-none uppercase">{scan.productName}</h3>
-                                            <Badge className={cn("rounded-md text-[8px] md:text-xs", scan.isSafe ? "bg-primary text-background" : "bg-destructive text-white")}>
+                                    <div className="flex-1 min-w-0 space-y-2">
+                                        <div className="flex flex-wrap items-center gap-3">
+                                            <h3 className="text-2xl md:text-4xl font-black tracking-tighter truncate leading-none uppercase">{scan.productName}</h3>
+                                            <Badge className={cn("rounded-lg px-3 py-1 font-black", scan.isSafe ? "bg-primary text-background" : "bg-destructive text-white")}>
                                                 {scan.nutriScore}
                                             </Badge>
                                         </div>
-                                        <p className="text-muted-foreground font-medium text-[10px] md:text-sm">
-                                            {scan.timestamp ? format(scan.timestamp.toDate(), 'MMM d, p') : 'Syncing...'}
-                                        </p>
-                                        <p className="text-muted-foreground line-clamp-1 italic text-[10px] md:text-sm hidden sm:block">{scan.summary}</p>
+                                        <div className="flex items-center gap-4">
+                                            <p className="text-muted-foreground font-black text-[10px] uppercase tracking-widest">
+                                                {scan.timestamp ? format(scan.timestamp.toDate(), 'MMM d, p') : 'Syncing...'}
+                                            </p>
+                                            <span className="size-1 rounded-full bg-white/20" />
+                                            <p className="text-muted-foreground font-medium text-[10px] uppercase tracking-widest truncate">{scan.summary}</p>
+                                        </div>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <Button variant="ghost" size="icon" onClick={() => handleDelete(scan.id)} className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl hover:bg-destructive/10 hover:text-destructive transition-colors shrink-0">
-                                            <Trash2 className="size-5 md:size-6" />
+                                        <Button variant="ghost" size="icon" onClick={() => handleDelete(scan.id)} className="size-14 md:size-20 rounded-2xl hover:bg-destructive/10 hover:text-destructive transition-colors shrink-0">
+                                            <Trash2 className="size-6 md:size-8" />
                                         </Button>
                                     </div>
                                 </CardContent>
