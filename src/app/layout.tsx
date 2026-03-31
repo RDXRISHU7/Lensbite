@@ -15,9 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-background m-0 p-0 overflow-hidden font-sans antialiased">
+      <body className="bg-background m-0 p-0 font-sans antialiased">
         <FirebaseClientProvider>
-          <div className="relative min-h-dvh overflow-hidden perspective-3d">
+          <div className="relative min-h-dvh perspective-3d">
             {children}
             <MobileNav />
             <Toaster />

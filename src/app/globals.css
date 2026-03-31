@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 222 47% 2%;
+    --background: 170 100% 2%;
     --foreground: 0 0% 100%;
     --card: 170 100% 5%;
     --card-foreground: 0 0% 100%;
-    --popover: 222 47% 2%;
+    --popover: 170 100% 2%;
     --popover-foreground: 0 0% 100%;
     --primary: 151 100% 45%;
-    --primary-foreground: 222 47% 2%;
+    --primary-foreground: 170 100% 2%;
     --secondary: 170 100% 15%;
     --secondary-foreground: 0 0% 100%;
     --muted: 170 100% 10%;
     --muted-foreground: 170 20% 60%;
     --accent: 24 100% 63%;
-    --accent-foreground: 222 47% 2%;
+    --accent-foreground: 170 100% 2%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 170 100% 15%;
     --input: 170 100% 15%;
     --ring: 151 100% 45%;
-    --radius: 1.5rem;
+    --radius: 2rem;
   }
 }
 
@@ -33,7 +33,7 @@
     font-style: normal !important;
   }
   body {
-    @apply bg-background text-foreground overflow-hidden antialiased font-sans;
+    @apply bg-background text-foreground antialiased font-sans;
     perspective: 2000px;
   }
 }
@@ -48,7 +48,7 @@
 }
 
 .glass-panel {
-  @apply bg-white/[0.02] backdrop-blur-3xl border border-white/5 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.8)];
+  @apply bg-secondary/20 backdrop-blur-3xl border border-white/5 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.8)];
 }
 
 @keyframes iris-shutter {
