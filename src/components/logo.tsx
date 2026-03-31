@@ -1,23 +1,23 @@
 import Link from 'next/link';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Fingerprint } from 'lucide-react';
 
 export function Logo(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <Link href="/" className="flex items-center gap-3 group" {...props}>
+    <Link href="/" className="flex items-center gap-4 group" {...props}>
       <div className="relative">
-        <div className="size-10 bg-primary rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-all duration-500 group-hover:scale-110">
-          <ShieldCheck className="size-6 text-white" />
+        <div className="size-12 bg-primary rounded-[1rem] flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:rotate-12 transition-all duration-700">
+          <Fingerprint className="size-7 text-white" />
         </div>
       </div>
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-black italic tracking-tighter text-foreground leading-none">
-            Lens<span className="text-primary">Bite</span>
+          <span className="text-3xl font-black italic tracking-tighter text-white leading-none">
+            LENS<span className="text-primary">BITE</span>
           </span>
-          <span className="text-[9px] font-black bg-accent text-white px-2 rounded-full tracking-tighter py-0.5 uppercase">Pro</span>
+          <div className="size-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]" />
         </div>
-        <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase leading-none mt-1 opacity-60">
-          Intelligent Safety
+        <span className="text-[10px] font-black tracking-[0.3em] text-muted-foreground uppercase leading-none mt-1 opacity-40">
+          Clinical Security
         </span>
       </div>
     </Link>
