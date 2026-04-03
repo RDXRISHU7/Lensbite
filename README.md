@@ -1,22 +1,40 @@
-# Lens Bite | Professional Food Safety Platform
+# Lens Bite | Clinical Food Safety Architecture
 
-Lens Bite is a high-fidelity AI platform that cross-references food ingredients with your unique Health Profile.
+Lens Bite is a high-fidelity AI platform designed to cross-reference food ingredients with unique user Health Architectures in real-time.
 
-## ⚡ How to Update Your Live Site Immediately
+## 🛠 Core Mechanics & Features
 
-Every time we finish making changes in the editor, run these 3 commands in the terminal to update your live website:
+### 1. Dual-Path Intelligence Scanner
+- **Barcode Decryption**: Real-time barcode scanning using the device camera. It fetches product data from the Open Food Facts API and identifies ingredients instantly.
+- **AI Vision Lens**: A multimodal AI scanner (Gemini 2.5 Flash) that captures a photo of any food product, identifies the item, and extracts the full ingredient list even if the packaging is damaged or non-standard.
 
-1. `git add .`
-2. `git commit -m "Update safety protocols"`
-3. `git push origin main`
+### 2. Clinical Risk Engine (Genkit)
+- **Hazard Detection**: Scans for potential carcinogens, process-induced toxins, and high-risk additives.
+- **Safety Metrics**: Calculates a clinical risk score (0-100), Nutri-Score (A-E), and NOVA food processing classification (1-4).
+- **Nutrient Profiling**: Provides a deep-dive analysis of Calories, Protein, Carbs, Sodium, and Sugar with traffic-light status indicators.
 
-**Vercel/Firebase will detect the push and update your link automatically within 2 minutes.**
+### 3. Biometric Synchronization
+- **Health Architecture**: Secure Firestore profiles storing biometric data (Height, Weight, BMI) and clinical triggers (Allergies, Diabetes, Hypertension, Celiac).
+- **Personalized Tips**: An AI logic layer that cross-references scanned ingredients with the user's specific medical profile to provide actionable, clinical-grade safety advice.
 
-## 🛠️ Fixing the "Large File" Error (project.zip)
-If your push ever fails because of a large file, run these commands in the terminal to "clean" your history:
+### 4. Secure Vault (History)
+- **Audit Logging**: Every scan is timestamped and stored in a private Firestore vault.
+- **Verification Records**: Users can review previous food safety audits with detailed breakdown summaries.
 
-1. `git reset $(git commit-tree HEAD^{tree} -m "Fresh start without large files")`
-2. `git push -f origin main`
+## 🎨 Visual Architecture & UX
+- **3D HUD Command Center**: A persistent, rotating 3D "Power Core" object on the home page built with CSS `perspective-3d`.
+- **High-Speed Iris Shutter**: Custom page transitions that mimic a professional camera aperture focal shift.
+- **Clinical Typography**: A strict "No Italics" policy using bold, architectural Inter fonts for high readability.
+- **Precision Color Palette**:
+  - Primary Green: `#2E7D32` (System Active)
+  - Scanner Orange: `#F4A261` (Action)
+  - Light Shell: `#F7F9FB` (Background)
+  - Status Indicators: Safe (#4CAF50), Caution (#F4C542), Alert (#E53935).
+
+## 🚀 Technical Stack
+- **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS, Lucide Icons.
+- **Backend**: Firebase Auth, Firestore, Firebase App Hosting.
+- **AI**: Genkit (Google AI Plugin), Gemini 2.5 Flash / Flash-Image.
 
 ---
-*Built with Next.js 15, Firebase, and Genkit AI.*
+*Every change made to this repository is automatically synchronized with the live clinical environment.*
