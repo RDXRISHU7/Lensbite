@@ -4,9 +4,8 @@ import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { ScanBarcode, ShieldCheck, Activity, Zap, Fingerprint, Database, ArrowDown, Globe, ShieldAlert, Binary } from 'lucide-react';
+import { ScanBarcode, ShieldCheck, Activity, Zap, Fingerprint, Database, ArrowDown, Globe, Binary } from 'lucide-react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
 
 export default function Home() {
   const { user } = useUser();
