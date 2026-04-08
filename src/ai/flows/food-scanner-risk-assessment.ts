@@ -57,7 +57,7 @@ const prompt = ai.definePrompt({
   input: { schema: FoodScannerInputSchema },
   output: { schema: FoodScannerOutputSchema },
   prompt: `You are a clinical food safety and nutritional analyst.
-  Analyze the following list of ingredients and provide an architectural risk assessment.
+  Analyze the following list of ingredients and provide an architectural risk assessment based on the Clinical Intelligence Protocol v4.0.
 
   Ingredients:
   {{#each ingredients}}
@@ -65,16 +65,15 @@ const prompt = ai.definePrompt({
   {{/each}}
 
   Your task is to:
-  1. Identify any potential carcinogenic ingredients or high-risk additives.
-  2. Determine the NOVA Processing Class (1: Unprocessed, 2: Processed ingredients, 3: Processed, 4: Ultra-processed).
-  3. Estimate a Nutri-Score (A through E).
-  4. Provide a traffic-light assessment and SPECIFIC PERCENTAGES (0-150) for Calories, Protein, Carbs, Sodium, and Sugar.
-  5. Check for common allergens (Gluten, Soy, Dairy, etc.).
-  6. Verify if the product is Vegan, Vegetarian, and Palm Oil Free.
-  7. Calculate an overall clinical risk score from 0 to 100.
-  8. Write a direct summary.
+  1. **Identify Hazards**: Scan for carcinogenic ingredients (e.g., Nitrates, BHA/BHT, Titanium Dioxide) and process-induced toxins.
+  2. **Determine NOVA Class**: Assign a processing classification from 1 (Unprocessed) to 4 (Ultra-processed).
+  3. **Estimate Nutri-Score**: Assign a nutritional grade from A to E.
+  4. **Nutrient Profiling**: Provide specific percentages (0-150) for Calories, Protein, Carbs, Sodium, and Sugar.
+  5. **Dietary Verification**: Check for common allergens and verify Vegan/Vegetarian/Palm Oil Free status.
+  6. **Calculate Clinical Risk**: Provide a final score from 0 to 100 based on the density of hazardous additives and processing levels.
+  7. **Write Synthesis**: Provide a direct, data-driven summary.
 
-  CRITICAL: You MUST provide values for all 5 nutrients: Calories, Protein, Carbs, Sodium, and Sugar. Estimate the percentages based on standard daily intake.
+  CRITICAL: You MUST provide values for all 5 nutrients: Calories, Protein, Carbs, Sodium, and Sugar.
   `,
 });
 

@@ -1,4 +1,3 @@
-
 'use server';
 
 import { ai } from '@/ai/genkit';
@@ -44,7 +43,7 @@ const prompt = ai.definePrompt({
     input: { schema: PersonalizedTipInputSchema },
     output: { schema: PersonalizedTipOutputSchema },
     prompt: `You are a clinical nutritional analyst.
-A user has scanned a food product. You must analyze the risks based on their detailed health architecture.
+A user has scanned a food product. You must analyze the risks based on their detailed health architecture following Clinical Intelligence Protocol v4.0.
 
 User's Health Architecture (JSON):
 {{{healthReport}}}
@@ -60,11 +59,10 @@ Food Product Analysis:
 {{/if}}
 
 STRICT INSTRUCTIONS:
-1. Parse the Health Architecture JSON to find specific triggers (e.g., if they have Hypertension, look for Sodium. If they Grill often, warn about PAHs).
-2. Connect a specific attribute of the food (hazard or nutrient) to a specific attribute of the user's biometric data (BMI), medical condition, or cooking habits.
-3. Be direct and actionable. Use "Based on your clinical profile...".
-4. If they have a high BMI, mention metabolic impact. If they use specific meds, warn of interactions if applicable.
-5. Provide a single, sophisticated sentence.
+1. **Biometric Cross-Reference**: Connect a specific hazard or nutrient signature to a specific biometric attribute (BMI, medical condition, or allergy).
+2. **Clinical Directness**: Use "Based on your clinical profile...".
+3. **Actionable Action**: Provide a sophisticated, single-sentence tip that explains the physiological impact of this food on the user's specific health architecture.
+4. **Scrutiny**: If the user has Hypertension, focus on Sodium signatures. If Diabetes, focus on added sugars and glycemic impact.
 `,
 });
 
