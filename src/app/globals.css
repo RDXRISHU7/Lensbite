@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    /* Reference Palette */
-    --background: 0 0% 94%; /* #efefef */
-    --foreground: 0 0% 10%;
+    /* Precision Palette */
+    --background: 0 0% 98%; /* #F7F9FB */
+    --foreground: 215 25% 17%; /* #1F2937 */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 215 25% 17%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 191 29% 34%; /* Deep Teal #3d646e */
+    --popover-foreground: 215 25% 17%;
+    --primary: 124 46% 32%; /* #2E7D32 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 65 89% 60%; /* Precision Yellow #e3f43b */
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 65 89% 60%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 84% 60%;
+    --secondary: 24 94% 61%; /* #F4A261 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 24 94% 61%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%; /* #E53935 */
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 191 29% 34%;
-    --radius: 0.5rem;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 124 46% 32%;
+    --radius: 1.5rem;
   }
 }
 
 @layer base {
   body {
-    @apply bg-background text-foreground antialiased font-sans;
+    @apply bg-background text-foreground antialiased font-sans m-0 p-0;
   }
 }
 
@@ -44,16 +44,12 @@
 }
 
 .floating-3d-text {
-  text-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-shadow: 0 20px 50px rgba(31, 41, 55, 0.1);
   transform: translateZ(50px);
 }
 
 .glass-panel {
-  @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.05)];
-}
-
-.teal-section {
-  @apply bg-[#3d646e] text-white;
+  @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.05)];
 }
 
 @keyframes iris-shutter {
@@ -63,7 +59,7 @@
 
 @keyframes float-slow {
   0%, 100% { transform: translateY(0) rotateX(0deg); }
-  50% { transform: translateY(-20px) rotateX(5deg); }
+  50% { transform: translateY(-30px) rotateX(8deg); }
 }
 
 .animate-iris {
@@ -71,5 +67,20 @@
 }
 
 .animate-float-3d {
-  animation: float-slow 8s ease-in-out infinite;
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Hide scrollbar for clean Awwwards aesthetic while maintaining functionality */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2E7D3233;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2E7D3266;
 }
