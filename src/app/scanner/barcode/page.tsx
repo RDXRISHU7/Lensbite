@@ -6,7 +6,7 @@ import { analyzeBarcodeAction, type FormState } from './action';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { RiskResultCard } from '@/components/risk-result-card';
-import { Loader2, ScanBarcode, CircleAlert, X, Zap, Activity, Barcode } from 'lucide-react';
+import { Loader2, ScanBarcode, CircleAlert, X, Zap, Activity } from 'lucide-react';
 import { BrowserMultiFormatReader } from '@zxing/library';
 import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { doc } from 'firebase/firestore';
@@ -90,22 +90,19 @@ export default function BarcodeScannerPage() {
                     </div>
                     <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">
                         Barcode <br />
-                        <span className="text-primary">Intelligence</span>
+                        <span className="text-primary">Scanner</span>
                     </h1>
-                    <p className="text-muted-foreground text-xs font-black uppercase tracking-[0.5em] opacity-40 max-w-sm mx-auto leading-loose">
-                        Structural ingredient decryption via global API synchronization.
-                    </p>
                 </div>
 
                 <Button onClick={() => setIsScannerActive(true)} className="h-28 px-16 rounded-[3rem] bg-secondary text-white text-3xl font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-xl w-full">
-                    Initiate Lens <Zap className="ml-4 size-8 fill-current" />
+                    Initiate <Zap className="ml-4 size-8 fill-current" />
                 </Button>
             </div>
         )}
 
         {isScannerActive && (
             <div className="flex flex-col items-center space-y-12 w-full max-w-3xl">
-                {/* STRUCTURAL RECTANGLE VIEWPORT */}
+                {/* STRUCTURAL FRONT-FACING RECTANGLE VIEWPORT */}
                 <div className="relative w-full aspect-[4/5] md:aspect-video bg-black rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-2xl transition-all duration-700">
                     <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
                     
@@ -113,12 +110,9 @@ export default function BarcodeScannerPage() {
                     <div className="absolute inset-0 pointer-events-none p-12">
                         {/* Top HUD */}
                         <div className="flex items-start justify-between">
-                            <div className="flex flex-col gap-2">
-                                <div className="flex items-center gap-3">
-                                    <div className="size-2 rounded-full bg-primary animate-pulse" />
-                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">SYSTEM ACTIVE</span>
-                                </div>
-                                <span className="text-[8px] font-black uppercase tracking-[0.3em] text-white/40">FOCAL LENS: 85MM</span>
+                            <div className="flex items-center gap-3">
+                                <div className="size-2 rounded-full bg-primary animate-pulse" />
+                                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">SYSTEM ACTIVE</span>
                             </div>
                             <Badge className="bg-white/10 text-white rounded-md text-[9px] font-black uppercase px-4 py-1">UPC-DECODER</Badge>
                         </div>
@@ -138,7 +132,7 @@ export default function BarcodeScannerPage() {
                             </div>
                             <div className="flex flex-col items-end gap-1">
                                 <span className="text-[8px] font-black uppercase tracking-[0.4em] text-white/40 opacity-60">BITRATE</span>
-                                <span className="text-xl font-black text-white">4K-RAW</span>
+                                <span className="text-xl font-black text-white uppercase">4K-RAW</span>
                             </div>
                         </div>
                     </div>
@@ -172,7 +166,7 @@ export default function BarcodeScannerPage() {
                     <CircleAlert size={80} className="text-destructive mx-auto" />
                     <div className="space-y-4">
                         <h2 className="text-5xl font-black uppercase tracking-tighter">Signature Rejected</h2>
-                        <p className="text-muted-foreground font-medium text-lg leading-relaxed">{state.errorMessage}</p>
+                        <p className="text-muted-foreground font-medium text-lg leading-relaxed uppercase">{state.errorMessage}</p>
                     </div>
                 </div>
                 <Button onClick={() => setIsScannerActive(true)} className="h-24 w-full rounded-[3rem] bg-primary text-background text-2xl font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-xl">

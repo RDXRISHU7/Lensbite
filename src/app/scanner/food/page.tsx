@@ -5,13 +5,12 @@ import { useActionState } from 'react';
 import { useRouter } from 'next/navigation';
 import { analyzeFoodProductAction, type FormState } from './action';
 import { useToast } from '@/hooks/use-toast';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RiskResultCard } from '@/components/risk-result-card';
-import { Loader2, Camera, CameraOff, CircleAlert, ArrowLeft, RefreshCw, Lightbulb, Zap, Activity } from 'lucide-react';
+import { Loader2, Camera, CameraOff, CircleAlert, ArrowLeft, RefreshCw, Zap, Activity } from 'lucide-react';
 import Link from 'next/link';
 import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { doc } from 'firebase/firestore';
@@ -156,6 +155,7 @@ export default function FoodScannerPage() {
                     <h1 className="text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none">Vision <span className="text-primary">Scanner</span></h1>
                 </div>
 
+                {/* STRUCTURAL FRONT-FACING RECTANGLE VIEWPORT */}
                 <div className="relative w-full aspect-[4/5] md:aspect-video bg-black rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-2xl">
                     <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
                     <canvas ref={canvasRef} className="hidden" />
@@ -181,7 +181,7 @@ export default function FoodScannerPage() {
                 </div>
 
                 <Button onClick={handleCapture} className="h-28 px-16 rounded-[3rem] bg-secondary text-white text-3xl font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-xl w-full" disabled={!hasCameraPermission || isPending}>
-                    Capture <Camera className="ml-4 size-8" />
+                    Initiate <Camera className="ml-4 size-8" />
                 </Button>
             </div>
         )}
@@ -231,7 +231,7 @@ export default function FoodScannerPage() {
                     <CircleAlert size={80} className="text-destructive mx-auto" />
                     <div className="space-y-4">
                         <h2 className="text-5xl font-black uppercase tracking-tighter">Extraction Failed</h2>
-                        <p className="text-muted-foreground font-medium text-lg leading-relaxed">{state.errorMessage}</p>
+                        <p className="text-muted-foreground font-medium text-lg leading-relaxed uppercase">{state.errorMessage}</p>
                     </div>
                 </div>
                 <Button onClick={resetAll} className="h-24 w-full rounded-[3rem] bg-primary text-background text-2xl font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-xl">
