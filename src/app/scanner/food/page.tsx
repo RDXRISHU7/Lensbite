@@ -155,12 +155,10 @@ export default function FoodScannerPage() {
                     <h1 className="text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none">Vision <span className="text-primary">Scanner</span></h1>
                 </div>
 
-                {/* STRUCTURAL FRONT-FACING RECTANGLE VIEWPORT */}
                 <div className="relative w-full aspect-[4/5] md:aspect-video bg-black rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-2xl">
                     <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
                     <canvas ref={canvasRef} className="hidden" />
 
-                    {/* HUD OVERLAY */}
                     <div className="absolute inset-0 pointer-events-none p-12">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-3">
@@ -214,7 +212,6 @@ export default function FoodScannerPage() {
                 </div>
             </div>
         )}
-
 
         {state.type === 'success' && (
              <div className="w-full space-y-8">

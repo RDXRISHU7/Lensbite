@@ -102,13 +102,10 @@ export default function BarcodeScannerPage() {
 
         {isScannerActive && (
             <div className="flex flex-col items-center space-y-12 w-full max-w-3xl">
-                {/* STRUCTURAL FRONT-FACING RECTANGLE VIEWPORT */}
                 <div className="relative w-full aspect-[4/5] md:aspect-video bg-black rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-2xl transition-all duration-700">
                     <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
                     
-                    {/* HUD OVERLAY LAYERS */}
                     <div className="absolute inset-0 pointer-events-none p-12">
-                        {/* Top HUD */}
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="size-2 rounded-full bg-primary animate-pulse" />
@@ -117,14 +114,12 @@ export default function BarcodeScannerPage() {
                             <Badge className="bg-white/10 text-white rounded-md text-[9px] font-black uppercase px-4 py-1">UPC-DECODER</Badge>
                         </div>
 
-                        {/* Structural Frame Brackets */}
                         <div className="absolute inset-16 border-2 border-primary/20 rounded-[3rem] animate-pulse">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-black text-primary text-[8px] font-black uppercase tracking-widest">
                                 ALIGN SIGNATURE
                             </div>
                         </div>
 
-                        {/* Bottom HUD */}
                         <div className="absolute bottom-12 inset-x-12 flex items-end justify-between">
                             <div className="flex flex-col gap-1">
                                 <span className="text-[8px] font-black uppercase tracking-[0.4em] text-white/40 opacity-60">LATENCY</span>
