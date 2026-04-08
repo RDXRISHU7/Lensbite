@@ -6,8 +6,8 @@ import { analyzeBarcodeAction, type FormState } from './action';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { RiskResultCard } from '@/components/risk-result-card';
-import { Loader2, ScanBarcode, CircleAlert, X, Zap, Activity, Box, Database, ShieldCheck, Fingerprint } from 'lucide-react';
-import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
+import { Loader2, ScanBarcode, CircleAlert, X, Zap, Activity, Barcode } from 'lucide-react';
+import { BrowserMultiFormatReader } from '@zxing/library';
 import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { doc } from 'firebase/firestore';
 import { Badge } from '@/components/ui/badge';
@@ -72,28 +72,14 @@ export default function BarcodeScannerPage() {
   );
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-6 py-24 pb-48 h-full flex flex-col items-center justify-center animate-iris perspective-3d">
+    <div className="w-full max-w-4xl mx-auto px-6 py-24 pb-48 h-full flex flex-col items-center justify-center animate-iris">
         
-        {/* STRUCTURAL HUD BACKGROUND */}
-        <div className="fixed inset-0 -z-10 pointer-events-none perspective-3d flex items-center justify-center opacity-10">
-            <div className="absolute size-[600px] border-[1px] border-primary/20 rounded-full animate-rings-3d" />
-            <div className="absolute size-[800px] border-[1px] border-dashed border-secondary/40 rounded-full animate-[spin_40s_linear_infinite]" />
-            <div className="absolute bottom-0 left-0 p-12 flex flex-col gap-2">
-                <span className="text-[8px] font-black uppercase tracking-[0.8em]">SCANNER-LENS-v.4.1</span>
-                <span className="text-[8px] font-black uppercase tracking-[0.8em]">AUTH-TOKEN: {user?.uid.slice(0, 8)}</span>
-            </div>
-        </div>
-
         {state.type === 'initial' && !isScannerActive && (
             <div className="flex flex-col items-center justify-center text-center space-y-16 max-w-xl">
-                <div className="relative size-64 preserve-3d group">
+                <div className="relative size-64 group">
                     <div className="absolute inset-0 bg-primary/5 rounded-[4rem] border-2 border-primary/20 group-hover:scale-105 transition-all duration-700" />
-                    <div className="absolute inset-0 flex items-center justify-center translate-z-20">
+                    <div className="absolute inset-0 flex items-center justify-center">
                         <ScanBarcode className="size-32 text-primary" />
-                    </div>
-                    {/* Floating HUD Labels */}
-                    <div className="absolute -top-6 -right-6 glass-panel px-4 py-2 rounded-xl translate-z-40 border-primary/30">
-                        <span className="text-[9px] font-black uppercase tracking-widest text-primary">Ready</span>
                     </div>
                 </div>
 
@@ -111,7 +97,7 @@ export default function BarcodeScannerPage() {
                     </p>
                 </div>
 
-                <Button onClick={() => setIsScannerActive(true)} className="h-28 px-16 rounded-[3rem] bg-secondary text-white text-3xl font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-[0_40px_80px_rgba(244,162,97,0.3)] w-full">
+                <Button onClick={() => setIsScannerActive(true)} className="h-28 px-16 rounded-[3rem] bg-secondary text-white text-3xl font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-xl w-full">
                     Initiate Lens <Zap className="ml-4 size-8 fill-current" />
                 </Button>
             </div>
@@ -119,14 +105,14 @@ export default function BarcodeScannerPage() {
 
         {isScannerActive && (
             <div className="flex flex-col items-center space-y-12 w-full max-w-3xl">
-                {/* 3D APERTURE VIEWPORT */}
-                <div className="relative w-full aspect-[4/5] md:aspect-video bg-black rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-2xl preserve-3d lg:rotate-y-12 transition-transform duration-1000">
+                {/* STRUCTURAL RECTANGLE VIEWPORT */}
+                <div className="relative w-full aspect-[4/5] md:aspect-video bg-black rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-2xl transition-all duration-700">
                     <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
                     
                     {/* HUD OVERLAY LAYERS */}
                     <div className="absolute inset-0 pointer-events-none p-12">
                         {/* Top HUD */}
-                        <div className="flex items-start justify-between translate-z-20">
+                        <div className="flex items-start justify-between">
                             <div className="flex flex-col gap-2">
                                 <div className="flex items-center gap-3">
                                     <div className="size-2 rounded-full bg-primary animate-pulse" />
@@ -137,15 +123,15 @@ export default function BarcodeScannerPage() {
                             <Badge className="bg-white/10 text-white rounded-md text-[9px] font-black uppercase px-4 py-1">UPC-DECODER</Badge>
                         </div>
 
-                        {/* Structural Frame */}
-                        <div className="absolute inset-16 border-2 border-primary/30 rounded-[3rem] animate-pulse">
+                        {/* Structural Frame Brackets */}
+                        <div className="absolute inset-16 border-2 border-primary/20 rounded-[3rem] animate-pulse">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-black text-primary text-[8px] font-black uppercase tracking-widest">
                                 ALIGN SIGNATURE
                             </div>
                         </div>
 
                         {/* Bottom HUD */}
-                        <div className="absolute bottom-12 inset-x-12 flex items-end justify-between translate-z-30">
+                        <div className="absolute bottom-12 inset-x-12 flex items-end justify-between">
                             <div className="flex flex-col gap-1">
                                 <span className="text-[8px] font-black uppercase tracking-[0.4em] text-white/40 opacity-60">LATENCY</span>
                                 <span className="text-xl font-black text-white">0.02ms</span>
@@ -194,12 +180,6 @@ export default function BarcodeScannerPage() {
                 </Button>
             </div>
         )}
-
-        <style jsx global>{`
-            .rotate-y-12 {
-                transform: rotateY(12deg);
-            }
-        `}</style>
     </div>
   );
 }
