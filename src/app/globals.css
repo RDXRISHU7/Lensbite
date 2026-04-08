@@ -19,8 +19,6 @@
     --muted-foreground: 215 16% 47%;
     --accent: 24 94% 61%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 124 46% 32%;
@@ -84,7 +82,8 @@
 }
 
 h1, h2, h3, h4 {
-  @apply font-black tracking-tighter uppercase;
+  @apply tracking-tighter uppercase;
+  font-weight: 900;
 }
 
 /* Scrollbar Refinement */
