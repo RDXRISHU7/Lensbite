@@ -24,8 +24,6 @@
     --input: 214 32% 91%;
     --ring: 122 45% 34%;
     --radius: 1.5rem;
-    --status-safe: 122 39% 49%; /* #4CAF50 */
-    --status-caution: 43 89% 61%; /* #F4C542 */
   }
 }
 
@@ -35,8 +33,8 @@
     font-style: normal !important; /* STRICT NO ITALICS */
   }
   
-  h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea {
-    font-style: normal !important; /* STRICT NO ITALICS */
+  * {
+    font-style: normal !important; /* GLOBAL NO ITALICS ENFORCEMENT */
   }
 }
 

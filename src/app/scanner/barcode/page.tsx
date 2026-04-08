@@ -66,7 +66,13 @@ export default function BarcodeScannerPage() {
   if (isUserLoading || isProfileLoading) return <div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin text-primary" /></div>;
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-6 py-12 pb-48 h-full flex flex-col justify-center animate-iris">
+    <div className="w-full max-w-2xl mx-auto px-6 py-12 pb-48 h-full flex flex-col justify-center animate-iris perspective-3d">
+        {/* 3D BACKGROUND FOR SCANNER */}
+        <div className="fixed inset-0 -z-10 pointer-events-none perspective-3d flex items-center justify-center opacity-10">
+            <div className="absolute size-[500px] border-4 border-primary rounded-full animate-3d-rings" />
+            <div className="absolute size-[600px] border-2 border-accent rounded-full animate-[spin_40s_linear_infinite]" />
+        </div>
+
         {state.type === 'initial' && !isScannerActive && (
             <div className="flex flex-col items-center justify-center text-center space-y-12">
                 <div className="size-48 rounded-[3rem] bg-white/5 border-4 border-primary/20 flex items-center justify-center relative animate-float">
