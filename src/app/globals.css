@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Precision Matte Palette */
+    /* Precision Matte Palette - Inspired by Nine To Five */
     --background: 210 20% 98%; /* Matte Light Grey #F7F9FB */
     --foreground: 215 25% 17%; /* Deep Charcoal #1F2937 */
     --card: 0 0% 100%;
@@ -63,7 +63,7 @@
   50% { transform: translateY(-20px) rotateX(5deg); }
 }
 
-@keyframes rings-rotate-3d {
+@keyframes rings-3d-rotation {
   0% { transform: rotateX(70deg) rotateZ(0deg); }
   100% { transform: rotateX(70deg) rotateZ(360deg); }
 }
@@ -73,7 +73,7 @@
 }
 
 .animate-rings-3d {
-  animation: rings-rotate-3d 12s linear infinite;
+  animation: rings-3d-rotation 12s linear infinite;
 }
 
 /* Typography Constraints */
@@ -105,3 +105,8 @@ h1, h2, h3, h4 {
   background-color: #3d646e;
   color: white;
 }
+
+.translate-z-10 { transform: translateZ(20px); }
+.translate-z-20 { transform: translateZ(40px); }
+.translate-z-30 { transform: translateZ(60px); }
+.translate-z-40 { transform: translateZ(80px); }
