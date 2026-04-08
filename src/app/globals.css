@@ -84,3 +84,17 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #2E7D3266;
 }
+
+.teal-section {
+  background-color: #004D40;
+  color: white;
+}
+
+@keyframes rings-rotate-3d {
+  0% { transform: rotateX(70deg) rotateZ(0deg); }
+  100% { transform: rotateX(70deg) rotateZ(360deg); }
+}
+
+.animate-rings-3d {
+  animation: rings-rotate-3d 10s linear infinite;
+}
