@@ -4,26 +4,27 @@
 
 @layer base {
   :root {
-    --background: 0 0% 2%; /* #050505 */
-    --foreground: 0 0% 100%;
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 153 100% 45%; /* Neon Green #00E676 */
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 153 100% 45%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 153 100% 45%;
+    /* Reference Palette */
+    --background: 0 0% 94%; /* #efefef */
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 191 29% 34%; /* Deep Teal #3d646e */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 65 89% 60%; /* Precision Yellow #e3f43b */
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 65 89% 60%;
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 153 100% 45%;
-    --radius: 1rem;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 191 29% 34%;
+    --radius: 0.5rem;
   }
 }
 
@@ -34,7 +35,7 @@
 }
 
 .perspective-3d {
-  perspective: 2000px;
+  perspective: 3000px;
   transform-style: preserve-3d;
 }
 
@@ -42,41 +43,33 @@
   transform-style: preserve-3d;
 }
 
-.neon-glow {
-  box-shadow: 0 0 20px rgba(0, 230, 118, 0.4), 0 0 40px rgba(0, 230, 118, 0.2);
-}
-
-.text-neon-glow {
-  text-shadow: 0 0 10px rgba(0, 230, 118, 0.6), 0 0 20px rgba(0, 230, 118, 0.3);
+.floating-3d-text {
+  text-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transform: translateZ(50px);
 }
 
 .glass-panel {
-  @apply bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl;
+  @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.05)];
+}
+
+.teal-section {
+  @apply bg-[#3d646e] text-white;
 }
 
 @keyframes iris-shutter {
-  0% { transform: scale(1.1); filter: blur(20px); opacity: 0; }
+  0% { transform: scale(1.05); filter: blur(10px); opacity: 0; }
   100% { transform: scale(1); filter: blur(0); opacity: 1; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes core-tilt-rotate {
-  0% { transform: rotateX(20deg) rotateY(0deg); }
-  100% { transform: rotateX(20deg) rotateY(360deg); }
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotateX(0deg); }
+  50% { transform: translateY(-20px) rotateX(5deg); }
 }
 
 .animate-iris {
-  animation: iris-shutter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: iris-shutter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-3d-rings {
-  animation: core-tilt-rotate 25s linear infinite;
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
+.animate-float-3d {
+  animation: float-slow 8s ease-in-out infinite;
 }

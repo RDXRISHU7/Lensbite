@@ -4,122 +4,142 @@ import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { ScanBarcode, Activity, LogIn, ChevronRight, Fingerprint } from 'lucide-react';
+import { ChevronRight, ArrowRight, Search, Activity, Database, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
 
 export default function Home() {
   const { user } = useUser();
 
   return (
-    <main className="relative flex flex-col items-center bg-background min-h-screen overflow-x-hidden text-white">
-      {/* Background Cyber Grid */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,230,118,0.08),transparent_70%)]" />
-        <div className="absolute inset-0 opacity-[0.05] bg-[grid-white/[0.2]] bg-[size:50px_50px]" />
-      </div>
-
-      {/* Header Navigation */}
-      <header className="w-full h-24 flex items-center justify-between px-6 md:px-12 z-50">
+    <main className="relative flex flex-col items-center bg-background min-h-screen text-foreground perspective-3d selection:bg-secondary selection:text-black">
+      {/* Reference Header */}
+      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 z-50 bg-background/80 backdrop-blur-md sticky top-0 border-b border-border/50">
         <Logo />
+        
+        {/* Navigation - Reference Style */}
+        <nav className="hidden lg:flex items-center gap-8">
+            {['Explore', 'Vault', 'Clinical', 'Intelligence'].map((item) => (
+                <Link key={item} href="/" className="text-[11px] font-bold uppercase tracking-widest hover:text-primary transition-colors">
+                    {item}
+                </Link>
+            ))}
+        </nav>
+
+        {/* Action Center */}
         <div className="flex items-center gap-4">
-          {user ? (
-            <UserNav />
-          ) : (
-            <Link href="/login">
-              <Button className="h-12 px-8 rounded-full bg-primary text-black font-black italic uppercase tracking-tighter neon-glow hover:scale-105 active:scale-95 transition-all">
-                <LogIn className="size-4 mr-2" />
-                Get Started
-              </Button>
-            </Link>
-          )}
+            <div className="hidden md:flex items-center gap-2 bg-muted px-4 py-2 rounded-full border border-border">
+                <Search size={14} className="opacity-40" />
+                <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">Intelligence Search</span>
+            </div>
+            
+            {user ? (
+                <UserNav />
+            ) : (
+                <div className="flex items-center gap-2">
+                    <Link href="/login" className="text-[10px] font-bold uppercase tracking-widest px-4">Log In</Link>
+                    <Link href="/signup">
+                        <Button className="h-10 px-6 rounded-full bg-black text-white font-bold uppercase text-[10px] tracking-widest hover:bg-black/90">
+                            Be Pro
+                        </Button>
+                    </Link>
+                </div>
+            )}
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="flex-1 w-full flex flex-col items-center justify-center px-6 py-12 relative">
-        {/* Floating Background 3D Rings */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 perspective-3d">
-            <div className="size-[600px] border border-primary/20 rounded-full animate-3d-rings" />
-            <div className="absolute size-[550px] border border-primary/10 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
+      {/* Hero Section - Reference Style */}
+      <section className="w-full flex flex-col items-center justify-center pt-24 pb-12 px-6 relative overflow-hidden">
+        <div className="text-center space-y-4 mb-12">
+            <Badge variant="outline" className="rounded-full border-border bg-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                Site of the Day • Apr 8, 2026 • Safety Score 9.8
+            </Badge>
+            <h1 className="text-[12vw] font-black tracking-tighter leading-[0.85] uppercase text-[#1a1a1a] floating-3d-text">
+                Lens Bite
+            </h1>
         </div>
 
-        <div className="w-full max-w-7xl flex flex-col items-start space-y-8 animate-iris relative z-10">
-          {/* Intelligence Badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-primary/30 bg-primary/5">
-            <div className="size-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00E676]" />
-            <span className="text-[10px] font-black italic uppercase tracking-[0.2em] text-primary">
-              Lens Bite Network • Safety Intelligence Live
-            </span>
-          </div>
-
-          {/* Main Title Stack */}
-          <div className="space-y-0">
-            <h1 className="text-[10vw] md:text-[8rem] font-black italic tracking-tight leading-[0.8] uppercase">
-              Food Safety <br />
-              Redefined.
-            </h1>
-            <h1 className="text-[10vw] md:text-[8rem] font-black italic tracking-tight leading-[0.8] uppercase text-primary text-neon-glow">
-              Precision
-            </h1>
-          </div>
-
-          {/* Interaction Hub */}
-          <div className="flex flex-col md:flex-row items-center gap-8 w-full md:w-auto pt-8">
-            <Link href="/scanner/barcode" className="w-full md:w-auto group">
-              <Button className="h-20 px-12 rounded-2xl bg-white text-black font-black italic uppercase text-xl tracking-tighter hover:bg-primary transition-all group-hover:scale-105 active:scale-95 shadow-2xl">
-                Initiate Lens
-                <ChevronRight className="ml-4 size-6" />
-              </Button>
-            </Link>
-
-            {/* Encrypted Protocol Badge */}
-            <div className="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4 group cursor-pointer hover:border-primary/50 transition-all">
-               <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                 <Fingerprint className="size-5" />
-               </div>
-               <div className="flex flex-col">
-                 <span className="text-[9px] font-black italic uppercase tracking-[0.2em] opacity-40">System Status</span>
-                 <span className="text-xs font-black italic uppercase tracking-widest text-primary">Encrypted Protocol</span>
-               </div>
-               <div className="ml-4 size-2 rounded-full bg-primary animate-pulse" />
-            </div>
-          </div>
+        {/* Creator Grid (Reference Elements) */}
+        <div className="flex flex-wrap justify-center gap-8 mb-24 opacity-80">
+            {[
+                { name: 'Clinical Intelligence', role: 'PRO', img: '1' },
+                { name: 'Risk Analytics', role: 'CORE', img: '2' },
+                { name: 'Safety Vault', role: 'VAULT', img: '3' },
+            ].map((node) => (
+                <div key={node.name} className="flex items-center gap-3">
+                    <div className="size-10 rounded-full bg-muted border-2 border-white shadow-sm overflow-hidden">
+                        <img src={`https://picsum.photos/seed/${node.img}/100`} alt="" className="object-cover" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest border-b-2 border-black pb-0.5">{node.name}</span>
+                    <span className="text-[8px] font-bold opacity-40">{node.role}</span>
+                </div>
+            ))}
         </div>
 
-        {/* Floating Scan UI Element (Right) */}
-        <div className="hidden xl:block absolute right-24 top-1/2 -translate-y-1/2 animate-float pointer-events-none">
-            <div className="size-80 rounded-[3rem] border border-primary/20 glass-panel p-8 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-primary/40 animate-[scan_3s_linear_infinite]" />
-                <div className="space-y-4">
-                    <div className="h-4 w-1/2 bg-primary/20 rounded-full" />
-                    <div className="h-4 w-full bg-primary/10 rounded-full" />
-                    <div className="h-24 w-full bg-primary/5 rounded-2xl border border-primary/10 flex items-center justify-center">
-                        <ScanBarcode className="size-12 text-primary opacity-40" />
+        {/* Large 3D Section - Teal/Yellow Architecture */}
+        <div className="w-full max-w-[90vw] aspect-[21/9] teal-section rounded-[2.5rem] p-12 relative preserve-3d group cursor-pointer hover:scale-[1.01] transition-all duration-500 shadow-[0_50px_100px_rgba(61,100,110,0.3)] overflow-hidden">
+            {/* 3D Background Objects */}
+            <div className="absolute top-[-20%] right-[-10%] size-[600px] border-[40px] border-white/5 rounded-full animate-float-3d" />
+            
+            <div className="relative z-10 h-full flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                    <div className="space-y-2">
+                        <span className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">System Node 01</span>
+                        <h2 className="text-5xl md:text-8xl font-black text-secondary uppercase tracking-tighter leading-none">
+                            Nine To Five <br /> Intelligence
+                        </h2>
+                    </div>
+                    <Link href="/scanner/barcode">
+                        <Button className="size-24 rounded-full bg-secondary text-black font-black uppercase text-xs tracking-widest border-[8px] border-black/10 hover:scale-110 transition-all shadow-2xl">
+                            Scan
+                        </Button>
+                    </Link>
+                </div>
+
+                <div className="flex justify-between items-end">
+                    <div className="flex gap-12">
+                        <div className="space-y-1">
+                            <span className="text-[9px] font-black uppercase opacity-40">Verification</span>
+                            <p className="text-xs font-bold uppercase tracking-widest">Active Protocol</p>
+                        </div>
+                        <div className="space-y-1">
+                            <span className="text-[9px] font-black uppercase opacity-40">Precision</span>
+                            <p className="text-xs font-bold uppercase tracking-widest">100% Architectural</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <span className="text-[10px] font-black uppercase tracking-widest opacity-60">Initialize Lens</span>
+                        <div className="size-12 rounded-full border-2 border-white/20 flex items-center justify-center">
+                            <ArrowRight className="text-white" size={20} />
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            {/* Animated 3D Scanline */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-secondary/20 blur-sm animate-[scan_4s_linear_infinite]" />
         </div>
       </section>
 
-      {/* Footer Info */}
-      <footer className="w-full p-12 flex flex-col md:flex-row items-center justify-between border-t border-white/5 mt-auto">
-        <div className="flex items-center gap-8 mb-6 md:mb-0">
-          <div className="flex flex-col">
-            <span className="text-[9px] font-black italic uppercase tracking-[0.4em] opacity-30">Security Node</span>
-            <span className="text-xs font-black italic uppercase tracking-widest">Active-2.4M</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] font-black italic uppercase tracking-[0.4em] opacity-30">Protocol</span>
-            <span className="text-xs font-black italic uppercase tracking-widest">v4.0.Intelligence</span>
-          </div>
+      {/* Footer System */}
+      <footer className="w-full bg-white border-t border-border mt-32 p-12 flex flex-col md:flex-row items-center justify-between">
+        <div className="flex items-center gap-12 mb-8 md:mb-0">
+            <div className="flex flex-col">
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] opacity-30">Studio System</span>
+                <span className="text-xs font-bold uppercase tracking-widest">ET.Clinical.01</span>
+            </div>
+            <div className="flex flex-col">
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] opacity-30">Framework</span>
+                <span className="text-xs font-bold uppercase tracking-widest">v4.Precision</span>
+            </div>
         </div>
-        <p className="text-[10px] font-black italic uppercase tracking-[0.3em] opacity-20">© 2026 Lens Bite Precision Architecture</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-20">© 2026 Lens Bite Precision Architecture</p>
       </footer>
 
       <style jsx global>{`
         @keyframes scan {
           0% { transform: translateY(0); }
-          100% { transform: translateY(320px); }
+          100% { transform: translateY(-500px); }
         }
       `}</style>
     </main>
