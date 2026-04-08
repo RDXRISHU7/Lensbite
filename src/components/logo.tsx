@@ -1,21 +1,21 @@
 import Link from 'next/link';
-import { Layers } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={`flex items-center gap-5 group ${className}`}>
+    <Link href="/" className={`flex items-center gap-4 group ${className}`}>
       <div className="relative">
-        <div className="size-12 bg-primary rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:rotate-[15deg] shadow-lg">
-          <Layers className="size-7 text-white" />
+        <div className="size-10 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:rotate-[15deg] group-hover:bg-primary/20">
+          <Shield className="size-5 text-primary" />
         </div>
-        <div className="absolute inset-0 border border-primary/20 rounded-2xl scale-125 -z-10 animate-pulse-ring" />
+        <div className="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
       <div className="flex flex-col">
-        <span className="text-3xl font-black tracking-tighter leading-[0.8] uppercase text-foreground">
+        <span className="text-2xl font-black italic tracking-tighter leading-none uppercase text-white">
           Lens<span className="text-primary">Bite</span>
         </span>
-        <span className="text-[9px] font-black tracking-[0.5em] text-muted-foreground uppercase leading-none mt-2">
-          Safety Intelligence
+        <span className="text-[8px] font-black italic tracking-[0.3em] text-white/30 uppercase leading-none mt-1">
+          Smart Food Analysis
         </span>
       </div>
     </Link>
