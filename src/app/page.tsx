@@ -4,7 +4,7 @@ import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { Search, Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, History, Database, Fingerprint, FileText } from 'lucide-react';
+import { Search, Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, Heart, Info } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -13,164 +13,148 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <main className="relative flex flex-col items-center bg-background min-h-screen text-foreground perspective-3d selection:bg-primary/20">
+    <main className="min-h-screen bg-background selection:bg-primary/10">
       
-      {/* ARCHITECTURAL HEADER */}
-      <header className="w-full h-24 flex items-center justify-between px-6 md:px-12 z-[100] bg-white/80 backdrop-blur-xl sticky top-0 border-b border-border">
+      {/* MEDICAL HEADER */}
+      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 bg-white border-b border-border sticky top-0 z-[100]">
         <Logo />
         
-        {/* Modern Search HUD */}
-        <div className="hidden lg:flex items-center flex-1 max-w-xl mx-12">
-            <div className="relative w-full group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+        <div className="hidden lg:flex items-center flex-1 max-w-md mx-8">
+            <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input 
-                    placeholder="Search by Clinical Ingredient..." 
-                    className="h-12 pl-12 rounded-xl bg-muted/50 border-none focus-visible:ring-1 focus-visible:ring-primary text-[10px] font-black uppercase tracking-widest"
+                    placeholder="Search clinical ingredients..." 
+                    className="h-10 pl-10 bg-muted/30 border-border rounded-lg text-sm"
                 />
             </div>
         </div>
 
-        <div className="flex items-center gap-6">
-            <div className="hidden xl:flex items-center gap-8 mr-8">
-                <Link href="/login" className="text-[10px] font-black uppercase tracking-widest opacity-40 hover:opacity-100">Log In</Link>
-            </div>
+        <div className="flex items-center gap-4">
+            {!user && (
+                <Link href="/login">
+                    <Button variant="ghost" className="text-sm font-medium">Log In</Button>
+                </Link>
+            )}
             {user ? (
                 <UserNav />
             ) : (
                 <Link href="/signup">
-                    <Button className="h-12 px-8 rounded-full bg-foreground text-background font-black uppercase text-[10px] tracking-widest hover:bg-primary transition-all">
-                        Be Pro
-                    </Button>
+                    <Button className="primary-btn h-10 px-6">Get Started</Button>
                 </Link>
             )}
         </div>
       </header>
 
-      {/* HERO: COMMAND CORE (MATCHES IMAGE) */}
-      <section className="w-full min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 relative overflow-hidden">
-        <div className="relative size-[400px] md:size-[700px] preserve-3d flex items-center justify-center">
-            {/* HUD RINGS */}
-            <div className="absolute inset-0 border-[1px] border-primary/10 rounded-full animate-rings-3d" />
-            <div className="absolute inset-20 border-[1px] border-dashed border-secondary/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
-            <div className="absolute inset-40 border-[1px] border-primary/5 rounded-full" />
-            
-            {/* CENTER COMMAND BUTTON (LARGE ORANGE ROUNDED SQUARE) */}
-            <div className="relative z-10 translate-z-40">
+      {/* HERO SECTION */}
+      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="space-y-8 page-fade-in">
+            <Badge variant="outline" className="badge-safe py-1 px-4 font-medium uppercase tracking-wider text-[10px]">
+                Medical-Grade Food Safety
+            </Badge>
+            <h1 className="text-4xl md:text-6xl text-foreground font-bold leading-tight">
+                Decipher your food.<br/>
+                <span className="text-primary">Protect your health.</span>
+            </h1>
+            <p className="text-muted-foreground text-lg max-w-lg">
+                BiteLens provides clinical-grade analysis of food ingredients, cross-referencing them with your unique biometric health profile in real-time.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href="/scanner/barcode">
-                    <Button className="size-64 md:size-80 rounded-[4rem] bg-secondary text-white font-black uppercase flex flex-col items-center justify-center gap-2 hover:scale-105 transition-all duration-700 shadow-[0_40px_100px_rgba(244,162,97,0.3)]">
-                        <Zap size={48} className="fill-current" />
-                        <span className="text-3xl tracking-tighter">Initiate</span>
+                    <Button className="scanner-btn h-14 px-8 text-base w-full sm:w-auto">
+                        <Zap className="mr-2 size-5 fill-current" />
+                        Start Scanning
+                    </Button>
+                </Link>
+                <Link href="/signup">
+                    <Button variant="outline" className="h-14 px-8 text-base border-border w-full sm:w-auto">
+                        Learn More
                     </Button>
                 </Link>
             </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 flex flex-col items-center gap-6 opacity-20">
-            <span className="text-[8px] font-black uppercase tracking-[0.6em]">Scroll to Decrypt</span>
-            <div className="w-px h-24 bg-foreground animate-pulse" />
-        </div>
-      </section>
-
-      {/* SECTION 01: SYSTEM PROTOCOLS */}
-      <section id="protocols" className="w-full max-w-7xl px-6 py-40 space-y-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-end">
-            <div className="space-y-8">
-                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Protocol 01</span>
-                <h2 className="text-8xl md:text-[10rem] font-black uppercase tracking-tighter leading-[0.8]">Neural<br />Scanner</h2>
-            </div>
-            <p className="text-2xl font-bold uppercase tracking-tight opacity-60 max-w-md pb-4">
-                Dual-path intelligence decrypts food signatures in milliseconds. Multi-layered vision extraction meets verified API synchronization.
-            </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="p-16 rounded-[4rem] bg-white border border-border space-y-12 group hover:-translate-y-4 transition-all duration-700 shadow-xl">
-                <div className="size-24 rounded-3xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <Barcode size={44} />
+            <div className="flex items-center gap-8 pt-8 border-t border-border">
+                <div className="flex flex-col">
+                    <span className="text-2xl font-bold">100k+</span>
+                    <span className="text-xs text-muted-foreground uppercase font-medium">Products Indexed</span>
                 </div>
-                <div className="space-y-6">
-                    <h3 className="text-5xl font-black tracking-tighter uppercase">Barcode Decryption</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">Instant global lookup via Open Food Facts API. Our system decrypts UPC/EAN signatures to extract verified ingredient metadata in milliseconds.</p>
-                </div>
-                <div className="pt-8 border-t border-border flex items-center justify-between">
-                    <Badge variant="outline" className="px-4 py-1 text-[9px] font-black uppercase tracking-widest">SYSTEM-VERIFIED v4</Badge>
-                    <ArrowRight size={24} className="text-primary group-hover:translate-x-4 transition-transform" />
+                <div className="flex flex-col">
+                    <span className="text-2xl font-bold">99.8%</span>
+                    <span className="text-xs text-muted-foreground uppercase font-medium">Accuracy Rate</span>
                 </div>
             </div>
+        </div>
 
-            <div className="p-16 rounded-[4rem] bg-[#3d646e] text-white space-y-12 group hover:-translate-y-4 transition-all duration-700 shadow-2xl">
-                <div className="size-24 rounded-3xl bg-white/10 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                    <Camera size={44} />
+        <div className="relative aspect-square md:aspect-video lg:aspect-square bg-muted/20 rounded-[24px] overflow-hidden border border-border flex items-center justify-center p-8 page-fade-in">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+            <div className="relative z-10 w-full max-w-md p-8 bg-white rounded-[20px] shadow-lg border border-border space-y-6">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                            <Activity size={20} />
+                        </div>
+                        <span className="font-bold text-sm">System Analysis</span>
+                    </div>
+                    <Badge className="badge-safe">Safe</Badge>
                 </div>
-                <div className="space-y-6">
-                    <h3 className="text-5xl font-black tracking-tighter uppercase">Vision AI Lens</h3>
-                    <p className="text-white/80 font-medium leading-relaxed">Multimodal AI (Gemini 2.5 Flash) analyzes packaging images to identify ingredients even when labels are damaged or non-standard.</p>
+                <div className="space-y-2">
+                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-primary w-[85%]" />
+                    </div>
+                    <div className="flex justify-between text-[10px] font-bold text-muted-foreground uppercase">
+                        <span>Purity Metric</span>
+                        <span>85%</span>
+                    </div>
                 </div>
-                <div className="pt-8 border-t border-white/10 flex items-center justify-between">
-                    <Badge variant="secondary" className="px-4 py-1 text-[9px] font-black uppercase tracking-widest bg-white/10 text-white">NEURAL ENGINE</Badge>
-                    <ArrowRight size={24} className="text-white group-hover:translate-x-4 transition-transform" />
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                    Based on your hypertension profile, this item is categorized as safe with moderate sodium levels.
+                </p>
+                <div className="pt-4 border-t border-border flex items-center gap-2">
+                    <ShieldCheck className="text-primary size-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Clinical Protocol v4.0</span>
                 </div>
             </div>
         </div>
       </section>
 
-      {/* SECTION 02: CLINICAL ENGINE */}
-      <section id="analysis" className="w-full bg-[#1F2937] py-48 px-6 text-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <div className="space-y-12 relative z-10">
-                <div className="space-y-6">
-                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Protocol 02</span>
-                    <h2 className="text-[8rem] md:text-[12rem] font-black uppercase tracking-tighter leading-[0.75]">Risk<br />Scrutiny</h2>
-                </div>
-                <p className="text-2xl font-bold uppercase tracking-tight text-white/50 leading-tight">Advanced algorithmic scrutiny of food components, additives, and process-induced toxins.</p>
-                
-                <div className="grid grid-cols-2 gap-8">
-                    <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 flex flex-col gap-4">
-                        <Activity size={32} className="text-primary" />
-                        <span className="text-5xl font-black">99.8%</span>
-                        <p className="text-[9px] font-black uppercase tracking-widest opacity-40">Accuracy Metric</p>
-                    </div>
-                    <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 flex flex-col gap-4">
-                        <History size={32} className="text-secondary" />
-                        <span className="text-5xl font-black">0ms</span>
-                        <p className="text-[9px] font-black uppercase tracking-widest opacity-40">Latency Target</p>
-                    </div>
-                </div>
+      {/* CORE PROTOCOLS */}
+      <section className="bg-white border-y border-border py-24 px-6">
+        <div className="max-w-7xl mx-auto space-y-16">
+            <div className="text-center space-y-4 max-w-2xl mx-auto">
+                <h2 className="text-3xl font-bold">Designated Safety Protocols</h2>
+                <p className="text-muted-foreground">Our multi-layered system scrutinizes every ingredient through a rigorous clinical framework.</p>
             </div>
-
-            <div className="relative lg:rotate-y-12 transition-transform duration-1000">
-                <div className="p-16 rounded-[4rem] bg-white text-[#1F2937] shadow-[0_100px_200px_rgba(0,0,0,0.4)] space-y-12">
-                    <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-40">Clinical Diagnostics</span>
-                        <Badge className="bg-destructive text-white rounded-md px-3 py-1 text-[8px] font-black uppercase">Hazard Alert</Badge>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                    { icon: Barcode, title: 'Barcode Decryption', desc: 'Instant lookup via Open Food Facts API for verified ingredient signatures.' },
+                    { icon: Camera, title: 'Vision AI Lens', desc: 'Multimodal extraction of label data even from damaged or non-standard packaging.' },
+                    { icon: Heart, title: 'Biometric Sync', desc: 'Cross-referencing ingredients with your clinical medical profile in real-time.' }
+                ].map((item, i) => (
+                    <div key={i} className="medical-card p-8 space-y-6 hover:translate-y-[-4px] transition-transform">
+                        <div className="size-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary">
+                            <item.icon size={24} />
+                        </div>
+                        <h3 className="text-lg font-bold">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                        <Link href="/scanner/barcode" className="inline-flex items-center text-primary text-xs font-bold uppercase tracking-wider hover:gap-3 transition-all">
+                            Initialize <ArrowRight className="ml-2 size-4" />
+                        </Link>
                     </div>
-                    <div className="space-y-8">
-                        {['Carcinogen Scan', 'Nutri-Score A-E', 'NOVA Classification', 'Daily Intake %'].map((metric) => (
-                            <div key={metric} className="flex items-center justify-between border-b border-border pb-6">
-                                <span className="font-black uppercase tracking-tighter text-2xl">{metric}</span>
-                                <ShieldCheck size={28} className="text-primary" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
       </section>
 
-      {/* FINAL SYSTEM FOOTER */}
-      <footer className="w-full bg-white border-t border-border p-12 md:p-24 flex flex-col md:flex-row items-center justify-between">
-        <div className="flex items-center gap-16 mb-12 md:mb-0">
-            <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">Studio Node</span>
-                <span className="text-sm font-bold tracking-widest uppercase">ET.CLINICAL.01</span>
+      {/* FOOTER */}
+      <footer className="w-full bg-background border-t border-border py-12 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <Logo />
+            <div className="flex gap-8">
+                <Link href="/history" className="text-xs font-bold text-muted-foreground hover:text-primary transition-colors">HISTORY</Link>
+                <Link href="/profile" className="text-xs font-bold text-muted-foreground hover:text-primary transition-colors">PROFILE</Link>
+                <Link href="/privacy" className="text-xs font-bold text-muted-foreground hover:text-primary transition-colors">PRIVACY</Link>
             </div>
-            <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">Security Protocol</span>
-                <span className="text-sm font-bold tracking-widest uppercase">AES-256.ENCRYPTED</span>
-            </div>
+            <p className="text-[10px] font-bold text-muted-foreground opacity-60">© 2026 BITE LENS CLINICAL SYSTEMS</p>
         </div>
-        <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-20">© 2026 Lens Bite Precision Architecture • No Italics</p>
       </footer>
     </main>
   );

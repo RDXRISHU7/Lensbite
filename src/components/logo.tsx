@@ -1,15 +1,20 @@
 import Link from 'next/link';
+import { Shield } from 'lucide-react';
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={`flex items-center gap-4 group ${className}`}>
-      <span className="text-3xl font-black tracking-tighter leading-none text-[#1a1a1a]">
-        L<span className="text-primary">.</span>B
-      </span>
-      <div className="h-6 w-px bg-border hidden md:block" />
-      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1a1a1a] hidden md:block">
-        Lens Bite
-      </span>
+    <Link href="/" className={`flex items-center gap-2 group ${className}`}>
+      <div className="size-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105">
+        <Shield size={18} />
+      </div>
+      <div className="flex flex-col">
+        <span className="text-lg font-bold leading-none tracking-tight text-foreground">
+          BiteLens
+        </span>
+        <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          Clinical AI
+        </span>
+      </div>
     </Link>
   );
 }
