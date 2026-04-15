@@ -53,8 +53,8 @@ export function RiskResultCard({ state }: { state: any }) {
     return (
         <div className="w-full max-w-4xl mx-auto space-y-8 page-fade-in text-left pb-32">
             
-            {/* PRODUCT SUMMARY CARD */}
-            <div className="medical-card overflow-hidden">
+            {/* PRODUCT SUMMARY GLASS SLATE */}
+            <div className="glass-panel overflow-hidden border-white/40">
                 <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between gap-12 items-start">
                     <div className="space-y-6 flex-1">
                         <div className="flex items-center gap-3">
@@ -64,10 +64,10 @@ export function RiskResultCard({ state }: { state: any }) {
                             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Clinical Audit</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold tracking-tight uppercase leading-[1.1]">{productName}</h2>
-                        <p className="text-lg leading-relaxed font-medium">{summary}</p>
+                        <p className="text-lg leading-relaxed font-medium text-foreground/80">{summary}</p>
                     </div>
                     
-                    <div className="flex flex-col items-center gap-2 p-8 bg-background rounded-3xl min-w-[180px] border border-border/50">
+                    <div className="flex flex-col items-center gap-2 p-8 bg-white/20 backdrop-blur-md rounded-3xl min-w-[180px] border border-white/40">
                         <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest">Risk Score</span>
                         <span className={cn("text-6xl font-bold", riskScore > 70 ? "text-destructive" : riskScore > 30 ? "text-secondary" : "text-primary")}>
                             {riskScore}
@@ -76,7 +76,7 @@ export function RiskResultCard({ state }: { state: any }) {
                     </div>
                 </div>
 
-                <div className="bg-muted/30 border-t border-border p-8 flex flex-wrap gap-12 items-center justify-between">
+                <div className="bg-white/10 backdrop-blur-xl border-t border-white/20 p-8 flex flex-wrap gap-12 items-center justify-between">
                     <div className="flex items-center gap-8">
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest mb-1">NOVA Class</span>
@@ -85,10 +85,10 @@ export function RiskResultCard({ state }: { state: any }) {
                                 <span className="text-xs font-medium text-muted-foreground">/ 4</span>
                             </div>
                         </div>
-                        <div className="h-10 w-px bg-border" />
+                        <div className="h-10 w-px bg-white/20" />
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest mb-1">Nutri-Score</span>
-                            <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center text-white text-xl font-bold">
+                            <div className="h-10 w-10 rounded-lg bg-primary/20 border border-primary/20 flex items-center justify-center text-primary text-xl font-bold">
                                 {nutriScore}
                             </div>
                         </div>
@@ -101,8 +101,8 @@ export function RiskResultCard({ state }: { state: any }) {
                 </div>
             </div>
 
-            {/* NUTRIENT PROFILING */}
-            <Card className="medical-card border-none shadow-none bg-white">
+            {/* NUTRIENT PROFILING GLASS PANEL */}
+            <Card className="medical-card p-0 border-white/40 overflow-hidden">
                 <CardHeader className="p-8 pb-4">
                     <CardTitle className="text-[11px] font-bold uppercase tracking-[0.3em] flex items-center gap-3 text-muted-foreground">
                         <Activity size={18} className="text-primary" />
@@ -116,12 +116,12 @@ export function RiskResultCard({ state }: { state: any }) {
                                 <span className="font-bold text-foreground text-sm uppercase tracking-tight">{n.name}</span>
                                 <div className="flex items-center gap-3">
                                     <span className="text-sm font-medium text-muted-foreground">{n.value}</span>
-                                    <span className="text-[10px] font-bold text-primary bg-primary/5 px-2 py-0.5 rounded-full">{n.percentage}% DV</span>
+                                    <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">{n.percentage}% DV</span>
                                 </div>
                             </div>
                             <Progress 
                                 value={animatedPercentages[n.name] || 0} 
-                                className="h-2.5 bg-muted rounded-full overflow-hidden" 
+                                className="h-2.5 bg-white/30 rounded-full overflow-hidden" 
                                 indicatorClassName={cn(
                                     "transition-all duration-1000",
                                     n.level === 'high' ? "bg-destructive" : n.level === 'moderate' ? "bg-secondary" : "bg-primary"
@@ -132,9 +132,9 @@ export function RiskResultCard({ state }: { state: any }) {
                 </CardContent>
             </Card>
 
-            {/* PERSONALIZED HEALTH TIP */}
+            {/* PERSONALIZED HEALTH TIP GLASS PANEL */}
             {tip && (
-                <div className="medical-card p-10 bg-primary/5 border-primary/10 space-y-6">
+                <div className="glass-panel p-10 bg-primary/5 border-primary/20 space-y-6">
                     <div className="flex items-center gap-4">
                         <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                             <Lightbulb size={20} />
@@ -151,15 +151,15 @@ export function RiskResultCard({ state }: { state: any }) {
                     onClick={handleSaveToHistory}
                     disabled={isSaving || isSaved}
                     className={cn(
-                        "flex-1 h-16 text-sm font-bold uppercase tracking-widest rounded-2xl transition-all shadow-md",
-                        isSaved ? "bg-[#E8F5E9] text-[#2E7D32] hover:bg-[#E8F5E9] border border-[#2E7D32]/20" : "primary-btn"
+                        "flex-1 h-16 text-[10px] font-bold uppercase tracking-widest rounded-2xl transition-all shadow-md",
+                        isSaved ? "bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20" : "primary-btn"
                     )}
                 >
                     {isSaving ? "Syncing to vault..." : isSaved ? "Saved to history" : "Commit Audit to Vault"}
-                    {isSaved ? <CheckCircle className="ml-3 size-5" /> : <DatabaseBackup className="ml-3 size-5" />}
+                    {isSaved ? <CheckCircle className="ml-3 size-4" /> : <DatabaseBackup className="ml-3 size-4" />}
                 </Button>
-                <Button variant="outline" className="h-16 w-16 md:w-20 border-border rounded-2xl hover:bg-white hover:border-primary/30 transition-all flex items-center justify-center">
-                    <Share2 size={24} className="text-muted-foreground" />
+                <Button variant="outline" className="h-16 w-16 md:w-20 border-white/40 bg-white/20 backdrop-blur-md rounded-2xl hover:bg-white/40 hover:border-primary/30 transition-all flex items-center justify-center">
+                    <Share2 size={20} className="text-muted-foreground" />
                 </Button>
             </div>
         </div>
