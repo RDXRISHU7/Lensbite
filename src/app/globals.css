@@ -58,7 +58,7 @@ p { @apply text-[16px] leading-[1.6] font-medium text-foreground/80; }
 
 /* Deep Frosted Glass Architecture */
 .glass-panel {
-  @apply bg-[#24316B]/40 backdrop-blur-[60px] border border-white/10 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)];
+  @apply bg-white/10 backdrop-blur-[60px] border border-white/20 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)];
   position: relative;
   overflow: hidden;
 }
@@ -81,6 +81,42 @@ p { @apply text-[16px] leading-[1.6] font-medium text-foreground/80; }
 .glass-card:hover {
   @apply bg-white/10 border-primary/30 shadow-[0_20px_40px_rgba(0,0,0,0.3)];
   transform: translateY(-4px);
+}
+
+/* 3D Glass Lens Component */
+.lens-container {
+  perspective: 1000px;
+}
+
+.lens-3d {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 60%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 
+    0 25px 50px -12px rgba(0,0,0,0.5),
+    inset 0 0 40px rgba(255,255,255,0.1);
+  position: relative;
+  transform-style: preserve-3d;
+  animation: float 6s ease-in-out infinite;
+}
+
+.lens-3d::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--tertiary), transparent 50%, var(--primary));
+  opacity: 0.2;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(5deg); }
+  50% { transform: translateY(-20px) rotateX(-5deg) rotateY(-5deg); }
 }
 
 /* Status Badges - Deep Glow */

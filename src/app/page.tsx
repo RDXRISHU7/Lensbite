@@ -4,7 +4,7 @@ import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, Fingerprint, Search, Target, Database } from 'lucide-react';
+import { Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, Fingerprint, Search, Target, Database, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -44,7 +44,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* HERO SECTION - MIDNIGHT CORE */}
+      {/* HERO SECTION - MIDNIGHT CORE WITH 3D LENS */}
       <section className="relative w-full min-h-[95vh] flex flex-col items-center justify-center overflow-hidden py-24">
         
         {/* Background Depth Layers */}
@@ -55,6 +55,20 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center text-center space-y-16 px-6 max-w-6xl">
+            
+            {/* 3D GLASS LENS */}
+            <div className="lens-container mb-8">
+                <div className="lens-3d flex items-center justify-center">
+                    <div className="text-center space-y-2 relative z-10">
+                        <Sparkles className="size-12 text-primary mx-auto animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">System Core</span>
+                    </div>
+                    {/* Inner HUD Elements */}
+                    <div className="absolute inset-8 border border-white/10 rounded-full animate-[spin_10s_linear_infinite]" />
+                    <div className="absolute inset-12 border border-primary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+                </div>
+            </div>
+
             <div className="flex flex-col items-center gap-8">
                 <Badge variant="outline" className="px-6 py-2 text-[10px] font-black uppercase tracking-[0.4em] border-primary/30 text-primary bg-primary/5 backdrop-blur-xl rounded-full">
                     Intelligence Protocol v5.0.4
@@ -81,15 +95,6 @@ export default function Home() {
                     </Button>
                 </Link>
             </div>
-
-            <div className="grid grid-cols-3 gap-16 md:gap-32 pt-24 opacity-60">
-                {['AES-256', '99.8%', '100K+'].map((stat, i) => (
-                    <div key={i} className="flex flex-col items-center">
-                        <span className="text-4xl font-black tracking-tighter text-white">{stat}</span>
-                        <span className="text-[9px] font-black uppercase tracking-[0.4em] mt-2 text-primary">Verified</span>
-                    </div>
-                ))}
-            </div>
         </div>
       </section>
 
@@ -97,7 +102,7 @@ export default function Home() {
       <section className="w-full py-32 px-6 md:px-24 space-y-48">
         <div className="max-w-7xl mx-auto">
             
-            {/* Protocol 01 */}
+            {/* Protocol 01 - Glass Slate */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                 <div className="space-y-8">
                     <div className="size-16 rounded-3xl bg-primary/10 backdrop-blur-2xl flex items-center justify-center text-primary border border-white/10 shadow-xl">
@@ -112,7 +117,7 @@ export default function Home() {
                     </Link>
                 </div>
                 <div className="glass-panel aspect-video flex items-center justify-center p-12">
-                    <div className="w-full h-full rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center relative">
+                    <div className="w-full h-full rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
                         <div className="absolute inset-x-12 h-1 bg-primary/40 shadow-[0_0_25px_rgba(251,255,161,0.5)] animate-pulse" />
                         <Barcode size={120} className="opacity-10 text-white" />
                         <div className="absolute top-8 left-8 flex items-center gap-3">
@@ -123,10 +128,10 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Protocol 02 */}
+            {/* Protocol 02 - Glass Slate */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center pt-48">
                 <div className="glass-panel aspect-video flex items-center justify-center p-12 lg:order-1">
-                    <div className="w-full h-full rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center">
+                    <div className="w-full h-full rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center overflow-hidden">
                         <Camera size={120} className="opacity-10 text-white" />
                         <Activity size={32} className="text-secondary animate-pulse mt-8" />
                     </div>
