@@ -58,7 +58,7 @@ p { @apply text-[16px] leading-[1.6] font-medium text-foreground/80; }
 
 /* Deep Frosted Glass Architecture */
 .glass-panel {
-  @apply bg-white/10 backdrop-blur-[60px] border border-white/20 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)];
+  @apply bg-[#24316B]/40 backdrop-blur-[60px] border border-white/20 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)];
   position: relative;
   overflow: hidden;
 }
@@ -75,48 +75,63 @@ p { @apply text-[16px] leading-[1.6] font-medium text-foreground/80; }
 }
 
 .glass-card {
-  @apply bg-white/5 backdrop-blur-3xl border border-white/10 rounded-3xl transition-all duration-500;
-}
-
-.glass-card:hover {
-  @apply bg-white/10 border-primary/30 shadow-[0_20px_40px_rgba(0,0,0,0.3)];
-  transform: translateY(-4px);
+  @apply bg-white/5 backdrop-blur-[40px] border border-white/10 rounded-3xl transition-all duration-500;
 }
 
 /* 3D Glass Lens Component */
 .lens-container {
-  perspective: 1000px;
+  perspective: 2000px;
 }
 
 .lens-3d {
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 60%);
-  backdrop-filter: blur(20px);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 70%);
+  backdrop-filter: blur(40px);
   border: 1px solid rgba(255,255,255,0.4);
   box-shadow: 
-    0 25px 50px -12px rgba(0,0,0,0.5),
-    inset 0 0 40px rgba(255,255,255,0.1);
+    0 40px 100px -20px rgba(0,0,0,0.8),
+    inset 0 0 80px rgba(255,255,255,0.1);
   position: relative;
   transform-style: preserve-3d;
-  animation: float 6s ease-in-out infinite;
+  transition: transform 0.1s ease-out;
+}
+
+.lens-inner-glass {
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 70%, rgba(124, 77, 255, 0.2), transparent 60%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(251, 255, 161, 0.2);
+  transform: translateZ(40px);
+}
+
+.lens-iris {
+  position: absolute;
+  inset: 80px;
+  border-radius: 50%;
+  border: 2px dashed rgba(251, 255, 161, 0.4);
+  transform: translateZ(80px);
+  animation: iris-rotate 20s linear infinite;
+}
+
+@keyframes iris-rotate {
+  from { transform: translateZ(80px) rotate(0deg); }
+  to { transform: translateZ(80px) rotate(360deg); }
 }
 
 .lens-3d::before {
   content: '';
   position: absolute;
-  inset: -10px;
+  inset: -20px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--tertiary), transparent 50%, var(--primary));
-  opacity: 0.2;
-  filter: blur(20px);
+  opacity: 0.15;
+  filter: blur(40px);
   z-index: -1;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(5deg); }
-  50% { transform: translateY(-20px) rotateX(-5deg) rotateY(-5deg); }
+  transform: translateZ(-20px);
 }
 
 /* Status Badges - Deep Glow */

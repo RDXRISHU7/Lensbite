@@ -1,13 +1,67 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, Fingerprint, Search, Target, Database, Sparkles } from 'lucide-react';
+import { Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, Fingerprint, Search, Target, Sparkles, Database } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+
+function InteractiveLens() {
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const lensRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!lensRef.current) return;
+      
+      const { left, top, width, height } = lensRef.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+      
+      // Calculate rotation based on cursor position relative to center
+      const deltaX = (e.clientX - centerX) / (width / 2);
+      const deltaY = (e.clientY - centerY) / (height / 2);
+      
+      // Max rotation of 20 degrees
+      setRotation({
+        x: -deltaY * 20,
+        y: deltaX * 20
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <div className="lens-container mb-8">
+      <div 
+        ref={lensRef}
+        className="lens-3d flex items-center justify-center cursor-crosshair"
+        style={{
+          transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`
+        }}
+      >
+        <div className="text-center space-y-2 relative z-10 pointer-events-none">
+          <Sparkles className="size-12 text-primary mx-auto animate-pulse" />
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">System Core</span>
+        </div>
+        
+        {/* Layered Refractive Elements */}
+        <div className="lens-inner-glass" />
+        <div className="lens-iris" />
+        
+        {/* HUD Ring Elements */}
+        <div className="absolute inset-4 border border-white/5 rounded-full pointer-events-none" />
+        <div className="absolute inset-16 border border-primary/10 rounded-full animate-[spin_15s_linear_infinite_reverse] pointer-events-none" />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const { user } = useUser();
@@ -16,7 +70,7 @@ export default function Home() {
     <main className="min-h-screen selection:bg-primary/20">
       
       {/* ARCHITECTURAL HEADER - CYBER GLASS */}
-      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 bg-white/5 backdrop-blur-3xl border-b border-white/10 sticky top-0 z-[100]">
+      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 bg-[#24316B]/20 backdrop-blur-[60px] border-b border-white/10 sticky top-0 z-[100]">
         <Logo />
         
         <div className="hidden lg:flex items-center flex-1 max-w-md mx-12">
@@ -44,7 +98,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* HERO SECTION - MIDNIGHT CORE WITH 3D LENS */}
+      {/* HERO SECTION - MIDNIGHT CORE WITH INTERACTIVE 3D LENS */}
       <section className="relative w-full min-h-[95vh] flex flex-col items-center justify-center overflow-hidden py-24">
         
         {/* Background Depth Layers */}
@@ -56,18 +110,8 @@ export default function Home() {
 
         <div className="relative z-10 flex flex-col items-center text-center space-y-16 px-6 max-w-6xl">
             
-            {/* 3D GLASS LENS */}
-            <div className="lens-container mb-8">
-                <div className="lens-3d flex items-center justify-center">
-                    <div className="text-center space-y-2 relative z-10">
-                        <Sparkles className="size-12 text-primary mx-auto animate-pulse" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">System Core</span>
-                    </div>
-                    {/* Inner HUD Elements */}
-                    <div className="absolute inset-8 border border-white/10 rounded-full animate-[spin_10s_linear_infinite]" />
-                    <div className="absolute inset-12 border border-primary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-                </div>
-            </div>
+            {/* INTERACTIVE 3D LENS */}
+            <InteractiveLens />
 
             <div className="flex flex-col items-center gap-8">
                 <Badge variant="outline" className="px-6 py-2 text-[10px] font-black uppercase tracking-[0.4em] border-primary/30 text-primary bg-primary/5 backdrop-blur-xl rounded-full">
@@ -155,7 +199,7 @@ export default function Home() {
 
       {/* CTA SECTION - MIDNIGHT FOCUS */}
       <section className="relative py-48 px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[#24316B]/90 backdrop-blur-3xl" />
+        <div className="absolute inset-0 bg-[#24316B]/90 backdrop-blur-[60px]" />
         <div className="absolute inset-0 opacity-10 pointer-events-none scale-150 flex items-center justify-center">
             <Fingerprint size={1000} className="text-primary" />
         </div>
@@ -178,7 +222,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER - CYBER MINIMAL */}
-      <footer className="w-full py-24 px-6 md:px-12 bg-white/5 backdrop-blur-3xl border-t border-white/10">
+      <footer className="w-full py-24 px-6 md:px-12 bg-white/5 backdrop-blur-[60px] border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-24">
             <div className="space-y-8">
                 <Logo />
