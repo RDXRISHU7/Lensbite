@@ -4,38 +4,42 @@
 
 @layer base {
   :root {
-    /* BiteLens Liquid Glass Palette */
-    --background: 210 33% 98%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 142 76% 36%; /* #2E7D32 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 26 87% 67%; /* #F4A261 */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 210 20% 96%;
-    --accent-foreground: 222 47% 11%;
-    --destructive: 0 84% 60%; /* #E53935 */
+    /* Cyber-Clinical Midnight Palette */
+    --background: 229 50% 12%; /* Deeper Midnight */
+    --foreground: 210 33% 98%;
+    --card: 229 50% 15%;
+    --card-foreground: 210 33% 98%;
+    --popover: 229 50% 15%;
+    --popover-foreground: 210 33% 98%;
+    
+    /* Specified Colors */
+    --primary: 62 96% 81%; /* #FBFFA1 Lemon */
+    --primary-foreground: 229 50% 12%;
+    --secondary: 313 58% 90%; /* #F6D5EE Lavender */
+    --secondary-foreground: 229 50% 12%;
+    --tertiary: 256 100% 65%; /* #7C4DFF Purple */
+    
+    --muted: 229 50% 20%;
+    --muted-foreground: 215 16% 70%;
+    --accent: 256 100% 65%;
+    --accent-foreground: 210 33% 98%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 142 76% 36%;
-    --radius: 1.5rem;
+    --border: 229 30% 25%;
+    --input: 229 30% 25%;
+    --ring: 62 96% 81%;
+    --radius: 2rem;
   }
 }
 
 @layer base {
   body {
-    @apply bg-background text-foreground antialiased font-sans m-0 p-0;
-    /* Liquid Background Gradient */
+    @apply bg-[#24316B] text-foreground antialiased font-sans m-0 p-0;
+    /* Deep Liquid Glow Background */
     background: 
-      radial-gradient(at 0% 0%, hsla(142, 76%, 36%, 0.05) 0, transparent 50%),
-      radial-gradient(at 50% 0%, hsla(26, 87%, 67%, 0.05) 0, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(210, 33%, 98%, 1) 0, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(256, 100%, 65%, 0.15) 0, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(62, 96%, 81%, 0.1) 0, transparent 50%),
+      radial-gradient(at 50% 50%, hsla(229, 50%, 28%, 1) 0, transparent 100%),
       fixed;
     min-height: 100vh;
     overflow-x: hidden;
@@ -47,79 +51,52 @@
   font-style: normal !important;
 }
 
-h1 { @apply text-[40px] md:text-[80px] font-black leading-[1] tracking-tighter uppercase; }
-h2 { @apply text-[32px] md:text-[56px] font-black leading-[1.1] tracking-tighter uppercase; }
+h1 { @apply text-[40px] md:text-[90px] font-black leading-[0.9] tracking-tighter uppercase; }
+h2 { @apply text-[32px] md:text-[60px] font-black leading-[1] tracking-tighter uppercase; }
 h3 { @apply text-[24px] font-black leading-[1.2] tracking-tighter uppercase; }
-p { @apply text-[16px] leading-[1.6] font-medium text-foreground/70; }
+p { @apply text-[16px] leading-[1.6] font-medium text-foreground/80; }
 
-/* Liquid Glass Morphism Utility */
+/* Deep Frosted Glass Architecture */
 .glass-panel {
-  @apply bg-white/10 backdrop-blur-[40px] border border-white/30 rounded-[3rem] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+  @apply bg-[#24316B]/40 backdrop-blur-[60px] border border-white/10 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)];
   position: relative;
   overflow: hidden;
 }
 
-.glass-panel::before {
+.glass-panel::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
   pointer-events: none;
 }
 
 .glass-card {
-  @apply bg-white/20 backdrop-blur-2xl border border-white/40 rounded-3xl shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all duration-500;
+  @apply bg-white/5 backdrop-blur-3xl border border-white/10 rounded-3xl transition-all duration-500;
 }
 
 .glass-card:hover {
-  @apply bg-white/30 border-primary/20 shadow-[0_12px_40px_rgba(0,0,0,0.06)];
+  @apply bg-white/10 border-primary/30 shadow-[0_20px_40px_rgba(0,0,0,0.3)];
   transform: translateY(-4px);
 }
 
-/* Structural Perspective */
-.perspective-container {
-  perspective: 2000px;
-}
-
-.structural-layer {
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Status Badges - Glass Variations */
+/* Status Badges - Deep Glow */
 .badge-safe { @apply bg-primary/20 text-primary border-primary/30 backdrop-blur-md; }
 .badge-caution { @apply bg-secondary/20 text-secondary border-secondary/30 backdrop-blur-md; }
 .badge-alert { @apply bg-destructive/20 text-destructive border-destructive/30 backdrop-blur-md; }
 
-/* Animations */
-@keyframes slow-pan {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.animate-liquid {
-  background-size: 200% 200%;
-  animation: slow-pan 20s ease infinite;
-}
-
-.page-reveal {
-  animation: iris-open 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes iris-open {
-  from { opacity: 0; transform: scale(0.98) translateY(20px); filter: blur(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-}
-
-/* Button Protocols - Liquid Gloss */
+/* Button Protocols - High Contrast */
 .primary-btn {
-  @apply bg-primary/90 text-white hover:bg-primary backdrop-blur-md transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-lg shadow-primary/20 active:scale-95 border border-white/20;
+  @apply bg-[#FBFFA1] text-[#24316B] hover:bg-white transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-xl shadow-primary/10 active:scale-95 border-none;
 }
 
 .scanner-btn {
-  @apply bg-secondary/90 text-white hover:bg-secondary backdrop-blur-md transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-lg shadow-secondary/20 active:scale-95 border border-white/20;
+  @apply bg-[#F4A261] text-white hover:bg-[#F4A261]/90 transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-xl shadow-secondary/10 active:scale-95 border-none;
+}
+
+.tertiary-btn {
+  @apply bg-[#7C4DFF] text-white hover:bg-[#7C4DFF]/90 transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-xl active:scale-95 border-none;
 }
