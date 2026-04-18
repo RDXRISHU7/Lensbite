@@ -12,7 +12,7 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in overflow-x-hidden">
+    <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in overflow-x-hidden relative">
       
       {/* PERSISTENT HUD HEADER */}
       <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/40 backdrop-blur-xl border-b border-white/50">

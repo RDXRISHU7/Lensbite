@@ -1,4 +1,3 @@
-
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { MobileNav } from '@/components/mobile-nav';
@@ -17,10 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-background m-0 p-0 font-sans antialiased">
+      <body className="m-0 p-0 font-sans antialiased relative">
         <FirebaseClientProvider>
-          <div className="relative min-h-dvh perspective-3d">
-            <InteractiveIris />
+          {/* ARCHITECTURAL BACKGROUND STACK */}
+          <div className="fixed inset-0 z-[-2] bg-[#F6F4FB]" />
+          <InteractiveIris />
+          
+          {/* CLINICAL INTERFACE LAYER */}
+          <div className="relative min-h-dvh z-10 perspective-3d">
             {children}
             <MobileNav />
             <Toaster />

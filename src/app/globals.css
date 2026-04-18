@@ -33,7 +33,7 @@
 
 @layer base {
   body {
-    @apply bg-[#F6F4FB] text-[#0F0A2A] antialiased font-sans selection:bg-primary/20;
+    @apply text-[#0F0A2A] antialiased font-sans selection:bg-primary/20 m-0 p-0;
   }
 }
 
