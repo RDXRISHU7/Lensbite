@@ -5,26 +5,24 @@
 @layer base {
   :root {
     /* Cinematic Noir v2.0 Palette - Light Theme */
-    --background: 250 30% 97%; /* #F6F4FB */
+    /* Background: #F6F4FB */
+    --background: 250 30% 97%; 
     --foreground: 251 62% 10%; /* #0F0A2A */
     
     --card: 0 0% 100%;
     --card-foreground: 251 62% 10%;
     
-    --primary: 256 87% 61%; /* #7C43F1 */
+    --primary: 256 87% 61%; /* #7C43F1 - Primary Purple */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 326 95% 91%; /* #FED0EE */
+    --secondary: 326 95% 91%; /* #FED0EE - Secondary Pink */
     --secondary-foreground: 251 62% 10%;
     
-    --accent: 65 100% 81%; /* #F8FFA1 */
+    --accent: 65 100% 81%; /* #F8FFA1 - Accent Lime */
     --accent-foreground: 251 62% 10%;
 
     --muted: 249 20% 92%;
     --muted-foreground: 247 16% 45%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
 
     --border: 251 62% 10% / 0.1;
     --input: 249 20% 92%;
@@ -51,6 +49,31 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 /* STRICT NO ITALICS */
 * { font-style: normal !important; }
 
+/* Cinematic Glass Surface System */
+.glass-surface {
+  @apply bg-white/55 backdrop-blur-xl border border-white/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)];
+}
+
+/* GLOBAL BUTTON GLASSMORPHISM HOVER */
+button, .btn-glass-hover {
+  @apply transition-all duration-300 ease-out relative overflow-hidden;
+}
+
+button:hover:not(:disabled), .btn-glass-hover:hover {
+  @apply backdrop-blur-md scale-[1.02] shadow-2xl border-white/80;
+  background-color: rgba(255, 255, 255, 0.55);
+  color: hsl(var(--foreground));
+}
+
+/* Primary Cinematic Button */
+.primary-btn {
+  @apply h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:bg-white/55 hover:text-[#0F0A2A] active:scale-[0.98] transition-all border border-transparent;
+}
+
+.scanner-btn {
+  @apply h-14 px-8 bg-[#F8FFA1] text-[#0F0A2A] rounded-[16px] font-bold uppercase tracking-wider hover:bg-white/55 active:scale-[0.98] transition-all border border-transparent;
+}
+
 /* Clinical Surface System */
 .clinical-card {
   @apply bg-white border border-black/10 rounded-[24px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300;
@@ -58,15 +81,6 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .hover-card {
   @apply hover:shadow-xl hover:-translate-y-1;
-}
-
-/* Primary Cinematic Button */
-.primary-btn {
-  @apply h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:bg-[#7C43F1]/90 active:scale-[0.98] transition-all;
-}
-
-.scanner-btn {
-  @apply h-14 px-8 bg-[#F8FFA1] text-[#0F0A2A] rounded-[16px] font-bold uppercase tracking-wider hover:bg-[#F8FFA1]/90 transition-all;
 }
 
 /* Page Transitions */
@@ -78,3 +92,8 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Status Badge Themes */
+.badge-safe { @apply bg-[#E8F5E9] text-[#2E7D32] border-[#E8F5E9]; }
+.badge-caution { @apply bg-[#FFF8E1] text-[#F4C542] border-[#FFF8E1]; }
+.badge-alert { @apply bg-[#FDECEA] text-[#E53935] border-[#FDECEA]; }
