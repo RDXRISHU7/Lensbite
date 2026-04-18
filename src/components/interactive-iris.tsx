@@ -3,16 +3,18 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Bio-Digital Iris Engine v5.0 - Precision Architectural Scaling
+ * Bio-Digital Iris Engine v5.1 - Hydration-Safe Architecture
  * 
  * - Multi-layered fibrous texture via high-octave fractal noise.
- * - Emerald, Teal, and Olive color matrix calibrated to user reference.
  * - Scroll-synced pupil dilation focused behind hero text area.
+ * - Hydration-safe mount check to prevent SSR mismatches.
  */
 export function InteractiveIris() {
   const [dilation, setDilation] = useState(1);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -21,7 +23,6 @@ export function InteractiveIris() {
       const progress = Math.min(scrollY / (windowHeight * 0.5 || 1), 1);
       
       // Pupil scale: 1.0 (contracted) to 1.6 (focused dilation)
-      // Constrained to stay within the targeted hero circle
       setDilation(1 + progress * 0.6);
     };
 
@@ -31,9 +32,17 @@ export function InteractiveIris() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  if (!isMounted) {
+    return (
+        <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden opacity-0">
+            <div className="relative size-[600px] md:size-[850px]" />
+        </div>
+    );
+  }
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden">
-      {/* 3D VIEWPORT CONTAINER - Re-scaled for focused hero alignment */}
+    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden transition-opacity duration-1000 opacity-100">
+      {/* 3D VIEWPORT CONTAINER */}
       <div className="relative size-[600px] md:size-[850px] flex items-center justify-center">
         
         {/* THE BIOLOGICAL IRIS STRUCTURE */}

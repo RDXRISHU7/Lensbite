@@ -2,7 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { ShieldCheck, Activity, DatabaseBackup, CheckCircle, Lightbulb, Share2, Target, Info, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { ShieldCheck, Activity, DatabaseBackup, CheckCircle, Lightbulb, Share2, Target, Info, AlertTriangle, ShieldAlert, Fingerprint } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
@@ -14,12 +14,16 @@ export function RiskResultCard({ state }: { state: any }) {
     const [animatedPercentages, setAnimatedPercentages] = useState<Record<string, number>>({});
     const [isSaving, setIsSaving] = useState(false);
     const [isSaved, setIsSaved] = useState(false);
+    const [scanId, setScanId] = useState('');
     const { user } = useUser();
     const firestore = useFirestore();
     const { toast } = useToast();
 
     useEffect(() => {
         if (state.type === 'success' && state.analysis) {
+            // Generate stable ID on mount to avoid hydration mismatch
+            setScanId(Math.random().toString(36).slice(2, 10).toUpperCase());
+            
             const timer = setTimeout(() => {
                 const newPercentages: Record<string, number> = {};
                 state.analysis.nutrients.forEach((n: any) => {
@@ -62,7 +66,7 @@ export function RiskResultCard({ state }: { state: any }) {
                         )}>
                             {isSafe ? "SAFE TO EAT" : "HIGH RISK"}
                         </Badge>
-                        <span className="overline text-[10px] opacity-40 font-black tracking-widest">ID: {Math.random().toString(36).slice(2, 10).toUpperCase()}</span>
+                        <span className="overline text-[10px] opacity-40 font-black tracking-widest">ID: {scanId || 'INITIALIZING'}</span>
                     </div>
                     <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tight leading-[0.9] font-['Space_Grotesk']">{productName}</h2>
                     <p className="text-lg font-medium text-[#3D3660] leading-relaxed max-w-xl">{summary}</p>
