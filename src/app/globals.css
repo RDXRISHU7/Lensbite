@@ -48,55 +48,70 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 /* STRICT NO ITALICS */
 * { font-style: normal !important; }
 
-/* LIQUID GLASS ARCHITECTURE */
+/* LIQUID GLASS ARCHITECTURE - THE JELLY EFFECT */
 .liquid-glass-base {
-  @apply backdrop-blur-2xl border transition-all duration-300 active:scale-[0.98] shadow-lg;
+  @apply backdrop-blur-2xl border-t border-l transition-all duration-300 active:scale-[0.96] shadow-xl;
+  border-top-color: rgba(255, 255, 255, 0.4);
+  border-left-color: rgba(255, 255, 255, 0.2);
 }
 
 .liquid-glass-purple {
-  background: linear-gradient(135deg, rgba(124, 67, 241, 0.4) 0%, rgba(124, 67, 241, 0.2) 100%);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(124, 67, 241, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2);
-  color: #0F0A2A;
-  @apply font-bold uppercase tracking-tight;
+  background: linear-gradient(135deg, rgba(124, 67, 241, 0.9) 0%, rgba(124, 67, 241, 1) 100%);
+  box-shadow: 
+    0 10px 30px -10px rgba(124, 67, 241, 0.5),
+    inset 0 4px 10px rgba(255, 255, 255, 0.3),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  @apply font-black uppercase tracking-tight;
 }
 
 .liquid-glass-purple:hover {
-  background: linear-gradient(135deg, rgba(124, 67, 241, 0.6) 0%, rgba(124, 67, 241, 0.4) 100%);
-  box-shadow: 0 12px 48px 0 rgba(124, 67, 241, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(124, 67, 241, 1) 0%, rgba(147, 99, 241, 1) 100%);
+  @apply shadow-2xl scale-[1.02];
 }
 
 .liquid-glass-lime {
-  background: linear-gradient(135deg, rgba(248, 255, 161, 0.7) 0%, rgba(248, 255, 161, 0.4) 100%);
-  border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(248, 255, 161, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(248, 255, 161, 0.9) 0%, rgba(248, 255, 161, 1) 100%);
+  box-shadow: 
+    0 10px 30px -10px rgba(248, 255, 161, 0.5),
+    inset 0 4px 10px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.05);
   color: #0F0A2A;
   @apply font-black uppercase tracking-widest;
 }
 
-.liquid-glass-lime:hover {
-  background: linear-gradient(135deg, rgba(248, 255, 161, 0.9) 0%, rgba(248, 255, 161, 0.6) 100%);
-  box-shadow: 0 12px 48px 0 rgba(248, 255, 161, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.5);
-}
-
 .liquid-glass-pink {
-  background: linear-gradient(135deg, rgba(254, 208, 238, 0.5) 0%, rgba(254, 208, 238, 0.3) 100%);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(254, 208, 238, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(254, 208, 238, 0.9) 0%, rgba(254, 208, 238, 1) 100%);
+  box-shadow: 
+    0 10px 30px -10px rgba(254, 208, 238, 0.5),
+    inset 0 4px 10px rgba(255, 255, 255, 0.4),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.05);
   color: #0F0A2A;
-  @apply font-bold uppercase tracking-tight;
-}
-
-.liquid-glass-pink:hover {
-  background: linear-gradient(135deg, rgba(254, 208, 238, 0.7) 0%, rgba(254, 208, 238, 0.5) 100%);
-  box-shadow: 0 12px 48px 0 rgba(254, 208, 238, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4);
+  @apply font-black uppercase tracking-tight;
 }
 
 .liquid-glass-clear {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07), inset 0 0 20px rgba(255, 255, 255, 0.2);
-  @apply font-bold uppercase tracking-tight;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 4px 20px rgba(31, 38, 135, 0.05),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  @apply font-bold uppercase tracking-tight text-[#0F0A2A];
+}
+
+.liquid-glass-clear:hover {
+  @apply bg-white/60 shadow-lg;
+}
+
+.liquid-glass-destructive {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(239, 68, 68, 1) 100%);
+  box-shadow: 
+    0 10px 30px -10px rgba(239, 68, 68, 0.5),
+    inset 0 4px 10px rgba(255, 255, 255, 0.3),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  @apply font-black uppercase tracking-tight;
 }
 
 /* Page Transitions */
