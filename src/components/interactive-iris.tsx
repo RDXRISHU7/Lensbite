@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Bio-Digital Iris Engine v5.1 - Hydration-Safe Architecture
+ * Crystalline Power Core v6.0 - Abstract Clinical Engine
  * 
- * - Multi-layered fibrous texture via high-octave fractal noise.
- * - Scroll-synced pupil dilation focused behind hero text area.
+ * - Replaces biological "creepy" textures with high-tech geometric light rings.
+ * - Scroll-synced dilation focused behind hero text area.
  * - Hydration-safe mount check to prevent SSR mismatches.
  */
 export function InteractiveIris() {
@@ -19,11 +19,9 @@ export function InteractiveIris() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      // Focus peak dilation early for the hero section impact
+      // Map scroll progress to pupil dilation (1.0 to 1.8x scale)
       const progress = Math.min(scrollY / (windowHeight * 0.5 || 1), 1);
-      
-      // Pupil scale: 1.0 (contracted) to 1.6 (focused dilation)
-      setDilation(1 + progress * 0.6);
+      setDilation(1 + progress * 0.8);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -33,11 +31,7 @@ export function InteractiveIris() {
   }, []);
 
   if (!isMounted) {
-    return (
-        <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden opacity-0">
-            <div className="relative size-[600px] md:size-[850px]" />
-        </div>
-    );
+    return null;
   }
 
   return (
@@ -45,72 +39,92 @@ export function InteractiveIris() {
       {/* 3D VIEWPORT CONTAINER */}
       <div className="relative size-[600px] md:size-[850px] flex items-center justify-center">
         
-        {/* THE BIOLOGICAL IRIS STRUCTURE */}
+        {/* THE DIGITAL APERTURE STRUCTURE */}
         <svg className="absolute inset-0 size-full" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            {/* Hyper-Realistic Biological Fiber Texture */}
-            <filter id="iris-fibers" x="-20%" y="-20%" width="140%" height="140%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="8" seed="42" result="noise" />
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="60" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
+            <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#7C43F1" stopOpacity="0.2" />
+              <stop offset="60%" stopColor="#7C43F1" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="transparent" />
+            </radialGradient>
+            
+            <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#B9FF61" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#7C43F1" stopOpacity="0.1" />
+            </linearGradient>
 
-            {/* Specular Light Reflection Filter */}
-            <filter id="lens-gloss">
-              <feGaussianBlur stdDeviation="15" result="blur" />
+            <filter id="bloom">
+              <feGaussianBlur stdDeviation="20" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
-
-            {/* Emerald/Teal Depth Gradients - Biological Fidelity */}
-            <radialGradient id="iris-gradient-complex" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-              <stop offset="0%" stopColor="#0F0A2A" />
-              <stop offset="10%" stopColor="#1A3B18" />
-              <stop offset="30%" stopColor="#2D5A27" />
-              <stop offset="50%" stopColor="#4E9A44" />
-              <stop offset="75%" stopColor="#124B4C" />
-              <stop offset="90%" stopColor="#B9FF61" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#1A3B18" stopOpacity="0.8" />
-            </radialGradient>
-
-            {/* Sub-Surface Light Scatter */}
-            <radialGradient id="rim-light" cx="50%" cy="50%" r="50%">
-              <stop offset="85%" stopColor="transparent" />
-              <stop offset="95%" stopColor="#B9FF61" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#B9FF61" stopOpacity="0.3" />
-            </radialGradient>
           </defs>
 
-          {/* BASE COLOR PLANE */}
-          <circle cx="500" cy="500" r="480" fill="url(#iris-gradient-complex)" />
-          
-          {/* FIBROUS LAYER 01 - CORE TEXTURE */}
-          <circle cx="500" cy="500" r="460" filter="url(#iris-fibers)" fill="url(#iris-gradient-complex)" opacity="0.9" />
-          
-          {/* FIBROUS LAYER 02 - HIGHLIGHTS */}
-          <circle cx="500" cy="500" r="460" filter="url(#iris-fibers)" fill="white" opacity="0.05" />
-          
-          {/* RIM LIGHTING */}
-          <circle cx="500" cy="500" r="480" fill="url(#rim-light)" />
-          
-          {/* CRYSTALLINE LENS REFLECTIONS */}
-          <ellipse cx="380" cy="380" rx="120" ry="80" fill="white" opacity="0.08" filter="url(#lens-gloss)" transform="rotate(-15, 380, 380)" />
-          <circle cx="680" cy="620" r="40" fill="white" opacity="0.04" filter="url(#lens-gloss)" />
+          {/* AMBIENT BACKGROUND GLOW */}
+          <circle cx="500" cy="500" r="450" fill="url(#core-glow)" filter="url(#bloom)" />
+
+          {/* CONCENTRIC APERTURE RINGS */}
+          {[...Array(15)].map((_, i) => (
+            <circle
+              key={i}
+              cx="500"
+              cy="500"
+              r={120 + i * 20}
+              stroke="url(#ring-gradient)"
+              strokeWidth="0.5"
+              className="opacity-20"
+              style={{
+                transformOrigin: 'center',
+                animation: `pulse ${5 + i * 0.5}s ease-in-out infinite alternate`,
+              }}
+            />
+          ))}
+
+          {/* ROTATING DATA AXIS RINGS */}
+          <circle 
+            cx="500" 
+            cy="500" 
+            r="180" 
+            stroke="#B9FF61" 
+            strokeWidth="1" 
+            strokeDasharray="4 12" 
+            className="opacity-40 animate-[spin_40s_linear_infinite]" 
+          />
+          <circle 
+            cx="500" 
+            cy="500" 
+            r="420" 
+            stroke="#7C43F1" 
+            strokeWidth="0.5" 
+            strokeDasharray="2 20" 
+            className="opacity-10 animate-[spin_120s_linear_reverse_infinite]" 
+          />
         </svg>
 
-        {/* INTERACTIVE PUPIL CORE (Scroll Responsive) */}
+        {/* THE INTERACTIVE POWER CORE (PUPIL REPLACEMENT) */}
         <div 
-          className="relative size-[18%] bg-[#0F0A2A] rounded-full shadow-[0_0_100px_rgba(15,10,42,0.8)] transition-transform duration-700 ease-out flex items-center justify-center border border-white/5"
+          className="relative size-[16%] flex items-center justify-center transition-transform duration-700 ease-out"
           style={{ transform: `scale(${dilation})` }}
         >
-          {/* Inner Bio-Luminescence */}
-          <div className="size-full bg-gradient-to-tr from-[#124B4C]/20 to-transparent rounded-full" />
+          {/* Glass Sphere Core */}
+          <div className="absolute inset-0 rounded-full liquid-glass-base liquid-glass-purple shadow-[0_0_100px_rgba(124,67,241,0.5)]" />
           
-          {/* Refractive Rim */}
-          <div className="absolute inset-0 rounded-full border-[0.5px] border-white/20" />
+          {/* Internal Refractive Light */}
+          <div className="size-1/2 bg-white/30 rounded-full blur-xl animate-pulse" />
+          
+          {/* High-Intensity Specular Rim */}
+          <div className="absolute inset-0 rounded-full border border-white/40" />
         </div>
 
-        {/* DATA HUD ROTATION AXIS (Subtle Clinical Overlay) */}
-        <div className="absolute inset-[-60px] border-[0.5px] border-[#B9FF61]/5 rounded-full animate-[spin_420s_linear_infinite]" />
+        {/* OUTER CLINICAL RADIUS */}
+        <div className="absolute inset-[-100px] border-[0.5px] border-primary/5 rounded-full animate-[spin_300s_linear_infinite]" />
       </div>
+
+      <style jsx global>{`
+        @keyframes pulse {
+          from { transform: scale(1); opacity: 0.1; }
+          to { transform: scale(1.08); opacity: 0.3; }
+        }
+      `}</style>
     </div>
   );
 }
