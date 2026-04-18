@@ -1,9 +1,11 @@
+
 'use client';
 
 import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
+import { InteractiveIris } from '@/components/interactive-iris';
 import { Zap, ArrowRight, Barcode, Camera, Activity, Shield, Database, Target, Fingerprint, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -14,6 +16,9 @@ export default function Home() {
   return (
     <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in bg-[#F6F4FB]">
       
+      {/* Bio-Digital Iris Engine */}
+      <InteractiveIris />
+
       {/* Cinematic Navigation */}
       <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/40 backdrop-blur-xl border-b border-white/50">
         <Logo />
@@ -32,10 +37,10 @@ export default function Home() {
       </header>
 
       {/* Hero Narrative */}
-      <section className="pt-48 pb-32 px-8 text-center space-y-12 max-w-4xl mx-auto">
+      <section className="pt-48 pb-32 px-8 text-center space-y-12 max-w-4xl mx-auto relative z-10">
         <div className="space-y-6">
             <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary overline bg-primary/5 backdrop-blur-sm">
-                Liquid Glass Architecture v1.0
+                Clinical Intelligence v5.0
             </Badge>
             <h1 className="text-[72px] font-black leading-[0.9] tracking-[-0.04em] uppercase font-['Space_Grotesk']">
               BITE<span className="text-primary">LENS</span>
@@ -62,7 +67,7 @@ export default function Home() {
       </section>
 
       {/* System Sections */}
-      <section className="px-8 pb-48 space-y-32">
+      <section className="px-8 pb-48 space-y-32 relative z-10">
         
         {/* Protocol 01: Barcode Decryption */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -154,7 +159,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 py-24 border-t border-black/5 bg-white">
+      <footer className="px-8 py-24 border-t border-black/5 bg-white relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
             <Logo />
             <div className="grid grid-cols-2 gap-12 md:gap-24">
@@ -176,7 +181,7 @@ export default function Home() {
             </div>
         </div>
         <div className="pt-16 mt-16 border-t border-black/5 flex justify-between items-center opacity-40">
-            <span className="overline text-[9px]">© 2026 BITE LENS SYSTEMS · LIQUID GLASS v1.0</span>
+            <span className="overline text-[9px]">© 2026 BITE LENS SYSTEMS · LIQUID GLASS v2.0</span>
             <span className="overline text-[9px]">FDA + WHO DATA VERIFIED</span>
         </div>
       </footer>

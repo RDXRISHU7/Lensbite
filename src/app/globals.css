@@ -49,6 +49,11 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 /* STRICT NO ITALICS */
 * { font-style: normal !important; }
 
+/* 3D Viewport */
+.perspective-3d {
+  perspective: 2000px;
+}
+
 /* LIQUID GLASS ARCHITECTURE - THE JELLY EFFECT */
 .liquid-glass-base {
   @apply backdrop-blur-3xl border-t border-l transition-all duration-300 active:scale-[0.96] shadow-2xl;

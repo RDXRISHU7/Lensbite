@@ -1,7 +1,9 @@
+
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { MobileNav } from '@/components/mobile-nav';
 import { Toaster } from '@/components/ui/toaster';
+import { InteractiveIris } from '@/components/interactive-iris';
 
 export const metadata = {
   title: 'Lens Bite | Command Center',
@@ -18,6 +20,7 @@ export default function RootLayout({
       <body className="bg-background m-0 p-0 font-sans antialiased">
         <FirebaseClientProvider>
           <div className="relative min-h-dvh perspective-3d">
+            <InteractiveIris />
             {children}
             <MobileNav />
             <Toaster />
