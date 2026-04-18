@@ -2,7 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { ShieldCheck, Activity, DatabaseBackup, CheckCircle, Lightbulb, Share2, Info, Target, Biohazard } from 'lucide-react';
+import { ShieldCheck, Activity, DatabaseBackup, CheckCircle, Lightbulb, Share2, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
@@ -52,27 +52,27 @@ export function RiskResultCard({ state }: { state: any }) {
     return (
         <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700 text-left pb-32">
             
-            {/* PRODUCT HEADER GLASS */}
-            <div className="glass-panel p-10 md:p-16 flex flex-col md:flex-row justify-between gap-12">
+            {/* PRODUCT HEADER */}
+            <div className="clinical-card p-10 md:p-16 flex flex-col md:flex-row justify-between gap-12">
                 <div className="space-y-6 flex-1">
                     <div className="flex items-center gap-4">
-                        <Badge className={cn(
-                            "px-4 py-1.5 rounded-md overline border-none",
-                            isSafe ? "bg-primary/10 text-primary" : "bg-destructive/10 text-destructive"
+                        <Badge variant="outline" className={cn(
+                            "px-4 py-1.5 rounded-md overline",
+                            isSafe ? "border-green-500/20 text-green-600 bg-green-50" : "border-red-500/20 text-red-600 bg-red-50"
                         )}>
                             {isSafe ? "SAFE TO EAT" : "HIGH RISK"}
                         </Badge>
-                        <span className="overline opacity-40">Audit: {Math.random().toString(36).slice(2, 8).toUpperCase()}</span>
+                        <span className="overline opacity-40">System Audit: {Math.random().toString(36).slice(2, 8).toUpperCase()}</span>
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight leading-none">{productName}</h2>
-                    <p className="text-lg font-medium opacity-80 leading-relaxed">{summary}</p>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">{productName}</h2>
+                    <p className="text-lg font-medium text-[#3D3660] leading-relaxed">{summary}</p>
                 </div>
                 
-                <div className="flex flex-col items-center justify-center p-8 bg-white/50 rounded-[24px] border border-white/80 shadow-sm min-w-[200px]">
+                <div className="flex flex-col items-center justify-center p-8 bg-[#F6F4FB] rounded-[24px] border border-black/5 min-w-[200px]">
                     <span className="overline opacity-40 mb-2">Risk Index</span>
                     <span className={cn(
-                        "text-7xl font-bold tracking-tighter",
-                        riskScore > 75 ? "text-destructive" : riskScore > 50 ? "text-secondary" : "text-primary"
+                        "text-7xl font-black tracking-tighter",
+                        riskScore > 75 ? "text-red-500" : riskScore > 20 ? "text-orange-500" : "text-green-500"
                     )}>
                         {riskScore}%
                     </span>
@@ -82,7 +82,7 @@ export function RiskResultCard({ state }: { state: any }) {
 
             {/* NUTRIENT MATRIX */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="glass-panel p-10 space-y-10">
+                <div className="clinical-card p-10 space-y-10">
                     <div className="flex items-center gap-3">
                         <Activity className="size-5 text-primary" />
                         <span className="overline">Clinical Nutrients</span>
@@ -99,7 +99,7 @@ export function RiskResultCard({ state }: { state: any }) {
                                     className="h-2 bg-black/5" 
                                     indicatorClassName={cn(
                                         "transition-all duration-1000",
-                                        n.level === 'high' ? "bg-destructive" : n.level === 'moderate' ? "bg-secondary" : "bg-primary"
+                                        n.level === 'high' ? "bg-red-500" : n.level === 'moderate' ? "bg-orange-500" : "bg-green-500"
                                     )}
                                 />
                             </div>
@@ -107,7 +107,7 @@ export function RiskResultCard({ state }: { state: any }) {
                     </div>
                 </div>
 
-                <div className="glass-panel p-10 flex flex-col justify-between">
+                <div className="clinical-card p-10 flex flex-col justify-between">
                     <div className="space-y-8">
                         <div className="flex items-center gap-3">
                             <Target className="size-5 text-secondary" />
@@ -117,13 +117,13 @@ export function RiskResultCard({ state }: { state: any }) {
                             <div className="space-y-2">
                                 <span className="overline opacity-40">NOVA Score</span>
                                 <div className="flex items-baseline gap-1">
-                                    <span className="text-4xl font-bold">{novaScore}</span>
+                                    <span className="text-4xl font-black">{novaScore}</span>
                                     <span className="text-sm opacity-20">/ 4</span>
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <span className="overline opacity-40">Nutri-Score</span>
-                                <div className="size-12 rounded-lg bg-primary text-white flex items-center justify-center text-2xl font-bold">
+                                <div className="size-12 rounded-lg bg-primary text-white flex items-center justify-center text-2xl font-black">
                                     {nutriScore}
                                 </div>
                             </div>
@@ -132,19 +132,19 @@ export function RiskResultCard({ state }: { state: any }) {
                     
                     <div className="pt-8 mt-8 border-t border-black/5 flex items-center gap-4 text-primary opacity-60">
                         <ShieldCheck size={20} />
-                        <span className="overline">FDA + WHO DATABASE MATCH</span>
+                        <span className="overline text-[9px]">FDA + WHO DATABASE MATCH</span>
                     </div>
                 </div>
             </div>
 
             {/* PERSONALIZED TIP */}
             {tip && (
-                <div className="glass-panel p-12 bg-primary/5 border-primary/20 space-y-6">
+                <div className="clinical-card p-12 bg-primary/5 border-primary/20 space-y-6">
                     <div className="flex items-center gap-3 text-primary">
                         <Lightbulb size={24} />
                         <span className="overline">Biometric Safety Tip</span>
                     </div>
-                    <p className="text-2xl font-medium leading-tight tracking-tight">{tip}</p>
+                    <p className="text-2xl font-medium leading-tight tracking-tight text-[#0F0A2A]">{tip}</p>
                 </div>
             )}
 
@@ -161,7 +161,7 @@ export function RiskResultCard({ state }: { state: any }) {
                     {isSaving ? "Syncing..." : isSaved ? "Vault Logged" : "Commit to Vault"}
                     {isSaved ? <CheckCircle className="ml-3 size-5" /> : <DatabaseBackup className="ml-3 size-5" />}
                 </Button>
-                <Button variant="outline" className="h-16 w-16 rounded-[16px] border-white/80 bg-white/50 backdrop-blur-md flex items-center justify-center">
+                <Button variant="outline" className="h-16 px-8 rounded-[16px] border-black/10 bg-white flex items-center justify-center">
                     <Share2 size={24} />
                 </Button>
             </div>

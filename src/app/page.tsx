@@ -1,59 +1,21 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
 import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { Zap, ArrowRight, Barcode, Camera, Sparkles, Activity, Shield, Database, Target, Fingerprint } from 'lucide-react';
+import { Zap, ArrowRight, Barcode, Camera, Activity, Shield, Database, Target, Fingerprint } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-
-function InteractiveLens() {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const lensRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!lensRef.current) return;
-      const { left, top, width, height } = lensRef.current.getBoundingClientRect();
-      const centerX = left + width / 2;
-      const centerY = top + height / 2;
-      const deltaX = (e.clientX - centerX) / (width / 2);
-      const deltaY = (e.clientY - centerY) / (height / 2);
-      setRotation({ x: -deltaY * 15, y: deltaX * 15 });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  return (
-    <div className="lens-container flex justify-center py-12">
-      <div 
-        ref={lensRef}
-        className="lens-3d flex items-center justify-center"
-        style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}
-      >
-        <div className="relative z-10 text-center flex flex-col items-center">
-            <Sparkles className="size-10 text-primary mb-2 opacity-80" />
-            <span className="overline text-primary/60">System Core</span>
-        </div>
-        <div className="lens-iris" />
-        <div className="lens-glare" />
-        <div className="absolute inset-4 border border-primary/5 rounded-full" />
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
   const { user } = useUser();
 
   return (
-    <main className="max-w-[1280px] mx-auto min-h-screen">
+    <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in">
       
       {/* Cinematic Navigation */}
-      <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/55 backdrop-blur-[40px] border-b border-white/80">
+      <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
         <Logo />
         <nav className="hidden lg:flex items-center gap-12">
             <Link href="/scanner/barcode" className="overline hover:text-primary transition-all">Scanner</Link>
@@ -69,19 +31,17 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Narrative */}
-      <section className="pt-48 pb-32 px-8 text-center space-y-12">
-        <div className="space-y-4">
-            <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary overline bg-white/50">
+      {/* Hero Narrative - Typographically Focused */}
+      <section className="pt-48 pb-32 px-8 text-center space-y-12 max-w-4xl mx-auto">
+        <div className="space-y-6">
+            <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary overline bg-primary/5">
                 Cinematic Noir Protocol v2.0
             </Badge>
             <h1>BITE<span className="text-primary">LENS</span></h1>
-            <p className="max-w-2xl mx-auto text-xl text-[#3D3660] font-medium leading-tight">
-                A cinematic visual system for safe, informed food scanning — built with high-depth <span className="text-primary font-bold">glassmorphism</span> and clinical precision.
+            <p className="text-xl text-[#3D3660] font-medium leading-tight">
+                A cinematic visual system for safe, informed food scanning — built with high-fidelity <span className="text-primary font-bold">clinical precision</span> and data-driven intelligence.
             </p>
         </div>
-
-        <InteractiveLens />
 
         <div className="flex flex-col sm:flex-row justify-center gap-6 pt-8">
             <Link href="/scanner/barcode">
@@ -91,7 +51,7 @@ export default function Home() {
                 </Button>
             </Link>
             <Link href="/profile">
-                <Button variant="outline" className="h-14 px-8 rounded-[16px] overline w-full sm:w-64 border-white/80 bg-white/30 backdrop-blur-md">
+                <Button variant="outline" className="h-14 px-8 rounded-[16px] overline w-full sm:w-64 border-black/10 bg-white">
                     Link Biometrics
                 </Button>
             </Link>
@@ -99,7 +59,7 @@ export default function Home() {
       </section>
 
       {/* System Sections - Structural Slates */}
-      <section className="px-8 pb-48 space-y-32">
+      <section className="px-8 pb-48 space-y-24">
         
         {/* Protocol 01: Decryption */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -113,8 +73,8 @@ export default function Home() {
                     <div className="px-4 py-2 bg-primary/5 rounded-lg overline text-primary">QR-CORE</div>
                 </div>
             </div>
-            <div className="glass-panel aspect-video flex items-center justify-center relative overflow-hidden group">
-                <div className="absolute inset-x-12 h-0.5 bg-primary/30 shadow-[0_0_20px_rgba(124,67,241,0.5)] animate-pulse" />
+            <div className="clinical-card aspect-video flex items-center justify-center relative overflow-hidden group">
+                <div className="absolute inset-x-12 h-px bg-primary/20" />
                 <Barcode size={80} className="opacity-10 text-foreground group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-8 left-8 flex items-center gap-2">
                     <Target size={14} className="text-primary" />
@@ -123,9 +83,9 @@ export default function Home() {
             </div>
         </div>
 
-        {/* Protocol 02: Vision */}
+        {/* Protocol 02: Vision AI */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-16">
-            <div className="glass-panel aspect-video flex items-center justify-center lg:order-1">
+            <div className="clinical-card aspect-video flex items-center justify-center lg:order-1">
                 <div className="relative">
                     <Camera size={80} className="opacity-10 text-foreground" />
                     <Activity size={32} className="absolute -bottom-4 -right-4 text-secondary animate-pulse" />
@@ -142,7 +102,7 @@ export default function Home() {
         </div>
 
         {/* Protocol 03: Biometric Sync */}
-        <div className="glass-panel p-12 md:p-20 text-center space-y-12">
+        <div className="clinical-card p-12 md:p-20 text-center space-y-12">
             <div className="max-w-3xl mx-auto space-y-6">
                 <span className="overline text-accent">Protocol 03</span>
                 <h2>Synchronize Your <br/> <span className="text-primary">Health Architecture</span></h2>
@@ -155,7 +115,7 @@ export default function Home() {
                     { label: 'Hypertension', icon: Database, color: 'text-accent' },
                     { label: 'Biometrics', icon: Fingerprint, color: 'text-foreground' }
                 ].map((item) => (
-                    <div key={item.label} className="glass-card p-8 flex flex-col items-center gap-4 hover:-translate-y-2">
+                    <div key={item.label} className="bg-[#F6F4FB] p-8 rounded-[24px] flex flex-col items-center gap-4 hover:bg-white border border-transparent hover:border-black/5 transition-all">
                         <item.icon className={`size-8 ${item.color}`} />
                         <span className="overline">{item.label}</span>
                     </div>
@@ -166,7 +126,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 py-24 border-t border-white/80 bg-white/30 backdrop-blur-xl">
+      <footer className="px-8 py-24 border-t border-black/5 bg-white">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
             <Logo />
             <div className="grid grid-cols-2 gap-12 md:gap-24">
@@ -186,7 +146,7 @@ export default function Home() {
                 </div>
             </div>
         </div>
-        <div className="pt-16 mt-16 border-t border-white/50 flex justify-between items-center opacity-40">
+        <div className="pt-16 mt-16 border-t border-black/5 flex justify-between items-center opacity-40">
             <span className="overline text-[9px]">© 2026 BITE LENS SYSTEMS · NOIR v2.0</span>
             <span className="overline text-[9px]">FDA + WHO DATA VERIFIED</span>
         </div>

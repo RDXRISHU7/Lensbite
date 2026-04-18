@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    /* Cinematic Noir v2.0 Palette */
+    /* Cinematic Noir v2.0 Palette - Light Theme */
     --background: 250 30% 97%; /* #F6F4FB */
     --foreground: 251 62% 10%; /* #0F0A2A */
     
-    --card: 0 0% 100% / 0.55;
+    --card: 0 0% 100%;
     --card-foreground: 251 62% 10%;
     
     --primary: 256 87% 61%; /* #7C43F1 */
@@ -26,7 +26,7 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 100% / 0.8;
+    --border: 251 62% 10% / 0.1;
     --input: 249 20% 92%;
     --ring: 256 87% 61%;
 
@@ -36,12 +36,7 @@
 
 @layer base {
   body {
-    @apply bg-[#F6F4FB] text-foreground antialiased font-sans selection:bg-primary/20;
-    /* Soft Purple/Pink Radial Underglow */
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(124, 67, 241, 0.05) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(254, 208, 238, 0.1) 0px, transparent 50%);
-    background-attachment: fixed;
+    @apply bg-[#F6F4FB] text-[#0F0A2A] antialiased font-sans selection:bg-primary/20;
   }
 }
 
@@ -56,49 +51,30 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 /* STRICT NO ITALICS */
 * { font-style: normal !important; }
 
-/* Cinematic Glass Surface System */
-.glass-panel {
-  @apply bg-white/55 backdrop-blur-[40px] border border-white/80 rounded-[24px] shadow-[0_8px_32px_rgba(15,10,42,0.04)];
+/* Clinical Surface System */
+.clinical-card {
+  @apply bg-white border border-black/10 rounded-[24px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300;
 }
 
-.glass-card {
-  @apply bg-white/70 backdrop-blur-[20px] border border-white/90 rounded-[24px] transition-all duration-500 hover:shadow-xl;
+.hover-card {
+  @apply hover:shadow-xl hover:-translate-y-1;
 }
 
 /* Primary Cinematic Button */
 .primary-btn {
-  @apply h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_20px_rgba(124,67,241,0.2)];
+  @apply h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:bg-[#7C43F1]/90 active:scale-[0.98] transition-all;
 }
 
-.scan-btn {
-  @apply h-14 px-8 bg-[#F8FFA1] text-[#0F0A2A] rounded-[16px] font-bold uppercase tracking-wider hover:bg-white transition-all shadow-lg;
+.scanner-btn {
+  @apply h-14 px-8 bg-[#F8FFA1] text-[#0F0A2A] rounded-[16px] font-bold uppercase tracking-wider hover:bg-[#F8FFA1]/90 transition-all;
 }
 
-/* 3D Lens Shimmer */
-.lens-container {
-  perspective: 2000px;
+/* Page Transitions */
+.page-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.lens-3d {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 80%);
-  backdrop-filter: blur(60px);
-  border: 1px solid rgba(255,255,255,0.8);
-  box-shadow: 
-    0 40px 80px rgba(15,10,42,0.1),
-    inset 0 0 40px rgba(255,255,255,0.2);
-  transform-style: preserve-3d;
-  @apply relative cursor-crosshair transition-transform duration-100 ease-out;
-}
-
-.lens-iris {
-  @apply absolute inset-12 rounded-full border border-primary/20 animate-[spin_20s_linear_infinite];
-  transform: translateZ(40px);
-}
-
-.lens-glare {
-  @apply absolute inset-0 rounded-full;
-  background: radial-gradient(circle at 70% 20%, rgba(254, 208, 238, 0.4), transparent 50%);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
