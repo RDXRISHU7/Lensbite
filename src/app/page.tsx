@@ -4,7 +4,6 @@ import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { InteractiveIris } from '@/components/interactive-iris';
 import { Zap, ArrowRight, Barcode, Camera, Activity, Shield, Database, Target, Fingerprint, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -13,11 +12,8 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in bg-[#F6F4FB] overflow-x-hidden">
+    <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in overflow-x-hidden">
       
-      {/* BIO-DIGITAL IRIS CORE (Scroll Responsive) */}
-      <InteractiveIris />
-
       {/* PERSISTENT HUD HEADER */}
       <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/40 backdrop-blur-xl border-b border-white/50">
         <Logo />
