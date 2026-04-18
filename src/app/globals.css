@@ -4,150 +4,101 @@
 
 @layer base {
   :root {
-    /* Cyber-Clinical Midnight Palette */
-    --background: 229 50% 12%; /* Deeper Midnight */
-    --foreground: 210 33% 98%;
-    --card: 229 50% 15%;
-    --card-foreground: 210 33% 98%;
-    --popover: 229 50% 15%;
-    --popover-foreground: 210 33% 98%;
+    /* Cinematic Noir v2.0 Palette */
+    --background: 250 30% 97%; /* #F6F4FB */
+    --foreground: 251 62% 10%; /* #0F0A2A */
     
-    /* Specified Colors */
-    --primary: 62 96% 81%; /* #FBFFA1 Lemon */
-    --primary-foreground: 229 50% 12%;
-    --secondary: 313 58% 90%; /* #F6D5EE Lavender */
-    --secondary-foreground: 229 50% 12%;
-    --tertiary: 256 100% 65%; /* #7C4DFF Purple */
+    --card: 0 0% 100% / 0.55;
+    --card-foreground: 251 62% 10%;
     
-    --muted: 229 50% 20%;
-    --muted-foreground: 215 16% 70%;
-    --accent: 256 100% 65%;
-    --accent-foreground: 210 33% 98%;
+    --primary: 256 87% 61%; /* #7C43F1 */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 326 95% 91%; /* #FED0EE */
+    --secondary-foreground: 251 62% 10%;
+    
+    --accent: 65 100% 81%; /* #F8FFA1 */
+    --accent-foreground: 251 62% 10%;
+
+    --muted: 249 20% 92%;
+    --muted-foreground: 247 16% 45%;
+
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 229 30% 25%;
-    --input: 229 30% 25%;
-    --ring: 62 96% 81%;
-    --radius: 2rem;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 100% / 0.8;
+    --input: 249 20% 92%;
+    --ring: 256 87% 61%;
+
+    --radius: 1.5rem; /* 24px */
   }
 }
 
 @layer base {
   body {
-    @apply bg-[#24316B] text-foreground antialiased font-sans m-0 p-0;
-    /* Deep Liquid Glow Background */
-    background: 
-      radial-gradient(at 0% 0%, hsla(256, 100%, 65%, 0.15) 0, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(62, 96%, 81%, 0.1) 0, transparent 50%),
-      radial-gradient(at 50% 50%, hsla(229, 50%, 28%, 1) 0, transparent 100%),
-      fixed;
-    min-height: 100vh;
-    overflow-x: hidden;
+    @apply bg-[#F6F4FB] text-foreground antialiased font-sans selection:bg-primary/20;
+    /* Soft Purple/Pink Radial Underglow */
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(124, 67, 241, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(254, 208, 238, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
   }
 }
 
-/* Typography Constraints - STRICT NO ITALICS */
-* {
-  font-style: normal !important;
-}
+/* Typography Protocol - SPACE GROTESK & INTER */
+h1 { @apply text-[72px] font-black leading-[0.9] tracking-[-0.04em] uppercase; font-family: 'Space Grotesk', sans-serif; }
+h2 { @apply text-[44px] font-bold leading-[1] tracking-[-0.03em] uppercase; font-family: 'Space Grotesk', sans-serif; }
+h3 { @apply text-[28px] font-semibold leading-[1.1] tracking-[-0.02em] uppercase; font-family: 'Space Grotesk', sans-serif; }
+.card-title { @apply text-[20px] font-medium leading-[1.2] tracking-[-0.01em]; font-family: 'Space Grotesk', sans-serif; }
+p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
+.overline { @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7E7A9A]; }
 
-h1 { @apply text-[40px] md:text-[90px] font-black leading-[0.9] tracking-tighter uppercase; }
-h2 { @apply text-[32px] md:text-[60px] font-black leading-[1] tracking-tighter uppercase; }
-h3 { @apply text-[24px] font-black leading-[1.2] tracking-tighter uppercase; }
-p { @apply text-[16px] leading-[1.6] font-medium text-foreground/80; }
+/* STRICT NO ITALICS */
+* { font-style: normal !important; }
 
-/* Deep Frosted Glass Architecture */
+/* Cinematic Glass Surface System */
 .glass-panel {
-  @apply bg-[#24316B]/40 backdrop-blur-[60px] border border-white/20 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)];
-  position: relative;
-  overflow: hidden;
-}
-
-.glass-panel::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-  pointer-events: none;
+  @apply bg-white/55 backdrop-blur-[40px] border border-white/80 rounded-[24px] shadow-[0_8px_32px_rgba(15,10,42,0.04)];
 }
 
 .glass-card {
-  @apply bg-white/5 backdrop-blur-[40px] border border-white/10 rounded-3xl transition-all duration-500;
+  @apply bg-white/70 backdrop-blur-[20px] border border-white/90 rounded-[24px] transition-all duration-500 hover:shadow-xl;
 }
 
-/* 3D Glass Lens Component */
+/* Primary Cinematic Button */
+.primary-btn {
+  @apply h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_20px_rgba(124,67,241,0.2)];
+}
+
+.scan-btn {
+  @apply h-14 px-8 bg-[#F8FFA1] text-[#0F0A2A] rounded-[16px] font-bold uppercase tracking-wider hover:bg-white transition-all shadow-lg;
+}
+
+/* 3D Lens Shimmer */
 .lens-container {
   perspective: 2000px;
 }
 
 .lens-3d {
-  width: 320px;
-  height: 320px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 70%);
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(255,255,255,0.4);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 80%);
+  backdrop-filter: blur(60px);
+  border: 1px solid rgba(255,255,255,0.8);
   box-shadow: 
-    0 40px 100px -20px rgba(0,0,0,0.8),
-    inset 0 0 80px rgba(255,255,255,0.1);
-  position: relative;
+    0 40px 80px rgba(15,10,42,0.1),
+    inset 0 0 40px rgba(255,255,255,0.2);
   transform-style: preserve-3d;
-  transition: transform 0.1s ease-out;
-}
-
-.lens-inner-glass {
-  position: absolute;
-  inset: 40px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 70% 70%, rgba(124, 77, 255, 0.2), transparent 60%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(251, 255, 161, 0.2);
-  transform: translateZ(40px);
+  @apply relative cursor-crosshair transition-transform duration-100 ease-out;
 }
 
 .lens-iris {
-  position: absolute;
-  inset: 80px;
-  border-radius: 50%;
-  border: 2px dashed rgba(251, 255, 161, 0.4);
-  transform: translateZ(80px);
-  animation: iris-rotate 20s linear infinite;
+  @apply absolute inset-12 rounded-full border border-primary/20 animate-[spin_20s_linear_infinite];
+  transform: translateZ(40px);
 }
 
-@keyframes iris-rotate {
-  from { transform: translateZ(80px) rotate(0deg); }
-  to { transform: translateZ(80px) rotate(360deg); }
-}
-
-.lens-3d::before {
-  content: '';
-  position: absolute;
-  inset: -20px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--tertiary), transparent 50%, var(--primary));
-  opacity: 0.15;
-  filter: blur(40px);
-  z-index: -1;
-  transform: translateZ(-20px);
-}
-
-/* Status Badges - Deep Glow */
-.badge-safe { @apply bg-primary/20 text-primary border-primary/30 backdrop-blur-md; }
-.badge-caution { @apply bg-secondary/20 text-secondary border-secondary/30 backdrop-blur-md; }
-.badge-alert { @apply bg-destructive/20 text-destructive border-destructive/30 backdrop-blur-md; }
-
-/* Button Protocols - High Contrast */
-.primary-btn {
-  @apply bg-[#FBFFA1] text-[#24316B] hover:bg-white transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-xl shadow-primary/10 active:scale-95 border-none;
-}
-
-.scanner-btn {
-  @apply bg-[#F4A261] text-white hover:bg-[#F4A261]/90 transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-xl shadow-secondary/10 active:scale-95 border-none;
-}
-
-.tertiary-btn {
-  @apply bg-[#7C4DFF] text-white hover:bg-[#7C4DFF]/90 transition-all rounded-2xl font-black uppercase tracking-widest text-[11px] h-14 px-8 shadow-xl active:scale-95 border-none;
+.lens-glare {
+  @apply absolute inset-0 rounded-full;
+  background: radial-gradient(circle at 70% 20%, rgba(254, 208, 238, 0.4), transparent 50%);
 }

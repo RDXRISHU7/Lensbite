@@ -5,10 +5,9 @@ import { useUser } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { Zap, ArrowRight, Barcode, Camera, Activity, ShieldCheck, Fingerprint, Search, Target, Sparkles, Database } from 'lucide-react';
+import { Zap, ArrowRight, Barcode, Camera, Sparkles, Activity, Shield, Database, Target, Fingerprint } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 
 function InteractiveLens() {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -17,47 +16,31 @@ function InteractiveLens() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!lensRef.current) return;
-      
       const { left, top, width, height } = lensRef.current.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
-      
-      // Calculate rotation based on cursor position relative to center
       const deltaX = (e.clientX - centerX) / (width / 2);
       const deltaY = (e.clientY - centerY) / (height / 2);
-      
-      // Max rotation of 20 degrees
-      setRotation({
-        x: -deltaY * 20,
-        y: deltaX * 20
-      });
+      setRotation({ x: -deltaY * 15, y: deltaX * 15 });
     };
-
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <div className="lens-container mb-8">
+    <div className="lens-container flex justify-center py-12">
       <div 
         ref={lensRef}
-        className="lens-3d flex items-center justify-center cursor-crosshair"
-        style={{
-          transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`
-        }}
+        className="lens-3d flex items-center justify-center"
+        style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}
       >
-        <div className="text-center space-y-2 relative z-10 pointer-events-none">
-          <Sparkles className="size-12 text-primary mx-auto animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">System Core</span>
+        <div className="relative z-10 text-center flex flex-col items-center">
+            <Sparkles className="size-10 text-primary mb-2 opacity-80" />
+            <span className="overline text-primary/60">System Core</span>
         </div>
-        
-        {/* Layered Refractive Elements */}
-        <div className="lens-inner-glass" />
         <div className="lens-iris" />
-        
-        {/* HUD Ring Elements */}
-        <div className="absolute inset-4 border border-white/5 rounded-full pointer-events-none" />
-        <div className="absolute inset-16 border border-primary/10 rounded-full animate-[spin_15s_linear_infinite_reverse] pointer-events-none" />
+        <div className="lens-glare" />
+        <div className="absolute inset-4 border border-primary/5 rounded-full" />
       </div>
     </div>
   );
@@ -67,191 +50,148 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <main className="min-h-screen selection:bg-primary/20">
+    <main className="max-w-[1280px] mx-auto min-h-screen">
       
-      {/* ARCHITECTURAL HEADER - CYBER GLASS */}
-      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 bg-[#24316B]/20 backdrop-blur-[60px] border-b border-white/10 sticky top-0 z-[100]">
+      {/* Cinematic Navigation */}
+      <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/55 backdrop-blur-[40px] border-b border-white/80">
         <Logo />
-        
-        <div className="hidden lg:flex items-center flex-1 max-w-md mx-12">
-            <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3 text-primary" />
-                <Input 
-                    placeholder="Search clinical intelligence..." 
-                    className="h-10 pl-10 bg-white/5 backdrop-blur-md border-white/10 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] focus-visible:ring-primary/40 text-white placeholder:text-white/30"
-                />
-            </div>
-        </div>
-
+        <nav className="hidden lg:flex items-center gap-12">
+            <Link href="/scanner/barcode" className="overline hover:text-primary transition-all">Scanner</Link>
+            <Link href="/history" className="overline hover:text-primary transition-all">Vault</Link>
+            <Link href="/profile" className="overline hover:text-primary transition-all">Profile</Link>
+        </nav>
         <div className="flex items-center gap-6">
-            <div className="hidden xl:flex items-center gap-8 mr-6">
-                <Link href="/history" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/50 hover:text-primary transition-all">Vault</Link>
-                <Link href="/profile" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/50 hover:text-primary transition-all">Profile</Link>
-            </div>
-            {user ? (
-                <UserNav />
-            ) : (
+            {user ? <UserNav /> : (
                 <Link href="/login">
-                    <Button className="primary-btn">Sync Access</Button>
+                    <Button variant="ghost" className="overline text-primary">Sync Session</Button>
                 </Link>
             )}
         </div>
       </header>
 
-      {/* HERO SECTION - MIDNIGHT CORE WITH INTERACTIVE 3D LENS */}
-      <section className="relative w-full min-h-[95vh] flex flex-col items-center justify-center overflow-hidden py-24">
-        
-        {/* Background Depth Layers */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-            <div className="size-[900px] border-[1px] border-primary/20 rounded-full animate-[spin_60s_linear_infinite]" />
-            <div className="absolute size-[700px] border-[1px] border-secondary/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
-            <div className="absolute size-[400px] bg-tertiary/20 blur-[150px] rounded-full" />
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center text-center space-y-16 px-6 max-w-6xl">
-            
-            {/* INTERACTIVE 3D LENS */}
-            <InteractiveLens />
-
-            <div className="flex flex-col items-center gap-8">
-                <Badge variant="outline" className="px-6 py-2 text-[10px] font-black uppercase tracking-[0.4em] border-primary/30 text-primary bg-primary/5 backdrop-blur-xl rounded-full">
-                    Intelligence Protocol v5.0.4
-                </Badge>
-                <h1 className="text-white">
-                    LENS <span className="text-primary">BITE</span>
-                </h1>
-            </div>
-
-            <p className="max-w-3xl text-2xl md:text-3xl font-bold leading-[1.1] text-white/80 tracking-tight">
-                High-fidelity decryption engine cross-referencing food signatures with your <span className="text-secondary font-black">Biometric Health Architecture</span>.
+      {/* Hero Narrative */}
+      <section className="pt-48 pb-32 px-8 text-center space-y-12">
+        <div className="space-y-4">
+            <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary overline bg-white/50">
+                Cinematic Noir Protocol v2.0
+            </Badge>
+            <h1>BITE<span className="text-primary">LENS</span></h1>
+            <p className="max-w-2xl mx-auto text-xl text-[#3D3660] font-medium leading-tight">
+                A cinematic visual system for safe, informed food scanning — built with high-depth <span className="text-primary font-bold">glassmorphism</span> and clinical precision.
             </p>
+        </div>
 
-            <div className="flex flex-col sm:flex-row gap-8 pt-12 w-full max-w-2xl justify-center">
-                <Link href="/scanner/barcode" className="w-full">
-                    <Button className="h-28 w-full rounded-[3rem] bg-primary text-[#24316B] text-3xl font-black uppercase tracking-tighter hover:scale-[1.05] transition-all shadow-3xl shadow-primary/20 border-none">
-                        <Zap className="mr-4 size-8 fill-current" />
-                        Initiate
-                    </Button>
-                </Link>
-                <Link href="/profile" className="w-full">
-                    <Button variant="outline" className="h-28 w-full rounded-[3rem] border-2 border-white/10 bg-white/5 backdrop-blur-3xl text-xl font-black uppercase tracking-tighter hover:bg-white/10 transition-all text-white">
-                        Sync Profile
-                    </Button>
-                </Link>
-            </div>
+        <InteractiveLens />
+
+        <div className="flex flex-col sm:flex-row justify-center gap-6 pt-8">
+            <Link href="/scanner/barcode">
+                <Button className="primary-btn w-full sm:w-64 text-lg">
+                    <Zap className="mr-3 size-5" />
+                    Initiate Scan
+                </Button>
+            </Link>
+            <Link href="/profile">
+                <Button variant="outline" className="h-14 px-8 rounded-[16px] overline w-full sm:w-64 border-white/80 bg-white/30 backdrop-blur-md">
+                    Link Biometrics
+                </Button>
+            </Link>
         </div>
       </section>
 
-      {/* INTELLIGENCE SECTIONS - DEEP GLASS SLATES */}
-      <section className="w-full py-32 px-6 md:px-24 space-y-48">
-        <div className="max-w-7xl mx-auto">
-            
-            {/* Protocol 01 - Glass Slate */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                <div className="space-y-8">
-                    <div className="size-16 rounded-3xl bg-primary/10 backdrop-blur-2xl flex items-center justify-center text-primary border border-white/10 shadow-xl">
-                        <Barcode size={32} />
-                    </div>
-                    <h2 className="uppercase text-white">Barcode<br/><span className="text-primary">Decryption</span></h2>
-                    <p className="text-xl font-bold text-white/60 leading-relaxed">
-                        Instant extraction of clinical ingredient strings via global product databases. Decrypts industrial metadata into clean, actionable safety audits.
-                    </p>
-                    <Link href="/scanner/barcode" className="inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-primary hover:gap-6 transition-all">
-                        Initialize Vault <ArrowRight className="size-4" />
-                    </Link>
-                </div>
-                <div className="glass-panel aspect-video flex items-center justify-center p-12">
-                    <div className="w-full h-full rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
-                        <div className="absolute inset-x-12 h-1 bg-primary/40 shadow-[0_0_25px_rgba(251,255,161,0.5)] animate-pulse" />
-                        <Barcode size={120} className="opacity-10 text-white" />
-                        <div className="absolute top-8 left-8 flex items-center gap-3">
-                            <Target size={16} className="text-primary" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-primary">Signal Active</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Protocol 02 - Glass Slate */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center pt-48">
-                <div className="glass-panel aspect-video flex items-center justify-center p-12 lg:order-1">
-                    <div className="w-full h-full rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center overflow-hidden">
-                        <Camera size={120} className="opacity-10 text-white" />
-                        <Activity size={32} className="text-secondary animate-pulse mt-8" />
-                    </div>
-                </div>
-                <div className="space-y-8 lg:order-2">
-                    <div className="size-16 rounded-3xl bg-secondary/10 backdrop-blur-2xl flex items-center justify-center text-secondary border border-white/10 shadow-xl">
-                        <Camera size={32} />
-                    </div>
-                    <h2 className="uppercase text-white">Vision AI<br/><span className="text-secondary">Intelligence</span></h2>
-                    <p className="text-xl font-bold text-white/60 leading-relaxed">
-                        Multimodal OCR identification for non-standard or damaged packaging. Gemini 2.5 Flash powers real-time hazard identification from raw visual inputs.
-                    </p>
-                    <Link href="/scanner/food" className="inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-secondary hover:gap-6 transition-all">
-                        Initiate Vision <ArrowRight className="size-4" />
-                    </Link>
-                </div>
-            </div>
-
-        </div>
-      </section>
-
-      {/* CTA SECTION - MIDNIGHT FOCUS */}
-      <section className="relative py-48 px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[#24316B]/90 backdrop-blur-[60px]" />
-        <div className="absolute inset-0 opacity-10 pointer-events-none scale-150 flex items-center justify-center">
-            <Fingerprint size={1000} className="text-primary" />
-        </div>
+      {/* System Sections - Structural Slates */}
+      <section className="px-8 pb-48 space-y-32">
         
-        <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10 text-white">
-            <h2 className="text-white text-6xl md:text-8xl leading-[0.9] tracking-tighter uppercase">
-                SECURE YOUR <br/> HEALTH LAYER
-            </h2>
-            <p className="text-xl md:text-2xl font-bold opacity-80 max-w-2xl mx-auto leading-tight">
-                Synchronize your medical triggers for real-time safety verification across the entire food supply chain.
-            </p>
-            <div className="pt-12">
-                <Link href="/profile">
-                    <Button className="h-28 px-16 rounded-[3rem] bg-[#7C4DFF] text-white text-3xl font-black uppercase tracking-tighter hover:scale-110 transition-all shadow-3xl">
-                        Link Biometrics <Fingerprint className="ml-4 size-8" />
-                    </Button>
-                </Link>
-            </div>
-        </div>
-      </section>
-
-      {/* FOOTER - CYBER MINIMAL */}
-      <footer className="w-full py-24 px-6 md:px-12 bg-white/5 backdrop-blur-[60px] border-t border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-24">
+        {/* Protocol 01: Decryption */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-                <Logo />
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40 max-w-xs leading-relaxed text-white">
-                    High-fidelity clinical food safety engine. Verified Secure.
-                </p>
+                <span className="overline text-primary">Protocol 01</span>
+                <h3>Barcode <br/> <span className="text-primary">Decryption</span></h3>
+                <p>Instant extraction of clinical ingredient strings via global product databases. Decrypts industrial metadata into clean, actionable safety audits.</p>
+                <div className="flex gap-4">
+                    <div className="px-4 py-2 bg-primary/5 rounded-lg overline text-primary">EAN-13</div>
+                    <div className="px-4 py-2 bg-primary/5 rounded-lg overline text-primary">UPC-A</div>
+                    <div className="px-4 py-2 bg-primary/5 rounded-lg overline text-primary">QR-CORE</div>
+                </div>
             </div>
-            <div className="grid grid-cols-2 gap-24">
+            <div className="glass-panel aspect-video flex items-center justify-center relative overflow-hidden group">
+                <div className="absolute inset-x-12 h-0.5 bg-primary/30 shadow-[0_0_20px_rgba(124,67,241,0.5)] animate-pulse" />
+                <Barcode size={80} className="opacity-10 text-foreground group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute top-8 left-8 flex items-center gap-2">
+                    <Target size={14} className="text-primary" />
+                    <span className="overline text-primary">Signal Verified</span>
+                </div>
+            </div>
+        </div>
+
+        {/* Protocol 02: Vision */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-16">
+            <div className="glass-panel aspect-video flex items-center justify-center lg:order-1">
+                <div className="relative">
+                    <Camera size={80} className="opacity-10 text-foreground" />
+                    <Activity size={32} className="absolute -bottom-4 -right-4 text-secondary animate-pulse" />
+                </div>
+            </div>
+            <div className="space-y-8 lg:order-2">
+                <span className="overline text-secondary">Protocol 02</span>
+                <h3>Vision AI <br/> <span className="text-secondary">Intelligence</span></h3>
+                <p>Multimodal OCR identification for non-standard or damaged packaging. Gemini 2.5 Flash powers real-time hazard identification from raw visual inputs.</p>
+                <Link href="/scanner/food" className="inline-flex items-center gap-3 overline text-secondary hover:gap-6 transition-all">
+                    Initiate Vision <ArrowRight size={14} />
+                </Link>
+            </div>
+        </div>
+
+        {/* Protocol 03: Biometric Sync */}
+        <div className="glass-panel p-12 md:p-20 text-center space-y-12">
+            <div className="max-w-3xl mx-auto space-y-6">
+                <span className="overline text-accent">Protocol 03</span>
+                <h2>Synchronize Your <br/> <span className="text-primary">Health Architecture</span></h2>
+                <p className="text-lg">Cross-reference every food scan with your clinical triggers—Allergies, Diabetes, Hypertension, and BMI metrics.</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                    { label: 'Allergies', icon: Shield, color: 'text-primary' },
+                    { label: 'Diabetes', icon: Activity, color: 'text-secondary' },
+                    { label: 'Hypertension', icon: Database, color: 'text-accent' },
+                    { label: 'Biometrics', icon: Fingerprint, color: 'text-foreground' }
+                ].map((item) => (
+                    <div key={item.label} className="glass-card p-8 flex flex-col items-center gap-4 hover:-translate-y-2">
+                        <item.icon className={`size-8 ${item.color}`} />
+                        <span className="overline">{item.label}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+      </section>
+
+      {/* Footer */}
+      <footer className="px-8 py-24 border-t border-white/80 bg-white/30 backdrop-blur-xl">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+            <Logo />
+            <div className="grid grid-cols-2 gap-12 md:gap-24">
                 <div className="space-y-6">
-                    <span className="text-[10px] font-black uppercase tracking-[0.5em] opacity-30 text-white">Vault</span>
-                    <nav className="flex flex-col gap-4">
-                        <Link href="/history" className="text-[11px] font-black uppercase tracking-widest text-white/60 hover:text-primary transition-all">Audit Log</Link>
-                        <Link href="/profile" className="text-[11px] font-black uppercase tracking-widest text-white/60 hover:text-primary transition-all">Biometrics</Link>
+                    <span className="overline text-muted-foreground">Intelligence</span>
+                    <nav className="flex flex-col gap-3">
+                        <Link href="/scanner/barcode" className="overline hover:text-primary">Scanner</Link>
+                        <Link href="/history" className="overline hover:text-primary">Vault</Link>
                     </nav>
                 </div>
                 <div className="space-y-6">
-                    <span className="text-[10px] font-black uppercase tracking-[0.5em] opacity-30 text-white">Legal</span>
-                    <nav className="flex flex-col gap-4">
-                        <Link href="/" className="text-[11px] font-black uppercase tracking-widest text-white/60 hover:text-primary transition-all">Privacy</Link>
-                        <Link href="/" className="text-[11px] font-black uppercase tracking-widest text-white/60 hover:text-primary transition-all">Protocol</Link>
+                    <span className="overline text-muted-foreground">Session</span>
+                    <nav className="flex flex-col gap-3">
+                        <Link href="/profile" className="overline hover:text-primary">Profile</Link>
+                        <Link href="/login" className="overline hover:text-primary">Sync Access</Link>
                     </nav>
                 </div>
             </div>
         </div>
-        <div className="max-w-7xl mx-auto pt-16 border-t border-white/10 mt-16 flex justify-between items-center opacity-30 text-white">
-            <span className="text-[9px] font-black uppercase tracking-[0.5em]">© 2026 BITE LENS SYSTEMS</span>
-            <ShieldCheck size={16} />
+        <div className="pt-16 mt-16 border-t border-white/50 flex justify-between items-center opacity-40">
+            <span className="overline text-[9px]">© 2026 BITE LENS SYSTEMS · NOIR v2.0</span>
+            <span className="overline text-[9px]">FDA + WHO DATA VERIFIED</span>
         </div>
       </footer>
+
     </main>
   );
 }
