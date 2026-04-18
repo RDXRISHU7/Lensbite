@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Bio-Digital Iris Engine v4.0 - Hyper-Realistic Biological Fidelity
+ * Bio-Digital Iris Engine v5.0 - Precision Architectural Scaling
  * 
  * - Multi-layered fibrous texture via high-octave fractal noise.
  * - Emerald, Teal, and Olive color matrix calibrated to user reference.
- * - Scroll-synced pupil dilation calibrated for cinematic hero impact.
+ * - Scroll-synced pupil dilation focused behind hero text area.
  */
 export function InteractiveIris() {
   const [dilation, setDilation] = useState(1);
@@ -17,11 +17,12 @@ export function InteractiveIris() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      // Reach peak dilation early in the hero section
-      const progress = Math.min(scrollY / (windowHeight * 0.8 || 1), 1);
+      // Focus peak dilation early for the hero section impact
+      const progress = Math.min(scrollY / (windowHeight * 0.5 || 1), 1);
       
-      // Pupil scale: 1.0 (contracted) to 2.2 (dilated)
-      setDilation(1 + progress * 1.2);
+      // Pupil scale: 1.0 (contracted) to 1.6 (focused dilation)
+      // Constrained to stay within the targeted hero circle
+      setDilation(1 + progress * 0.6);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -31,9 +32,9 @@ export function InteractiveIris() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden transition-opacity duration-1000">
-      {/* 3D VIEWPORT CONTAINER */}
-      <div className="relative size-[1000px] md:size-[2000px] flex items-center justify-center scale-110">
+    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden">
+      {/* 3D VIEWPORT CONTAINER - Re-scaled for focused hero alignment */}
+      <div className="relative size-[600px] md:size-[850px] flex items-center justify-center">
         
         {/* THE BIOLOGICAL IRIS STRUCTURE */}
         <svg className="absolute inset-0 size-full" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +51,7 @@ export function InteractiveIris() {
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
 
-            {/* Emerald/Teal Depth Gradients */}
+            {/* Emerald/Teal Depth Gradients - Biological Fidelity */}
             <radialGradient id="iris-gradient-complex" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
               <stop offset="0%" stopColor="#0F0A2A" />
               <stop offset="10%" stopColor="#1A3B18" />
@@ -88,7 +89,7 @@ export function InteractiveIris() {
 
         {/* INTERACTIVE PUPIL CORE (Scroll Responsive) */}
         <div 
-          className="relative size-[18%] bg-[#0F0A2A] rounded-full shadow-[0_0_150px_rgba(15,10,42,0.8)] transition-transform duration-1000 ease-out flex items-center justify-center border border-white/5"
+          className="relative size-[18%] bg-[#0F0A2A] rounded-full shadow-[0_0_100px_rgba(15,10,42,0.8)] transition-transform duration-700 ease-out flex items-center justify-center border border-white/5"
           style={{ transform: `scale(${dilation})` }}
         >
           {/* Inner Bio-Luminescence */}
@@ -99,7 +100,7 @@ export function InteractiveIris() {
         </div>
 
         {/* DATA HUD ROTATION AXIS (Subtle Clinical Overlay) */}
-        <div className="absolute inset-[-100px] border-[0.5px] border-[#B9FF61]/5 rounded-full animate-[spin_420s_linear_infinite]" />
+        <div className="absolute inset-[-60px] border-[0.5px] border-[#B9FF61]/5 rounded-full animate-[spin_420s_linear_infinite]" />
       </div>
     </div>
   );
