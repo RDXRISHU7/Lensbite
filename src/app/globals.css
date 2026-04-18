@@ -114,6 +114,10 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   @apply font-black uppercase tracking-tight;
 }
 
+.glass-panel {
+  @apply bg-white/40 backdrop-blur-3xl border border-white/50 shadow-[0_8px_32px_rgba(31,38,135,0.07)];
+}
+
 /* Page Transitions */
 .page-fade-in {
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
