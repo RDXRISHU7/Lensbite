@@ -15,7 +15,7 @@ export default function Home() {
     <main className="max-w-[1280px] mx-auto min-h-screen page-fade-in bg-[#F6F4FB]">
       
       {/* Cinematic Navigation */}
-      <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
+      <header className="fixed top-0 inset-x-0 z-[100] h-20 px-8 max-w-[1280px] mx-auto flex items-center justify-between bg-white/40 backdrop-blur-xl border-b border-white/50">
         <Logo />
         <nav className="hidden lg:flex items-center gap-12">
             <Link href="/scanner/barcode" className="overline hover:text-primary transition-all">Barcode</Link>
@@ -25,7 +25,7 @@ export default function Home() {
         <div className="flex items-center gap-6">
             {user ? <UserNav /> : (
                 <Link href="/login">
-                    <Button variant="ghost" className="overline text-primary">Sync Session</Button>
+                    <Button variant="ghost" className="overline text-primary h-10 px-6">Sync Session</Button>
                 </Link>
             )}
         </div>
@@ -34,8 +34,8 @@ export default function Home() {
       {/* Hero Narrative */}
       <section className="pt-48 pb-32 px-8 text-center space-y-12 max-w-4xl mx-auto">
         <div className="space-y-6">
-            <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary overline bg-primary/5">
-                Cinematic Noir Protocol v2.0
+            <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary overline bg-primary/5 backdrop-blur-sm">
+                Liquid Glass Architecture v1.0
             </Badge>
             <h1 className="text-[72px] font-black leading-[0.9] tracking-[-0.04em] uppercase font-['Space_Grotesk']">
               BITE<span className="text-primary">LENS</span>
@@ -47,14 +47,14 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row justify-center gap-6 pt-8">
             <Link href="/scanner/barcode">
-                <Button className="h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:bg-[#7C43F1]/90 active:scale-[0.98] transition-all w-full sm:w-64 text-lg">
+                <Button variant="default" className="w-full sm:w-64 text-lg">
                     <Barcode className="mr-3 size-5" />
                     Scan Barcode
                 </Button>
             </Link>
             <Link href="/scanner/food">
-                <Button variant="outline" className="h-14 px-8 rounded-[16px] overline w-full sm:w-64 border-black/10 bg-white hover:bg-muted">
-                    <Camera className="mr-3 size-5 text-primary" />
+                <Button variant="scan" className="w-full sm:w-64 text-lg">
+                    <Camera className="mr-3 size-5" />
                     Vision AI
                 </Button>
             </Link>
@@ -75,8 +75,8 @@ export default function Home() {
                   Instant extraction of clinical ingredient strings via global product databases. Decrypts industrial metadata into clean, actionable safety audits using verified UPC/EAN signals.
                 </p>
                 <div className="flex gap-4">
-                    <div className="px-4 py-2 bg-primary/5 rounded-lg overline text-primary text-[10px]">UPC-A Verified</div>
-                    <div className="px-4 py-2 bg-primary/5 rounded-lg overline text-primary text-[10px]">EAN-13 Match</div>
+                    <div className="px-4 py-2 bg-white/40 backdrop-blur-md rounded-lg overline text-primary text-[10px] border border-white/50">UPC-A Verified</div>
+                    <div className="px-4 py-2 bg-white/40 backdrop-blur-md rounded-lg overline text-primary text-[10px] border border-white/50">EAN-13 Match</div>
                 </div>
                 <Link href="/scanner/barcode">
                   <Button variant="link" className="p-0 h-auto text-primary overline flex items-center gap-2 group">
@@ -84,7 +84,7 @@ export default function Home() {
                   </Button>
                 </Link>
             </div>
-            <div className="bg-white border border-black/5 rounded-[24px] aspect-video flex items-center justify-center relative overflow-hidden group shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+            <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] aspect-video flex items-center justify-center relative overflow-hidden group shadow-[0_8px_32px_rgba(31,38,135,0.07)]">
                 <div className="absolute inset-x-12 h-px bg-primary/20 animate-pulse" />
                 <Barcode size={80} className="opacity-10 text-foreground group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-8 left-8 flex items-center gap-2">
@@ -96,10 +96,10 @@ export default function Home() {
 
         {/* Protocol 02: Vision AI */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="bg-white border border-black/5 rounded-[24px] aspect-video flex items-center justify-center lg:order-1 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+            <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] aspect-video flex items-center justify-center lg:order-1 shadow-[0_8px_32px_rgba(31,38,135,0.07)]">
                 <div className="relative">
                     <Camera size={80} className="opacity-10 text-foreground" />
-                    <Activity size={32} className="absolute -bottom-4 -right-4 text-[#F8FFA1] animate-pulse" />
+                    <Activity size={32} className="absolute -bottom-4 -right-4 text-accent animate-pulse" />
                 </div>
             </div>
             <div className="space-y-8 lg:order-2">
@@ -119,7 +119,7 @@ export default function Home() {
         </div>
 
         {/* Protocol 03: Biometric Sync */}
-        <div className="bg-white border border-black/5 rounded-[32px] p-12 md:p-24 text-center space-y-16 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+        <div className="bg-white/40 backdrop-blur-2xl border border-white/60 rounded-[40px] p-12 md:p-24 text-center space-y-16 shadow-[0_8px_32px_rgba(31,38,135,0.07)]">
             <div className="max-w-3xl mx-auto space-y-6">
                 <span className="overline text-primary font-black">Protocol 03</span>
                 <h2 className="text-[44px] font-bold leading-[1] tracking-[-0.03em] uppercase font-['Space_Grotesk']">
@@ -131,12 +131,12 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {[
-                    { label: 'Allergies', icon: Shield, color: 'text-[#7C43F1]' },
-                    { label: 'Diabetes', icon: Activity, color: 'text-[#7C43F1]' },
-                    { label: 'Hypertension', icon: Database, color: 'text-[#7C43F1]' },
-                    { label: 'Biometrics', icon: Fingerprint, color: 'text-[#7C43F1]' }
+                    { label: 'Allergies', icon: Shield, color: 'text-primary' },
+                    { label: 'Diabetes', icon: Activity, color: 'text-primary' },
+                    { label: 'Hypertension', icon: Database, color: 'text-primary' },
+                    { label: 'Biometrics', icon: Fingerprint, color: 'text-primary' }
                 ].map((item) => (
-                    <div key={item.label} className="bg-[#F6F4FB] p-10 rounded-[24px] flex flex-col items-center gap-4 hover:bg-white border border-transparent hover:border-black/5 transition-all group">
+                    <div key={item.label} className="bg-white/30 backdrop-blur-md p-10 rounded-[32px] flex flex-col items-center gap-4 hover:bg-white/60 border border-white/40 transition-all group shadow-sm">
                         <item.icon className={`size-8 ${item.color} group-hover:scale-110 transition-transform`} />
                         <span className="overline text-[10px] font-black">{item.label}</span>
                     </div>
@@ -144,7 +144,7 @@ export default function Home() {
             </div>
             <div className="pt-8">
               <Link href="/profile">
-                <Button className="h-14 px-12 rounded-full bg-black text-white overline text-xs font-bold tracking-widest hover:bg-primary transition-all">
+                <Button variant="default" className="px-12 rounded-full">
                   Configure Architecture
                 </Button>
               </Link>
@@ -176,7 +176,7 @@ export default function Home() {
             </div>
         </div>
         <div className="pt-16 mt-16 border-t border-black/5 flex justify-between items-center opacity-40">
-            <span className="overline text-[9px]">© 2026 BITE LENS SYSTEMS · NOIR v2.0</span>
+            <span className="overline text-[9px]">© 2026 BITE LENS SYSTEMS · LIQUID GLASS v1.0</span>
             <span className="overline text-[9px]">FDA + WHO DATA VERIFIED</span>
         </div>
       </footer>

@@ -5,20 +5,19 @@
 @layer base {
   :root {
     /* Cinematic Noir v2.0 Palette - Light Theme */
-    /* Background: #F6F4FB */
     --background: 250 30% 97%; 
-    --foreground: 251 62% 10%; /* #0F0A2A */
+    --foreground: 251 62% 10%;
     
     --card: 0 0% 100%;
     --card-foreground: 251 62% 10%;
     
-    --primary: 256 87% 61%; /* #7C43F1 - Primary Purple */
+    --primary: 256 87% 61%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 326 95% 91%; /* #FED0EE - Secondary Pink */
+    --secondary: 326 95% 91%;
     --secondary-foreground: 251 62% 10%;
     
-    --accent: 65 100% 81%; /* #F8FFA1 - Accent Lime */
+    --accent: 65 100% 81%;
     --accent-foreground: 251 62% 10%;
 
     --muted: 249 20% 92%;
@@ -28,7 +27,7 @@
     --input: 249 20% 92%;
     --ring: 256 87% 61%;
 
-    --radius: 1.5rem; /* 24px */
+    --radius: 1.5rem;
   }
 }
 
@@ -49,38 +48,55 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 /* STRICT NO ITALICS */
 * { font-style: normal !important; }
 
-/* Cinematic Glass Surface System */
-.glass-surface {
-  @apply bg-white/55 backdrop-blur-xl border border-white/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)];
+/* LIQUID GLASS ARCHITECTURE */
+.liquid-glass-base {
+  @apply backdrop-blur-2xl border transition-all duration-300 active:scale-[0.98] shadow-lg;
 }
 
-/* GLOBAL BUTTON GLASSMORPHISM HOVER */
-button, .btn-glass-hover {
-  @apply transition-all duration-300 ease-out relative overflow-hidden;
+.liquid-glass-purple {
+  background: linear-gradient(135deg, rgba(124, 67, 241, 0.4) 0%, rgba(124, 67, 241, 0.2) 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(124, 67, 241, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  color: #0F0A2A;
+  @apply font-bold uppercase tracking-tight;
 }
 
-button:hover:not(:disabled), .btn-glass-hover:hover {
-  @apply backdrop-blur-md scale-[1.02] shadow-2xl border-white/80;
-  background-color: rgba(255, 255, 255, 0.55);
-  color: hsl(var(--foreground));
+.liquid-glass-purple:hover {
+  background: linear-gradient(135deg, rgba(124, 67, 241, 0.6) 0%, rgba(124, 67, 241, 0.4) 100%);
+  box-shadow: 0 12px 48px 0 rgba(124, 67, 241, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
-/* Primary Cinematic Button */
-.primary-btn {
-  @apply h-14 px-8 bg-[#7C43F1] text-white rounded-[16px] font-medium tracking-tight hover:bg-white/55 hover:text-[#0F0A2A] active:scale-[0.98] transition-all border border-transparent;
+.liquid-glass-lime {
+  background: linear-gradient(135deg, rgba(248, 255, 161, 0.7) 0%, rgba(248, 255, 161, 0.4) 100%);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(248, 255, 161, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  color: #0F0A2A;
+  @apply font-black uppercase tracking-widest;
 }
 
-.scanner-btn {
-  @apply h-14 px-8 bg-[#F8FFA1] text-[#0F0A2A] rounded-[16px] font-bold uppercase tracking-wider hover:bg-white/55 active:scale-[0.98] transition-all border border-transparent;
+.liquid-glass-lime:hover {
+  background: linear-gradient(135deg, rgba(248, 255, 161, 0.9) 0%, rgba(248, 255, 161, 0.6) 100%);
+  box-shadow: 0 12px 48px 0 rgba(248, 255, 161, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.5);
 }
 
-/* Clinical Surface System */
-.clinical-card {
-  @apply bg-white border border-black/10 rounded-[24px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300;
+.liquid-glass-pink {
+  background: linear-gradient(135deg, rgba(254, 208, 238, 0.5) 0%, rgba(254, 208, 238, 0.3) 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(254, 208, 238, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  color: #0F0A2A;
+  @apply font-bold uppercase tracking-tight;
 }
 
-.hover-card {
-  @apply hover:shadow-xl hover:-translate-y-1;
+.liquid-glass-pink:hover {
+  background: linear-gradient(135deg, rgba(254, 208, 238, 0.7) 0%, rgba(254, 208, 238, 0.5) 100%);
+  box-shadow: 0 12px 48px 0 rgba(254, 208, 238, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.liquid-glass-clear {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  @apply font-bold uppercase tracking-tight;
 }
 
 /* Page Transitions */
