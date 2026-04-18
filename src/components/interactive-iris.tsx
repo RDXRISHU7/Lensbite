@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Crystalline Power Core v6.0 - Abstract Clinical Engine
+ * Bio-Digital Iris Engine v5.0 | Hyper-Realistic Organic Protocol
  * 
- * - Replaces biological "creepy" textures with high-tech geometric light rings.
- * - Scroll-synced dilation focused behind hero text area.
- * - Hydration-safe mount check to prevent SSR mismatches.
+ * - Reconstructs biological iris stroma using advanced SVG turbulence filters.
+ * - Emerald-Teal color mapping for high-fidelity realism.
+ * - Scroll-synced pupil dilation physics (1.0x to 2.2x).
+ * - Hydration-safe mount check for stable SSR.
  */
 export function InteractiveIris() {
   const [dilation, setDilation] = useState(1);
@@ -19,9 +20,9 @@ export function InteractiveIris() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      // Map scroll progress to pupil dilation (1.0 to 1.8x scale)
-      const progress = Math.min(scrollY / (windowHeight * 0.5 || 1), 1);
-      setDilation(1 + progress * 0.8);
+      // Map scroll progress to pupil dilation (1.0 to 2.2x scale)
+      const progress = Math.min(scrollY / (windowHeight * 0.7 || 1), 1);
+      setDilation(1 + progress * 1.2);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -35,94 +36,107 @@ export function InteractiveIris() {
   }
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden transition-opacity duration-1000 opacity-100">
+    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden bg-[#F6F4FB]">
       {/* 3D VIEWPORT CONTAINER */}
-      <div className="relative size-[600px] md:size-[850px] flex items-center justify-center">
+      <div className="relative size-[600px] md:size-[850px] flex items-center justify-center scale-110">
         
-        {/* THE DIGITAL APERTURE STRUCTURE */}
+        {/* THE BIOLOGICAL IRIS STRUCTURE */}
         <svg className="absolute inset-0 size-full" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#7C43F1" stopOpacity="0.2" />
-              <stop offset="60%" stopColor="#7C43F1" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="transparent" />
-            </radialGradient>
-            
-            <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#B9FF61" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#7C43F1" stopOpacity="0.1" />
-            </linearGradient>
+            {/* ORGANIC FIBER FILTER */}
+            <filter id="iris-fibers" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="8" seed="42" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="60" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
 
+            {/* IRIS DEPTH GRADIENT */}
+            <radialGradient id="iris-body" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#0A1A09" />
+              <stop offset="25%" stopColor="#124B4C" />
+              <stop offset="50%" stopColor="#2D5A27" />
+              <stop offset="85%" stopColor="#4E9A44" />
+              <stop offset="100%" stopColor="#1A3B18" />
+            </radialGradient>
+
+            {/* CRYSTALLINE LENS REFLECTION */}
+            <linearGradient id="lens-gloss" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="white" stopOpacity="0.3" />
+              <stop offset="40%" stopColor="white" stopOpacity="0" />
+              <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+            </linearGradient>
+            
             <filter id="bloom">
-              <feGaussianBlur stdDeviation="20" result="blur" />
+              <feGaussianBlur stdDeviation="15" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
           </defs>
 
-          {/* AMBIENT BACKGROUND GLOW */}
-          <circle cx="500" cy="500" r="450" fill="url(#core-glow)" filter="url(#bloom)" />
+          {/* AMBIENT DEPTH GLOW */}
+          <circle cx="500" cy="500" r="480" fill="#B9FF61" fillOpacity="0.03" filter="url(#bloom)" />
 
-          {/* CONCENTRIC APERTURE RINGS */}
-          {[...Array(15)].map((_, i) => (
-            <circle
-              key={i}
-              cx="500"
-              cy="500"
-              r={120 + i * 20}
-              stroke="url(#ring-gradient)"
-              strokeWidth="0.5"
-              className="opacity-20"
-              style={{
-                transformOrigin: 'center',
-                animation: `pulse ${5 + i * 0.5}s ease-in-out infinite alternate`,
-              }}
-            />
-          ))}
-
-          {/* ROTATING DATA AXIS RINGS */}
-          <circle 
-            cx="500" 
-            cy="500" 
-            r="180" 
-            stroke="#B9FF61" 
-            strokeWidth="1" 
-            strokeDasharray="4 12" 
-            className="opacity-40 animate-[spin_40s_linear_infinite]" 
-          />
+          {/* MAIN BIOLOGICAL IRIS BODY */}
           <circle 
             cx="500" 
             cy="500" 
             r="420" 
-            stroke="#7C43F1" 
+            fill="url(#iris-body)" 
+            filter="url(#iris-fibers)"
+            className="opacity-90" 
+          />
+
+          {/* LIMBAL RING (OUTER EDGE) */}
+          <circle 
+            cx="500" 
+            cy="500" 
+            r="425" 
+            stroke="#051004" 
+            strokeWidth="10" 
+            className="opacity-60"
+          />
+
+          {/* REFRACTIVE RIM LIGHT */}
+          <circle 
+            cx="500" 
+            cy="500" 
+            r="418" 
+            stroke="white" 
             strokeWidth="0.5" 
-            strokeDasharray="2 20" 
-            className="opacity-10 animate-[spin_120s_linear_reverse_infinite]" 
+            className="opacity-20"
+          />
+
+          {/* CRYSTALLINE LENS GLOSS LAYER */}
+          <circle 
+            cx="500" 
+            cy="500" 
+            r="420" 
+            fill="url(#lens-gloss)" 
+            className="opacity-40"
           />
         </svg>
 
-        {/* THE INTERACTIVE POWER CORE (PUPIL REPLACEMENT) */}
+        {/* INTERACTIVE BIOMETRIC PUPIL */}
         <div 
-          className="relative size-[16%] flex items-center justify-center transition-transform duration-700 ease-out"
+          className="relative size-[18%] flex items-center justify-center transition-transform duration-700 ease-out"
           style={{ transform: `scale(${dilation})` }}
         >
-          {/* Glass Sphere Core */}
-          <div className="absolute inset-0 rounded-full liquid-glass-base liquid-glass-purple shadow-[0_0_100px_rgba(124,67,241,0.5)]" />
+          {/* Pupil Core */}
+          <div className="absolute inset-0 rounded-full bg-[#0F0A2A] shadow-[0_0_80px_rgba(0,0,0,0.8)]" />
           
-          {/* Internal Refractive Light */}
-          <div className="size-1/2 bg-white/30 rounded-full blur-xl animate-pulse" />
+          {/* Internal Aqueous Refraction */}
+          <div className="size-full rounded-full border border-white/5 bg-gradient-to-br from-white/10 to-transparent" />
           
-          {/* High-Intensity Specular Rim */}
-          <div className="absolute inset-0 rounded-full border border-white/40" />
+          {/* SPECULAR HIGHLIGHT (MOISTURE) */}
+          <div className="absolute top-[20%] left-[20%] size-1/4 bg-white/40 rounded-full blur-md" />
         </div>
 
-        {/* OUTER CLINICAL RADIUS */}
-        <div className="absolute inset-[-100px] border-[0.5px] border-primary/5 rounded-full animate-[spin_300s_linear_infinite]" />
+        {/* CLINICAL HUD OVERLAY (SUBTLE) */}
+        <div className="absolute inset-[-40px] border-[0.5px] border-[#B9FF61]/10 rounded-full animate-[spin_240s_linear_infinite]" />
       </div>
 
       <style jsx global>{`
-        @keyframes pulse {
-          from { transform: scale(1); opacity: 0.1; }
-          to { transform: scale(1.08); opacity: 0.3; }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
       `}</style>
     </div>
