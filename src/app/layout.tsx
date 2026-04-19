@@ -1,3 +1,4 @@
+
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { MobileNav } from '@/components/mobile-nav';

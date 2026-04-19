@@ -1,16 +1,78 @@
+
 'use client';
 
-import { useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
+import React, { Suspense, useRef, useState, useEffect } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Environment, ContactShadows, Float, MeshDistortMaterial, PresentationControls } from '@react-three/drei';
+import * as THREE from 'three';
 
 /**
- * Clinical Human Core v1.0 | Holographic Biometric Model
+ * Realistic 3D Human Biometric Viewer
  * 
- * - Multi-planar 3D Human Silhouette
- * - Carcinogen Hazard Nodes (Lungs, Liver, Colon, Stomach)
- * - Scroll-synced 3D Rotation
- * - Data Filament Lattice
+ * This component uses Three.js (React Three Fiber) to render a high-fidelity
+ * biological model. It is designed to show the specific organs and systems
+ * affected by scanned food hazards.
  */
+
+function AnatomyModel({ rotationY }: { rotationY: number }) {
+  const meshRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = rotationY;
+    }
+  });
+
+  return (
+    <group ref={meshRef}>
+      {/* 
+        ARCHITECTURAL PLACEHOLDER FOR GLB MODEL
+        In a production environment, use useGLTF() to load a professional 
+        human anatomy model (muscles, organs, nervous system).
+      */}
+      <mesh position={[0, 0, 0]}>
+        <capsuleGeometry args={[1, 3.5, 32, 64]} />
+        <MeshDistortMaterial 
+          color="#7C43F1" 
+          speed={2} 
+          distort={0.2} 
+          radius={1} 
+          opacity={0.1} 
+          transparent 
+        />
+      </mesh>
+
+      {/* HAZARD NODES - HIGHLIGHTED BIO-SYSTEMS */}
+      <mesh position={[0, 1.2, 0.8]}>
+          <sphereGeometry args={[0.3, 32, 32]} />
+          <meshStandardMaterial 
+            color="#B9FF61" 
+            emissive="#B9FF61" 
+            emissiveIntensity={2} 
+          />
+      </mesh>
+      
+      <mesh position={[0.4, 0.5, 0.7]}>
+          <sphereGeometry args={[0.25, 32, 32]} />
+          <meshStandardMaterial 
+            color="#E53935" 
+            emissive="#E53935" 
+            emissiveIntensity={3} 
+          />
+      </mesh>
+
+      <mesh position={[-0.3, -0.4, 0.6]}>
+          <sphereGeometry args={[0.35, 32, 32]} />
+          <meshStandardMaterial 
+            color="#F4A261" 
+            emissive="#F4A261" 
+            emissiveIntensity={1.5} 
+          />
+      </mesh>
+    </group>
+  );
+}
+
 export function ClinicalHumanCore() {
   const [rotation, setRotation] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
@@ -18,10 +80,8 @@ export function ClinicalHumanCore() {
   useEffect(() => {
     setIsMounted(true);
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setRotation(scrollY * 0.05);
+      setRotation(window.scrollY * 0.005);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -29,78 +89,38 @@ export function ClinicalHumanCore() {
   if (!isMounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden bg-[#F6F4FB]">
-      <div 
-        className="relative size-[600px] md:size-[900px] flex items-center justify-center perspective-3d"
-        style={{ 
-          transform: `rotateY(${rotation}deg) rotateX(${rotation * 0.2}deg)`,
-          transformStyle: 'preserve-3d'
-        }}
-      >
+    <div className="fixed inset-0 z-[-1] bg-[#F6F4FB] pointer-events-none">
+      <Canvas shadows camera={{ position: [0, 0, 12], fov: 35 }}>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} shadow-mapSize={[512, 512]} castShadow />
         
-        {/* HOLOGRAPHIC BIOMETRIC SILHOUETTE */}
-        <div 
-          className="relative size-full flex items-center justify-center transition-transform duration-1000 ease-clinical"
-          style={{ transformStyle: 'preserve-3d' }}
-        >
-          {/* VOLUMETRIC BODY LAYERS (Simulating 3D Depth) */}
-          {[...Array(5)].map((_, i) => (
-            <svg 
-              key={`layer-${i}`}
-              className="absolute size-full opacity-10"
-              viewBox="0 0 100 100"
-              style={{ 
-                transform: `translateZ(${(i - 2) * 40}px) scale(${1 - Math.abs(i - 2) * 0.05})`,
-                color: i === 2 ? '#7C43F1' : '#B9FF61'
-              }}
-            >
-              <path 
-                d="M50 5 C45 5, 42 8, 42 12 C42 16, 45 20, 50 20 C55 20, 58 16, 58 12 C58 8, 55 5, 50 5 M42 22 L58 22 L62 45 L58 45 L58 70 L55 95 L45 95 L42 70 L42 45 L38 45 Z" 
-                fill="currentColor" 
-                className="transition-all duration-700"
-              />
-            </svg>
-          ))}
+        <Suspense fallback={null}>
+          <PresentationControls
+            global
+            config={{ mass: 2, tension: 500 }}
+            snap={{ mass: 4, tension: 1500 }}
+            rotation={[0, 0, 0]}
+            polar={[-Math.PI / 3, Math.PI / 3]}
+            azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
+          >
+            <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+              <AnatomyModel rotationY={rotation} />
+            </Float>
+          </PresentationControls>
+          
+          <ContactShadows position={[0, -4.5, 0]} opacity={0.4} scale={20} blur={2} far={4.5} />
+          <Environment preset="city" />
+        </Suspense>
+      </Canvas>
 
-          {/* HAZARD SCRUTINY NODES (Organs affected by carcinogens) */}
-          {[
-            { id: 'lungs', pos: [30, 50, 42], label: 'Respiratory Hazard' },
-            { id: 'liver', pos: [45, 52, 48], label: 'Metabolic Toxin' },
-            { id: 'colon', pos: [60, 50, 52], label: 'Digestive Risk' },
-            { id: 'stomach', pos: [52, 45, 48], label: 'Nitrite Target' }
-          ].map((node) => (
-            <div 
-              key={node.id}
-              className="absolute size-4 bg-accent rounded-full shadow-[0_0_20px_#B9FF61] group"
-              style={{
-                transform: `translateX(${node.pos[1] - 50}px) translateY(${node.pos[0] - 50}px) translateZ(${node.pos[2]}px)`,
-              }}
-            >
-              <div className="absolute inset-[-10px] rounded-full border border-accent/40 animate-ping" />
-              <div className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 backdrop-blur-md px-3 py-1 rounded-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-[8px] font-black uppercase tracking-widest text-white">{node.label}</span>
-              </div>
-            </div>
-          ))}
-
-          {/* CONNECTIVE DATA LATTICE */}
-          <div 
-            className="absolute inset-0 border-[0.5px] border-primary/10 rounded-full" 
-            style={{ transform: 'rotateX(90deg) translateZ(0px)' }} 
-          />
-          <div 
-            className="absolute inset-0 border-[0.5px] border-accent/10 rounded-full" 
-            style={{ transform: 'rotateY(90deg) translateZ(0px)' }} 
-          />
-
+      {/* CLINICAL DATA OVERLAY */}
+      <div className="absolute inset-0 flex items-center justify-between px-12 opacity-20 pointer-events-none">
+        <div className="h-full w-px bg-primary/20 flex flex-col justify-around">
+            {[...Array(20)].map((_, i) => <div key={i} className="w-4 h-px bg-primary/40" />)}
         </div>
-
-        {/* SCANNING FIELD RING */}
-        <div 
-          className="absolute size-[500px] border-4 border-dashed border-primary/20 rounded-full animate-[spin_60s_linear_infinite]"
-          style={{ transform: 'rotateX(75deg) translateZ(-100px)' }}
-        />
-
+        <div className="h-full w-px bg-primary/20 flex flex-col justify-around">
+            {[...Array(20)].map((_, i) => <div key={i} className="w-4 h-px bg-primary/40" />)}
+        </div>
       </div>
     </div>
   );
