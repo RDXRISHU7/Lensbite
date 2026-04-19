@@ -67,6 +67,9 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      transitionTimingFunction: {
+        'clinical': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
