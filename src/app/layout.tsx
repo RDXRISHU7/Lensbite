@@ -1,9 +1,8 @@
-
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { MobileNav } from '@/components/mobile-nav';
 import { Toaster } from '@/components/ui/toaster';
-import { ClinicalHumanCore } from '@/components/clinical-human-core';
+import { ClinicalEyeCore } from '@/components/clinical-eye-core';
 
 export const metadata = {
   title: 'Lens Bite | Command Center',
@@ -21,7 +20,7 @@ export default function RootLayout({
         <FirebaseClientProvider>
           {/* ARCHITECTURAL BACKGROUND STACK */}
           <div className="fixed inset-0 z-[-2] bg-[#F6F4FB]" />
-          <ClinicalHumanCore />
+          <ClinicalEyeCore />
           
           {/* CLINICAL INTERFACE LAYER */}
           <div className="relative min-h-dvh z-10 perspective-3d">
