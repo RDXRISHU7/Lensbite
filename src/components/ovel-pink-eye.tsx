@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Ovel Pink Eye | Archived Command Center v1.0
+ * Ovel Pink Eye | Cinematic Geometric HUD
  * 
- * A non-organic, geometric 3D background object.
+ * An archived background object using a Pink/Violet spectrum.
  * - Rotating Crystalline Rings
- * - Pulsing Pink/Violet Data Core
- * - Scroll-synced 3D Depth
+ * - Pulsing Data Core
  */
 export function OvelPinkEye() {
   const [rotation, setRotation] = useState(0);
@@ -47,29 +46,16 @@ export function OvelPinkEye() {
           style={{ transform: `rotateX(-60deg) rotateY(${rotation * 0.3}deg)` }}
         />
 
-        {/* DASHED DATA ORBIT */}
-        <div 
-          className="absolute inset-40 border-t border-b border-dashed border-[#D863F1]/10 rounded-full animate-[spin_30s_linear_infinite]"
-          style={{ transform: `rotateX(45deg)` }}
-        />
-
         {/* THE CORE ENGINE */}
         <div className="relative size-1/3 flex items-center justify-center">
-          {/* Glowing Pink Orb */}
           <div className="absolute inset-0 rounded-full bg-[#D863F1]/10 blur-3xl animate-pulse" />
-          
-          {/* Crystalline Center */}
           <div 
-            className="size-32 rounded-[2rem] bg-gradient-to-br from-[#D863F1] to-[#7C43F1] shadow-[0_0_80px_rgba(216,99,241,0.4)] transition-transform duration-1000 ease-clinical"
+            className="size-32 rounded-[2rem] bg-gradient-to-br from-[#D863F1] to-[#7C43F1] shadow-[0_0_80px_rgba(216,99,241,0.4)] transition-transform duration-1000"
             style={{ 
               transform: `rotateX(${rotation * 0.8}deg) rotateY(${rotation * 0.8}deg) scale(${1 + (rotation * 0.001)})`,
               borderRadius: '35%'
             }}
           />
-
-          {/* Precision Accents */}
-          <div className="absolute size-48 border border-white/20 rounded-full" />
-          <div className="absolute size-2 bg-accent rounded-full -top-24 left-1/2 -translate-x-1/2 shadow-[0_0_20px_#B9FF61]" />
         </div>
 
       </div>

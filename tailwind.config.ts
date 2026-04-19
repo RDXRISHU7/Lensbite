@@ -64,13 +64,13 @@ export default {
         },
         'float': {
           '0%, 100%': { transform: 'translateY(0) rotateX(0) rotateY(0)' },
-          '50%': { transform: 'translateY(-20px) rotateX(10deg) rotateY(10deg)' },
+          '50%': { transform: 'translateY(-30px) rotateX(5deg) rotateY(5deg)' },
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'float-slow': 'float 8s ease-in-out infinite',
+        'float-slow': 'float 12s ease-in-out infinite',
       },
       transitionTimingFunction: {
         'clinical': 'cubic-bezier(0.16, 1, 0.3, 1)',

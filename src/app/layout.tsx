@@ -16,10 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="m-0 p-0 font-sans antialiased relative">
+      <body className="m-0 p-0 font-sans antialiased relative bg-[#F6F4FB]">
         <FirebaseClientProvider>
           {/* ARCHITECTURAL BACKGROUND STACK */}
-          <div className="fixed inset-0 z-[-2] bg-[#F6F4FB]" />
           <ClinicalBackground />
           
           {/* CLINICAL INTERFACE LAYER */}

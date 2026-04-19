@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Data Shard v1.0 | High-Fidelity 3D Background
+ * Clinical Shard Core v2.0 | High-Fidelity 3D Shard
  * 
- * A high-tech, geometric 3D lattice representing "Lens Bite" data structures.
- * - Multi-planar 3D Shards
- * - Glassmorphic refractive elements
- * - Scroll-synced 3D rotation and depth
+ * A truly 3D background object built with CSS preserve-3d.
+ * - Multi-face Octahedral Shard
+ * - Scroll-synced rotation and 3D depth
+ * - Glassmorphic refractive surfaces
  */
 export function ClinicalBackground() {
   const [rotation, setRotation] = useState(0);
@@ -33,46 +33,62 @@ export function ClinicalBackground() {
       <div 
         className="relative size-[600px] md:size-[1000px] flex items-center justify-center perspective-3d"
         style={{ 
-          transform: `rotateY(${rotation}deg) rotateX(${rotation * 0.5}deg)`,
+          transform: `rotateY(${rotation}deg) rotateX(${rotation * 0.2}deg)`,
           transformStyle: 'preserve-3d'
         }}
       >
         
         {/* CENTRAL DATA CORE */}
         <div 
-          className="absolute size-64 md:size-96 bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-3xl rounded-[3rem] border border-white/40 shadow-2xl animate-float-slow"
-          style={{ transform: 'translateZ(100px)' }}
+          className="absolute size-64 md:size-96 bg-gradient-to-br from-primary/30 to-accent/30 backdrop-blur-3xl rounded-[3rem] border border-white/40 shadow-2xl animate-float-slow"
+          style={{ 
+            transform: 'translateZ(150px)',
+            transformStyle: 'preserve-3d'
+          }}
         >
           <div className="absolute inset-0 flex items-center justify-center">
-             <div className="size-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+             <div className="size-48 bg-primary/20 rounded-full blur-[80px] animate-pulse" />
           </div>
         </div>
 
-        {/* 3D FLOATING SHARDS - LIME */}
-        {[...Array(4)].map((_, i) => (
+        {/* 3D FLOATING SHARDS - OCTAHEDRAL PLANES */}
+        {[...Array(6)].map((_, i) => (
           <div 
-            key={`lime-${i}`}
-            className="absolute size-48 md:size-64 bg-[#B9FF61]/10 backdrop-blur-2xl border border-[#B9FF61]/30 rounded-[2rem] shadow-xl"
+            key={`shard-${i}`}
+            className={cn(
+              "absolute size-72 md:size-96 backdrop-blur-2xl border transition-all duration-1000 ease-clinical",
+              i % 2 === 0 
+                ? "bg-[#B9FF61]/5 border-[#B9FF61]/20 rounded-[4rem]" 
+                : "bg-[#7C43F1]/5 border-[#7C43F1]/20 rounded-[2rem]"
+            )}
             style={{
-              transform: `rotateX(${i * 90}deg) rotateY(${i * 45}deg) translateZ(300px)`,
+              transform: `rotateX(${i * 60}deg) rotateY(${i * 30}deg) translateZ(350px)`,
+              opacity: 0.6
             }}
           />
         ))}
 
-        {/* 3D FLOATING SHARDS - PURPLE */}
-        {[...Array(4)].map((_, i) => (
+        {/* CONNECTIVE DATA LATTICE - BACKGROUND DEPTH */}
+        <div 
+          className="absolute inset-0 border-[0.5px] border-black/5 rounded-full" 
+          style={{ transform: 'translateZ(-200px)' }} 
+        />
+        
+        <div 
+          className="absolute inset-40 border-[0.5px] border-dashed border-primary/10 rounded-full animate-[spin_120s_linear_infinite]" 
+          style={{ transform: 'rotateX(45deg) translateZ(-100px)' }}
+        />
+
+        {/* DATA NODES */}
+        {[...Array(8)].map((_, i) => (
           <div 
-            key={`purple-${i}`}
-            className="absolute size-40 md:size-56 bg-[#7C43F1]/5 backdrop-blur-xl border border-[#7C43F1]/20 rounded-[1.5rem] shadow-lg"
+            key={`node-${i}`}
+            className="absolute size-3 bg-accent rounded-full shadow-[0_0_15px_#B9FF61]"
             style={{
-              transform: `rotateX(${i * -90}deg) rotateY(${i * -60}deg) translateZ(450px)`,
+              transform: `rotateX(${i * 45}deg) rotateZ(${i * 22}deg) translateZ(500px)`,
             }}
           />
         ))}
-
-        {/* CONNECTIVE DATA LATTICE */}
-        <div className="absolute inset-0 border-[0.5px] border-black/5 rounded-full" style={{ transform: 'translateZ(-100px)' }} />
-        <div className="absolute inset-20 border-[0.5px] border-dashed border-primary/10 rounded-full animate-[spin_60s_linear_infinite]" />
 
       </div>
     </div>
