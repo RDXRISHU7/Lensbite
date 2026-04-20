@@ -8,48 +8,65 @@ import {
   Float, 
   PresentationControls, 
   useGLTF, 
-  Html,
-  Loader
+  Html
 } from '@react-three/drei';
 import * as THREE from 'three';
 
 /**
- * Bio-Digital Eye Core v11.0 | High-Fidelity GLTF Loader
+ * Bio-Digital Eye Core v12.0 | High-Fidelity GLTF Loader with Fallback
  * 
  * This component renders a realistic 3D Eye model.
  * It expects a file at /public/eye_model.glb.
+ * Now includes error handling to prevent runtime crashes if file is missing.
  */
 
 function EyeModel({ rotationY, dilation }: { rotationY: number, dilation: number }) {
-  // This hook will attempt to load the model from the public folder.
-  // We use a try/catch or fallback since the file might not exist yet.
-  const { scene } = useGLTF('/eye_model.glb', true) || { scene: null };
+  const [error, setError] = useState(false);
   const groupRef = useRef<THREE.Group>(null);
+
+  // We attempt to load the model. If it fails (404), we set the error state.
+  // We use a try-catch block inside a useEffect or handle it via the hook's behavior.
+  let model: any = null;
+  try {
+    model = useGLTF('/eye_model.glb', true);
+  } catch (e) {
+    // This will be caught by the Suspense boundary or we can handle it here if not using Suspense.
+    console.warn("Eye model not found at /public/eye_model.glb. Displaying placeholder.");
+  }
 
   useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.rotation.y = rotationY;
-      // We simulate a mechanical/biological dilation by scaling the iris part
-      // if we can find it in the model, otherwise we scale the whole group.
-      groupRef.current.scale.set(dilation, dilation, dilation);
+      // Bio-mechanical dilation mapping
+      const s = dilation;
+      groupRef.current.scale.set(s, s, s);
     }
   });
 
-  if (!scene) {
+  if (!model || !model.scene) {
     return (
-      <mesh>
+      <mesh ref={groupRef as any}>
         <sphereGeometry args={[2, 32, 32]} />
-        <meshStandardMaterial color="#0F0A2A" transparent opacity={0.2} wireframe />
+        <meshStandardMaterial 
+          color="#7C43F1" 
+          transparent 
+          opacity={0.1} 
+          wireframe 
+        />
         <Html center>
-          <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary whitespace-nowrap bg-white/40 p-4 rounded-full backdrop-blur-md">
-            Waiting for eye_model.glb
+          <div className="flex flex-col items-center gap-2 pointer-events-none">
+            <div className="px-6 py-2 bg-white/40 backdrop-blur-md rounded-full border border-white/50 shadow-xl">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary whitespace-nowrap">
+                Awaiting eye_model.glb
+              </span>
+            </div>
           </div>
         </Html>
       </mesh>
     );
   }
 
-  return <primitive object={scene} ref={groupRef} />;
+  return <primitive object={model.scene} ref={groupRef} />;
 }
 
 export function ClinicalEyeCore() {
@@ -61,9 +78,9 @@ export function ClinicalEyeCore() {
     setIsMounted(true);
     const handleScroll = () => {
       const scrollY = window.scrollY;
+      // Map scroll to rotation and dilation
       setRotation(scrollY * 0.005);
-      // Map scroll to dilation (1.0 to 1.5)
-      setDilation(1 + Math.min(scrollY / 1000, 0.5));
+      setDilation(1 + Math.min(scrollY / 1200, 0.4));
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -75,10 +92,10 @@ export function ClinicalEyeCore() {
     <div className="fixed inset-0 z-[-1] bg-[#F6F4FB] pointer-events-none">
       <Canvas shadows camera={{ position: [0, 0, 10], fov: 35 }}>
         <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} shadow-mapSize={[512, 512]} castShadow />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} castShadow />
         <pointLight position={[-10, -10, -10]} intensity={0.5} />
         
-        <Suspense fallback={<Html center><div className="overline animate-pulse">Initializing 3D Optic...</div></Html>}>
+        <Suspense fallback={<Html center><div className="overline animate-pulse">Synchronizing Optic...</div></Html>}>
           <PresentationControls
             global
             config={{ mass: 2, tension: 500 }}
