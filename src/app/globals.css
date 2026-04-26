@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-    /* Cinematic Noir v2.0 Palette - Light Theme */
     --background: 250 30% 97%; 
     --foreground: 251 62% 10%;
     
@@ -37,7 +36,6 @@
   }
 }
 
-/* Typography Protocol - SPACE GROTESK & INTER */
 h1 { @apply text-[72px] font-black leading-[0.9] tracking-[-0.04em] uppercase; font-family: 'Space Grotesk', sans-serif; }
 h2 { @apply text-[44px] font-bold leading-[1] tracking-[-0.03em] uppercase; font-family: 'Space Grotesk', sans-serif; }
 h3 { @apply text-[28px] font-semibold leading-[1.1] tracking-[-0.02em] uppercase; font-family: 'Space Grotesk', sans-serif; }
@@ -45,15 +43,13 @@ h3 { @apply text-[28px] font-semibold leading-[1.1] tracking-[-0.02em] uppercase
 p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 .overline { @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7E7A9A]; }
 
-/* STRICT NO ITALICS */
 * { font-style: normal !important; }
 
-/* 3D Viewport */
 .perspective-3d {
   perspective: 2000px;
 }
 
-/* LIQUID GLASS ARCHITECTURE - THE SHINY EDGE EFFECT */
+/* LIQUID GLASS ARCHITECTURE - THE SHINY EDGE PROTOCOL */
 .liquid-glass-base {
   @apply backdrop-blur-3xl border border-white/60 transition-all duration-300 active:scale-[0.96];
   box-shadow: 
@@ -106,12 +102,10 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   @apply font-black uppercase tracking-tight;
 }
 
-/* SHINY MEDICAL CARD */
 .medical-card {
   @apply liquid-glass-base bg-white/50 overflow-hidden;
 }
 
-/* Page Transitions */
 .page-fade-in {
   animation: fadeIn 0.8s ease-clinical;
 }
@@ -121,7 +115,6 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Status Badge Themes */
 .badge-safe { @apply bg-[#E8F5E9] text-[#2E7D32] border-[#E8F5E9]; }
 .badge-caution { @apply bg-[#FFF8E1] text-[#F4C542] border-[#FFF8E1]; }
 .badge-alert { @apply bg-[#FDECEA] text-[#E53935] border-[#FDECEA]; }

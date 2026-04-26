@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v10.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v12.0 | Hybrid Kinetic Engine
  * 
  * - Multi-face Octahedral Shard lattice
  * - Scroll-synced orientation & depth shifts
@@ -40,7 +40,7 @@ export function ClinicalBackground() {
         }}
       >
         
-        {/* PERPETUAL IDLE ROTATION WRAPPER (Clockwise) */}
+        {/* PERPETUAL IDLE ROTATION WRAPPER (Clockwise 360) */}
         <div 
           className="absolute inset-0 flex items-center justify-center animate-spin-slow-3d"
           style={{ transformStyle: 'preserve-3d' }}
@@ -59,7 +59,7 @@ export function ClinicalBackground() {
               </div>
             </div>
 
-            {/* 3D FLOATING SHARDS - OCTAHEDRAL PLANES */}
+            {/* 3D FLOATING SHARDS - SYMMETRICAL OCTAHEDRAL PLANES */}
             {[...Array(8)].map((_, i) => (
               <div 
                 key={`shard-${i}`}
