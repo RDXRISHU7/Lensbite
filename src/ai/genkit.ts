@@ -3,9 +3,8 @@ import { googleAI } from '@genkit-ai/google-genai';
 
 /**
  * Genkit instance configuration.
- * We explicitly pass the API key from environment variables to ensure clinical integrity.
- * If the key is missing, Genkit will throw a clear error in the server logs.
- * Ensure you have added GEMINI_API_KEY to your .env file or Environment Variables.
+ * Hardened for production deployment with explicit API key retrieval.
+ * If GEMINI_API_KEY is missing, ensure it is added to the project's environment variables.
  */
 export const ai = genkit({
   plugins: [

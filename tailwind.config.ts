@@ -62,10 +62,6 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
-        'float': {
-          '0%, 100%': { transform: 'translateY(0) rotateX(0) rotateY(0)' },
-          '50%': { transform: 'translateY(-30px) rotateX(5deg) rotateY(5deg)' },
-        },
         'spin-slow-3d': {
           '0%': { transform: 'rotateY(0deg)' },
           '100%': { transform: 'rotateY(360deg)' },
@@ -74,8 +70,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'float-slow': 'float 12s ease-in-out infinite',
-        'spin-slow-3d': 'spin-slow-3d 60s linear infinite',
+        'spin-slow-3d': 'spin-slow-3d 80s linear infinite',
       },
       transitionTimingFunction: {
         'clinical': 'cubic-bezier(0.16, 1, 0.3, 1)',

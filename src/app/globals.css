@@ -50,7 +50,7 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   perspective: 2000px;
 }
 
-/* LIQUID GLASS ARCHITECTURE - THE SHINY EDGE PROTOCOL v2.0 */
+/* SHINY EDGE PROTOCOL v2.0 | LIQUID GLASS ARCHITECTURE */
 .liquid-glass-base {
   @apply backdrop-blur-3xl border border-white/60 transition-all duration-300 active:scale-[0.96] relative overflow-hidden;
   box-shadow: 
@@ -126,12 +126,12 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 }
 
 @keyframes spin-slow-3d {
-  from { transform: rotateY(0deg) rotateZ(0deg); }
-  to { transform: rotateY(360deg) rotateZ(360deg); }
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
 
 .animate-spin-slow-3d {
-  animation: spin-slow-3d 80s linear infinite;
+  animation: spin-slow-3d 60s linear infinite;
 }
 
 .badge-safe { @apply bg-[#E8F5E9] text-[#2E7D32] border-[#E8F5E9]; }

@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v20.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v22.0 | Hybrid Kinetic Engine
  * 
- * - Multi-face Octahedral Shard lattice
- * - Scroll-synced orientation & depth shifts
- * - Perpetual slow 360-degree clockwise rotation when idle
- * - Symmetrical alignment restored
+ * - Multi-face Octahedral Shard lattice.
+ * - Symmetrical 8-shard geometric alignment.
+ * - Perpetual slow 360-degree clockwise rotation when idle.
+ * - Scroll-synced orientation and depth shifts for interaction feedback.
  */
 export function ClinicalBackground() {
   const [scrollRotation, setScrollRotation] = useState(0);
@@ -19,7 +19,7 @@ export function ClinicalBackground() {
     setIsMounted(true);
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      // Precise mechanical mapping of scroll to orientation
+      // Precise mechanical mapping of scroll to 3D orientation
       setScrollRotation(scrollY * 0.05);
     };
 
@@ -33,7 +33,7 @@ export function ClinicalBackground() {
     <div className="fixed inset-0 pointer-events-none z-[-1] flex items-center justify-center overflow-hidden bg-[#F6F4FB]">
       {/* SCROLL-SYNCED VIEWPORT */}
       <div 
-        className="relative size-[600px] md:size-[1000px] flex items-center justify-center perspective-3d transition-transform duration-700 ease-clinical"
+        className="relative size-[600px] md:size-[1000px] flex items-center justify-center perspective-3d transition-transform duration-1000 ease-clinical"
         style={{ 
           transform: `rotateY(${scrollRotation}deg) rotateX(${scrollRotation * 0.2}deg)`,
           transformStyle: 'preserve-3d'
@@ -46,7 +46,7 @@ export function ClinicalBackground() {
           style={{ transformStyle: 'preserve-3d' }}
         >
             
-            {/* CENTRAL DATA CORE */}
+            {/* CENTRAL HARDWARE CORE */}
             <div 
               className="absolute size-64 md:size-96 bg-gradient-to-br from-primary/30 to-accent/30 backdrop-blur-3xl rounded-[3rem] border border-white/40 shadow-2xl"
               style={{ 
@@ -59,7 +59,7 @@ export function ClinicalBackground() {
               </div>
             </div>
 
-            {/* 3D FLOATING SHARDS - SYMMETRICAL OCTAHEDRAL PLANES */}
+            {/* 3D FLOATING SHARDS - SYMMETRICAL LATTICE */}
             {[...Array(8)].map((_, i) => (
               <div 
                 key={`shard-${i}`}
@@ -76,7 +76,7 @@ export function ClinicalBackground() {
               />
             ))}
 
-            {/* CONNECTIVE DATA LATTICE - BACKGROUND DEPTH */}
+            {/* CONNECTIVE DATA LATTICE */}
             <div 
               className="absolute inset-0 border-[0.5px] border-black/5 rounded-full" 
               style={{ transform: 'translateZ(-200px)' }} 
