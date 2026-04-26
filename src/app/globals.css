@@ -43,6 +43,7 @@ h3 { @apply text-[28px] font-semibold leading-[1.1] tracking-[-0.02em] uppercase
 p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 .overline { @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7E7A9A]; }
 
+/* NO ITALICS POLICY */
 * { font-style: normal !important; }
 
 .perspective-3d {
