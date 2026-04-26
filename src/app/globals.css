@@ -50,7 +50,7 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   perspective: 2000px;
 }
 
-/* LIQUID GLASS ARCHITECTURE - THE SHINY EDGE PROTOCOL */
+/* LIQUID GLASS ARCHITECTURE - THE SHINY EDGE PROTOCOL v2.0 */
 .liquid-glass-base {
   @apply backdrop-blur-3xl border border-white/60 transition-all duration-300 active:scale-[0.96] relative overflow-hidden;
   box-shadow: 
