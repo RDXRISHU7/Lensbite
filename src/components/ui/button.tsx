@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "liquid-glass-base liquid-glass-purple",
-        scan: "liquid-glass-base liquid-glass-lime",
+        scan: "liquid-glass-base liquid-glass-aqua",
         destructive: "liquid-glass-base liquid-glass-destructive",
         outline: "liquid-glass-base liquid-glass-clear border-2",
         secondary: "liquid-glass-base liquid-glass-pink",

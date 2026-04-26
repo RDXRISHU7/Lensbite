@@ -17,7 +17,7 @@
     --secondary: 326 95% 91%;
     --secondary-foreground: 251 62% 10%;
     
-    --accent: 65 100% 81%;
+    --accent: 190 90% 50%;
     --accent-foreground: 251 62% 10%;
 
     --muted: 249 20% 92%;
@@ -71,21 +71,23 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 }
 
 .liquid-glass-purple:hover {
-  @apply shadow-[0_25px_50px_-12px_rgba(124,67,241,0.5)] scale-[1.02] opacity-90;
+  @apply scale-[1.02] opacity-90;
+  box-shadow: 0 25px 50px -12px rgba(124, 67, 241, 0.5);
 }
 
-.liquid-glass-lime {
-  background: linear-gradient(135deg, #F8FFA1 0%, #B9FF61 100%);
+.liquid-glass-aqua {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
   box-shadow: 
-    0 20px 40px -10px rgba(248, 255, 161, 0.4),
-    inset 0 4px 12px rgba(255, 255, 255, 0.6),
-    inset 0 -4px 12px rgba(0, 0, 0, 0.05);
-  color: #0F0A2A;
+    0 20px 40px -10px rgba(37, 99, 235, 0.4),
+    inset 0 4px 12px rgba(255, 255, 255, 0.4),
+    inset 0 -4px 12px rgba(0, 0, 0, 0.1);
+  color: white;
   @apply font-black uppercase tracking-widest;
 }
 
-.liquid-glass-lime:hover {
-  @apply shadow-[0_25px_50px_-12px_rgba(248,255,161,0.5)] scale-[1.02] opacity-90;
+.liquid-glass-aqua:hover {
+  @apply scale-[1.02] opacity-90;
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.5);
 }
 
 .liquid-glass-pink {
@@ -128,7 +130,7 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 /* Page Transitions */
 .page-fade-in {
-  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeIn 0.8s ease-clinical;
 }
 
 @keyframes fadeIn {

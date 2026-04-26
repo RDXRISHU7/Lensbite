@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v2.0 | High-Fidelity 3D Shard
+ * Clinical Shard Core v2.2 | High-Fidelity 3D Shard
  * 
- * A truly 3D background object built with CSS preserve-3d.
  * - Multi-face Octahedral Shard
  * - Scroll-synced rotation and 3D depth
  * - Glassmorphic refractive surfaces
+ * - Node suppression enabled (Dots removed)
  */
 export function ClinicalBackground() {
   const [rotation, setRotation] = useState(0);
@@ -75,20 +75,9 @@ export function ClinicalBackground() {
         />
         
         <div 
-          className="absolute inset-40 border-[0.5px] border-dashed border-primary/10 rounded-full animate-[spin_120s_linear_infinite]" 
+          className="absolute inset-40 border-[0.5px] border-primary/10 rounded-full" 
           style={{ transform: 'rotateX(45deg) translateZ(-100px)' }}
         />
-
-        {/* DATA NODES */}
-        {[...Array(8)].map((_, i) => (
-          <div 
-            key={`node-${i}`}
-            className="absolute size-3 bg-accent rounded-full shadow-[0_0_15px_#B9FF61]"
-            style={{
-              transform: `rotateX(${i * 45}deg) rotateZ(${i * 22}deg) translateZ(500px)`,
-            }}
-          />
-        ))}
 
       </div>
     </div>
