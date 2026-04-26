@@ -4,15 +4,15 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v15.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v16.0 | Hybrid Kinetic Engine
  * 
  * - Multi-face Octahedral Shard lattice
  * - Scroll-synced orientation & depth shifts
- * - Perpetual slow 360-degree clockwise rotation at rest
- * - Node suppression enabled
+ * - Perpetual slow 360-degree clockwise rotation when idle
+ * - Symmetrical alignment restored
  */
 export function ClinicalBackground() {
-  const [rotation, setRotation] = useState(0);
+  const [scrollRotation, setScrollRotation] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export function ClinicalBackground() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       // Precise mechanical mapping of scroll to orientation
-      setRotation(scrollY * 0.05);
+      setScrollRotation(scrollY * 0.05);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -35,7 +35,7 @@ export function ClinicalBackground() {
       <div 
         className="relative size-[600px] md:size-[1000px] flex items-center justify-center perspective-3d transition-transform duration-700 ease-clinical"
         style={{ 
-          transform: `rotateY(${rotation}deg) rotateX(${rotation * 0.2}deg)`,
+          transform: `rotateY(${scrollRotation}deg) rotateX(${scrollRotation * 0.2}deg)`,
           transformStyle: 'preserve-3d'
         }}
       >
