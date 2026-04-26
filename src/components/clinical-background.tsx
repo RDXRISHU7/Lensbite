@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v5.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v9.0 | Hybrid Kinetic Engine
  * 
  * - Multi-face Octahedral Shard lattice
  * - Scroll-synced orientation & depth shifts
- * - Perpetual slow 360-degree rotation at rest
- * - Node suppression enabled (Dots removed)
+ * - Perpetual slow 360-degree rotation at rest (Clockwise)
+ * - Node suppression enabled
  */
 export function ClinicalBackground() {
   const [rotation, setRotation] = useState(0);
@@ -40,7 +40,7 @@ export function ClinicalBackground() {
         }}
       >
         
-        {/* PERPETUAL IDLE ROTATION WRAPPER */}
+        {/* PERPETUAL IDLE ROTATION WRAPPER (Clockwise) */}
         <div 
           className="absolute inset-0 flex items-center justify-center animate-spin-slow-3d"
           style={{ transformStyle: 'preserve-3d' }}
@@ -66,8 +66,8 @@ export function ClinicalBackground() {
                 className={cn(
                   "absolute size-72 md:size-96 backdrop-blur-2xl border transition-all duration-1000 ease-clinical shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_8px_32px_rgba(31,38,135,0.05)]",
                   i % 2 === 0 
-                    ? "bg-[#B9FF61]/5 border-[#B9FF61]/20 rounded-[4rem]" 
-                    : "bg-[#7C43F1]/5 border-[#7C43F1]/20 rounded-[2rem]"
+                    ? "bg-white/10 border-white/40 rounded-[4rem]" 
+                    : "bg-primary/5 border-primary/20 rounded-[2rem]"
                 )}
                 style={{
                   transform: `rotateX(${i * 60}deg) rotateY(${i * 30}deg) translateZ(350px)`,

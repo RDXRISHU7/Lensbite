@@ -53,19 +53,17 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
   perspective: 2000px;
 }
 
-/* LIQUID GLASS ARCHITECTURE - THE JELLY EFFECT */
+/* LIQUID GLASS ARCHITECTURE - THE SHINY EDGE EFFECT */
 .liquid-glass-base {
-  @apply backdrop-blur-3xl border-t border-l transition-all duration-300 active:scale-[0.96] shadow-2xl;
-  border-top-color: rgba(255, 255, 255, 0.5);
-  border-left-color: rgba(255, 255, 255, 0.2);
+  @apply backdrop-blur-3xl border border-white/60 transition-all duration-300 active:scale-[0.96];
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .liquid-glass-purple {
   background: linear-gradient(135deg, #7C43F1 0%, #D863F1 100%);
-  box-shadow: 
-    0 20px 40px -10px rgba(124, 67, 241, 0.4),
-    inset 0 4px 12px rgba(255, 255, 255, 0.4),
-    inset 0 -4px 12px rgba(0, 0, 0, 0.1);
   color: white;
   @apply font-black uppercase tracking-tight;
 }
@@ -77,10 +75,6 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .liquid-glass-aqua {
   background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  box-shadow: 
-    0 20px 40px -10px rgba(37, 99, 235, 0.4),
-    inset 0 4px 12px rgba(255, 255, 255, 0.4),
-    inset 0 -4px 12px rgba(0, 0, 0, 0.1);
   color: white;
   @apply font-black uppercase tracking-widest;
 }
@@ -92,10 +86,6 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .liquid-glass-pink {
   background: linear-gradient(135deg, rgba(254, 208, 238, 0.95) 0%, rgba(254, 208, 238, 1) 100%);
-  box-shadow: 
-    0 20px 40px -10px rgba(254, 208, 238, 0.4),
-    inset 0 4px 12px rgba(255, 255, 255, 0.5),
-    inset 0 -4px 12px rgba(0, 0, 0, 0.05);
   color: #0F0A2A;
   @apply font-black uppercase tracking-tight;
 }
@@ -103,10 +93,6 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 .liquid-glass-clear {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 
-    0 8px 32px rgba(31, 38, 135, 0.05),
-    inset 0 4px 10px rgba(255, 255, 255, 0.4);
   @apply font-bold uppercase tracking-tight text-[#0F0A2A];
 }
 
@@ -116,16 +102,13 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .liquid-glass-destructive {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(239, 68, 68, 1) 100%);
-  box-shadow: 
-    0 20px 40px -10px rgba(239, 68, 68, 0.4),
-    inset 0 4px 12px rgba(255, 255, 255, 0.4),
-    inset 0 -4px 12px rgba(0, 0, 0, 0.1);
   color: white;
   @apply font-black uppercase tracking-tight;
 }
 
-.glass-panel {
-  @apply bg-white/40 backdrop-blur-3xl border border-white/60 shadow-[0_8px_32px_rgba(31,38,135,0.07)];
+/* SHINY MEDICAL CARD */
+.medical-card {
+  @apply liquid-glass-base bg-white/50 overflow-hidden;
 }
 
 /* Page Transitions */
