@@ -4,6 +4,7 @@ import { googleAI } from '@genkit-ai/google-genai';
 /**
  * Genkit instance configuration.
  * We explicitly pass the API key from environment variables to ensure clinical integrity.
+ * If the key is missing, Genkit will throw a clear error in the server logs.
  */
 export const ai = genkit({
   plugins: [

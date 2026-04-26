@@ -70,7 +70,7 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .liquid-glass-purple:hover {
   @apply scale-[1.02] opacity-90;
-  box-shadow: 0 25px 50px -12px rgba(124, 67, 241, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(124, 67, 241, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .liquid-glass-aqua {
@@ -81,7 +81,7 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .liquid-glass-aqua:hover {
   @apply scale-[1.02] opacity-90;
-  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .liquid-glass-pink {

@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v9.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v10.0 | Hybrid Kinetic Engine
  * 
  * - Multi-face Octahedral Shard lattice
  * - Scroll-synced orientation & depth shifts
- * - Perpetual slow 360-degree rotation at rest (Clockwise)
+ * - Perpetual slow 360-degree clockwise rotation at rest
  * - Node suppression enabled
  */
 export function ClinicalBackground() {
@@ -60,7 +60,7 @@ export function ClinicalBackground() {
             </div>
 
             {/* 3D FLOATING SHARDS - OCTAHEDRAL PLANES */}
-            {[...Array(6)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <div 
                 key={`shard-${i}`}
                 className={cn(
@@ -70,7 +70,7 @@ export function ClinicalBackground() {
                     : "bg-primary/5 border-primary/20 rounded-[2rem]"
                 )}
                 style={{
-                  transform: `rotateX(${i * 60}deg) rotateY(${i * 30}deg) translateZ(350px)`,
+                  transform: `rotateX(${i * 45}deg) rotateY(${i * 22.5}deg) translateZ(400px)`,
                   opacity: 0.6
                 }}
               />

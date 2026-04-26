@@ -75,7 +75,7 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'float-slow': 'float 12s ease-in-out infinite',
-        'spin-slow-3d': 'spin-slow-3d 40s linear infinite',
+        'spin-slow-3d': 'spin-slow-3d 60s linear infinite',
       },
       transitionTimingFunction: {
         'clinical': 'cubic-bezier(0.16, 1, 0.3, 1)',
