@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v16.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v18.0 | Hybrid Kinetic Engine
  * 
  * - Multi-face Octahedral Shard lattice
  * - Scroll-synced orientation & depth shifts
