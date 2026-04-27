@@ -32,7 +32,7 @@
 
 @layer base {
   body {
-    @apply text-[#0F0A2A] antialiased font-sans selection:bg-primary/20 m-0 p-0;
+    @apply text-[#0F0A2A] antialiased font-sans selection:bg-primary/20 m-0 p-0 overflow-x-hidden;
   }
 }
 
@@ -89,6 +89,12 @@ p { @apply text-[16px] leading-[1.6] text-[#3D3660]; }
 
 .liquid-glass-pink {
   background: linear-gradient(135deg, rgba(254, 208, 238, 0.95) 0%, rgba(254, 208, 238, 1) 100%);
+  color: #0F0A2A;
+  @apply font-black uppercase tracking-tight;
+}
+
+.liquid-glass-lime {
+  background: linear-gradient(135deg, #B9FF61 0%, #A3E635 100%);
   color: #0F0A2A;
   @apply font-black uppercase tracking-tight;
 }

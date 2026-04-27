@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * Clinical Shard Core v24.0 | Hybrid Kinetic Engine
+ * Clinical Shard Core v25.0 | Hybrid Kinetic Engine
  * 
  * - Multi-face Octahedral Shard lattice.
  * - Symmetrical 8-shard geometric alignment.
- * - Perpetual slow clockwise 360-degree rotation when site is still.
- * - Scroll-synced orientation and depth shifts for interaction feedback.
+ * - Perpetual slow clockwise 360-degree rotation when site is still (via CSS).
+ * - Scroll-synced orientation and depth shifts (via JS).
  */
 export function ClinicalBackground() {
   const [scrollRotation, setScrollRotation] = useState(0);
